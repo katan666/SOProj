@@ -3,23 +3,23 @@
 Projekt SO
 
 ## Interfejs tekstowy wzorowany na Windowsie
-### Dominik Boła
+#### Dominik Boła
 
 ## Rozkazy asemblerowe i ich interpreter + 2 przykładowe programy
-### Mateusz Biernacki
+#### Mateusz Biernacki
 
 ## Zarządzanie plikami i katalogami metodą indeksową
-### Grzegorz Piątkowski
+#### Grzegorz Piątkowski
 
 ## Zarządzanie procesami wzorowane na Windowsie
-### Magda Ducka
+#### Magda Ducka
 
 ## Zarządzanie pamięcią operacyjną z użyciem stronicowania
-### Katarzyna Malowany
+#### Katarzyna Malowany
 
 ## Mechanizmy synchronizacyjne wykorzystujące zamki (mutex locks)
-### Szymon Wiśniewski
+#### Szymon Wiśniewski
 
 ## Zarządzanie procesorem (planista) za pomocą algorytmu SRT
-### Patryk Miedziaszczyk
+#### Patryk Miedziaszczyk
 
