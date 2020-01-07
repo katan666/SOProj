@@ -23,6 +23,10 @@ public class Interpreter {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Write command in: ");
         String string = scanner.nextLine();
+        if(string.equals("show")){
+            System.out.printf("AX:%d\nBX:%d\nCX:%d\nDX:%d\n", rA,rB,rC,rD);
+            return readCommand();
+        }
         return string;
     }
     //Na podstawie pierwszych 2 znakow w argumencie str okresla typ komendy
@@ -172,33 +176,248 @@ public class Interpreter {
         counter += argsStr.length() + 3;
 
     }
-    //TODO
-    private static void addInt(String args) {
-        System.out.printf("addInt args: %s\n", args);
+
+    private static void addInt(String argsStr) throws InvalidArgumentsInterpreterException {
+        String[] args = argsStr.split(" ");
+        if (args.length != 2) {
+            throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawna liczba argumentow");
+        }
+        int buff;
+        try {
+            buff = Integer.parseInt(args[1]);
+        } catch (NumberFormatException e){
+            buff = 0;
+        }
+        switch (args[0]){
+            case REG_A:
+                rA+=buff;
+                break;
+            case REG_B:
+                rB+=buff;
+                break;
+            case REG_C:
+                rC+=buff;
+                break;
+            case REG_D:
+                rD+=buff;
+                break;
+            default:
+                throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawny argument");
+        }
+        counter += argsStr.length() + 3;
+    }
+
+    private static void subtract(String argsStr) throws InvalidArgumentsInterpreterException {
+        String[] args = argsStr.split(" ");
+        if (args.length != 2) {
+            throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawna liczba argumentow");
+        }
+        int buff;
+        switch (args[1]){
+            case REG_A:
+                buff = rA;
+                break;
+            case REG_B:
+                buff = rB;
+                break;
+            case REG_C:
+                buff = rC;
+                break;
+            case REG_D:
+                buff = rD;
+                break;
+            default:
+                throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawny argument");
+        }
+        switch (args[0]){
+            case REG_A:
+                rA-=buff;
+                break;
+            case REG_B:
+                rB-=buff;
+                break;
+            case REG_C:
+                rC-=buff;
+                break;
+            case REG_D:
+                rD-=buff;
+                break;
+            default:
+                throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawny argument");
+        }
+        counter += argsStr.length() + 3;
+    }
+
+    private static void subtractInt(String argsStr) throws InvalidArgumentsInterpreterException {
+        String[] args = argsStr.split(" ");
+        if (args.length != 2) {
+            throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawna liczba argumentow");
+        }
+        int buff;
+        try {
+            buff = Integer.parseInt(args[1]);
+        } catch (NumberFormatException e){
+            buff = 0;
+        }
+        switch (args[0]){
+            case REG_A:
+                rA-=buff;
+                break;
+            case REG_B:
+                rB-=buff;
+                break;
+            case REG_C:
+                rC-=buff;
+                break;
+            case REG_D:
+                rD-=buff;
+                break;
+            default:
+                throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawny argument");
+        }
+        counter += argsStr.length() + 3;
+    }
+
+    private static void multiply(String argsStr) throws InvalidArgumentsInterpreterException {
+        String[] args = argsStr.split(" ");
+        if (args.length != 2) {
+            throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawna liczba argumentow");
+        }
+        int buff;
+        switch (args[1]){
+            case REG_A:
+                buff = rA;
+                break;
+            case REG_B:
+                buff = rB;
+                break;
+            case REG_C:
+                buff = rC;
+                break;
+            case REG_D:
+                buff = rD;
+                break;
+            default:
+                throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawny argument");
+        }
+        switch (args[0]){
+            case REG_A:
+                rA*=buff;
+                break;
+            case REG_B:
+                rB*=buff;
+                break;
+            case REG_C:
+                rC*=buff;
+                break;
+            case REG_D:
+                rD*=buff;
+                break;
+            default:
+                throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawny argument");
+        }
+        counter += argsStr.length() + 3;
     }
     //TODO
-    private static void subtract(String args) {
-        System.out.printf("subtract args: %s\n", args);
+    private static void multiplyInt(String argsStr) throws InvalidArgumentsInterpreterException {
+        String[] args = argsStr.split(" ");
+        if (args.length != 2) {
+            throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawna liczba argumentow");
+        }
+        int buff;
+        try {
+            buff = Integer.parseInt(args[1]);
+        } catch (NumberFormatException e){
+            buff = 0;
+        }
+        switch (args[0]){
+            case REG_A:
+                rA*=buff;
+                break;
+            case REG_B:
+                rB*=buff;
+                break;
+            case REG_C:
+                rC*=buff;
+                break;
+            case REG_D:
+                rD*=buff;
+                break;
+            default:
+                throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawny argument");
+        }
+        counter += argsStr.length() + 3;
     }
-    //TODO
-    private static void subtractInt(String args) {
-        System.out.printf("subtractInt args: %s\n", args);
+
+    private static void move(String argsStr) throws InvalidArgumentsInterpreterException {
+            String[] args = argsStr.split(" ");
+            if (args.length != 2) {
+                throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawna liczba argumentow");
+            }
+            int buff;
+            switch (args[1]){
+                case REG_A:
+                    buff = rA;
+                    break;
+                case REG_B:
+                    buff = rB;
+                    break;
+                case REG_C:
+                    buff = rC;
+                    break;
+                case REG_D:
+                    buff = rD;
+                    break;
+                default:
+                    throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawny argument");
+            }
+            switch (args[0]){
+                case REG_A:
+                    rA=buff;
+                    break;
+                case REG_B:
+                    rB=buff;
+                    break;
+                case REG_C:
+                    rC=buff;
+                    break;
+                case REG_D:
+                    rD=buff;
+                    break;
+                default:
+                    throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawny argument");
+            }
+            counter += argsStr.length() + 3;
     }
-    //TODO
-    private static void multiply(String args) {
-        System.out.printf("multiply args: %s\n", args);
-    }
-    //TODO
-    private static void multiplyInt(String args) {
-        System.out.printf("multiplyInt args: %s\n", args);
-    }
-    //TODO
-    private static void move(String args) {
-        System.out.printf("move args: %s\n", args);
-    }
-    //TODO
-    private static void moveIntToReg(String args) {
-        System.out.printf("moveIntToReg args: %s\n", args);
+
+    private static void moveIntToReg(String argsStr) throws InvalidArgumentsInterpreterException {
+        String[] args = argsStr.split(" ");
+        if (args.length != 2) {
+            throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawna liczba argumentow");
+        }
+        int buff;
+        try {
+            buff = Integer.parseInt(args[1]);
+        } catch (NumberFormatException e){
+            buff = 0;
+        }
+        switch (args[0]){
+            case REG_A:
+                rA=buff;
+                break;
+            case REG_B:
+                rB=buff;
+                break;
+            case REG_C:
+                rC=buff;
+                break;
+            case REG_D:
+                rD=buff;
+                break;
+            default:
+                throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawny argument");
+        }
+        counter += argsStr.length() + 3;
     }
     //TODO
     private static void jumpTo(String args) {
@@ -244,17 +463,57 @@ public class Interpreter {
     private static void runProcess(String args) {
         System.out.printf("runProcess args: %s\n", args);
     }
-    //TODO
-    private static void decrement(String args) {
-        System.out.printf("decrement args: %s\n", args);
+
+    private static void decrement(String argsStr) throws InvalidArgumentsInterpreterException {
+        String[] args = argsStr.split(" ");
+        if (args.length != 1) {
+            throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawna liczba argumentow");
+        }
+        switch (args[0]){
+            case REG_A:
+                rA--;
+                break;
+            case REG_B:
+                rB--;
+                break;
+            case REG_C:
+                rC--;
+                break;
+            case REG_D:
+                rD--;
+                break;
+            default:
+                throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawny argument");
+        }
+        counter += argsStr.length() + 3;
     }
     //TODO
-    private static void increment(String args) {
-        System.out.printf("increment args: %s\n", args);
+    private static void increment(String argsStr) throws InvalidArgumentsInterpreterException {
+        String[] args = argsStr.split(" ");
+        if (args.length != 1) {
+            throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawna liczba argumentow");
+        }
+        switch (args[0]){
+            case REG_A:
+                rA++;
+                break;
+            case REG_B:
+                rB++;
+                break;
+            case REG_C:
+                rC++;
+                break;
+            case REG_D:
+                rD++;
+                break;
+            default:
+                throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawny argument");
+        }
+        counter += argsStr.length() + 3;
     }
-    //TODO
+
     private static void doNothing() {
-        System.out.printf("doNothing args: %s\n", "");
+        //totalna utopia
     }
     //TODO
     private static void swapByte(String args) {
