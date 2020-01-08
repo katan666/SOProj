@@ -1,6 +1,6 @@
 import java.util.Vector;
 
-public class scheduler
+class scheduler
 {
     private static final double alfa = 0.5; //stala z zakresu [0-1]
 
