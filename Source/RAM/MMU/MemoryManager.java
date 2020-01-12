@@ -41,7 +41,6 @@ public class MemoryManager {
             return -1;
         }
         else {
-            // adres fizyczny = (numer ramki z tablicy stron * rozmiar ramki) + offset
             short physAdr = (short)(pcb.pageTable.get(adr / FRAME_SIZE) * FRAME_SIZE + (adr - ((adr / FRAME_SIZE) * FRAME_SIZE)));
             if (frameTable[physAdr / FRAME_SIZE].getPID() == pcb.getPID()) {
                 return byteToUShort(RAM[physAdr]);
@@ -62,7 +61,6 @@ public class MemoryManager {
             System.out.println("\n <MemoryManager> [BŁĄD] Procesowi \"" + pcb.getName() + "\"(" + pcb.getPID() + ") nie przydzielono żadnej pamięci. Najpierw zaalokuj ją za pomocą odpowiedniego polecenia.");
         }
         else {
-            // adres fizyczny = (numer ramki z tablicy stron * rozmiar ramki) + offset
             short physAdr = (short)(pcb.pageTable.get(adr / FRAME_SIZE) * FRAME_SIZE + (adr - ((adr / FRAME_SIZE) * FRAME_SIZE)));
             if (frameTable[physAdr / FRAME_SIZE].getPID() == pcb.getPID()) {
                 RAM[physAdr] = (byte)(data - 128);
@@ -149,7 +147,6 @@ public class MemoryManager {
         }
         return false;
     }
-
 
     public static void printMemory() {
         System.out.println("\n <MemoryManager> Zawartość pamięci fizycznej:");
