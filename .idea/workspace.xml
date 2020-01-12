@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="61837fae-e481-4f7a-89a2-8cb0a51d03c3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/FileSystem/DiskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Source/FileSystem/DiskManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/soproject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/soproject.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +95,7 @@
       <updated>1578848749433</updated>
       <workItem from="1578848755637" duration="1271000" />
       <workItem from="1578854634594" duration="172000" />
-      <workItem from="1578864825280" duration="255000" />
+      <workItem from="1578864825280" duration="545000" />
     </task>
     <task id="LOCAL-00001" summary="ehh">
       <created>1578849311070</created>
@@ -177,7 +174,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578864993549</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="static">
+      <created>1578865084391</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1578865084391</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -210,11 +214,11 @@
     </state>
     <state x="629" y="321" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1536.824@0.0.1536.824" timestamp="1578855269909" />
     <state x="688" y="394" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1680.1010/-900.-247.900.1400@0.0.1680.1010" timestamp="1578865014224" />
-    <state x="430" y="9" key="CommitChangelistDialog2" timestamp="1578864992749">
+    <state x="430" y="9" key="CommitChangelistDialog2" timestamp="1578865083634">
       <screen x="0" y="0" width="1680" height="1010" />
     </state>
     <state x="393" y="7" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1578852106208" />
-    <state x="430" y="9" key="CommitChangelistDialog2/0.0.1680.1010/-900.-247.900.1400@0.0.1680.1010" timestamp="1578864992749" />
+    <state x="430" y="9" key="CommitChangelistDialog2/0.0.1680.1010/-900.-247.900.1400@0.0.1680.1010" timestamp="1578865083634" />
     <state x="147" y="71" key="DiffContextDialog" timestamp="1578850063671">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -223,11 +227,11 @@
       <screen x="0" y="0" width="1680" height="1010" />
     </state>
     <state x="552" y="221" key="MultipleFileMergeDialog/0.0.1680.1010/-900.-247.900.1400@0.0.1680.1010" timestamp="1578865003263" />
-    <state x="395" y="179" key="Vcs.Push.Dialog.v2" timestamp="1578865024699">
+    <state x="395" y="179" key="Vcs.Push.Dialog.v2" timestamp="1578865093704">
       <screen x="0" y="0" width="1680" height="1010" />
     </state>
     <state x="361" y="146" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1578850172730" />
-    <state x="395" y="179" key="Vcs.Push.Dialog.v2/0.0.1680.1010/-900.-247.900.1400@0.0.1680.1010" timestamp="1578865024699" />
+    <state x="395" y="179" key="Vcs.Push.Dialog.v2/0.0.1680.1010/-900.-247.900.1400@0.0.1680.1010" timestamp="1578865093704" />
     <state x="578" y="330" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1578856257154">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

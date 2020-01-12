@@ -2,20 +2,18 @@ package FileSystem;
 
 public class DiskManager extends Disk {
 
-    public static char[][] fillDisk(){
+    public static void fillDisk(){
         for(int i = 0; i < diskSize/blockSize; i++){
             for(int j = 0; j < blockSize; j++){
                 disk[i][j] = '%';
             }
         }
-        return disk;
     }
 
-    public static int[] setBitMap() {
+    public static void setBitMap() {
         for(int i = 0; i<(diskSize/blockSize); i++){
             bitMap[i] = 0;
         }
-        return bitMap;
     }
 
     public static void showDisk(){
