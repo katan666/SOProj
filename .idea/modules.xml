@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/FileSystem/FileSystem.iml" filepath="$PROJECT_DIR$/FileSystem/FileSystem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Interpreter/Interpreter.iml" filepath="$PROJECT_DIR$/Interpreter/Interpreter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RAM/RAM.iml" filepath="$PROJECT_DIR$/RAM/RAM.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Scheduler/Scheduler.iml" filepath="$PROJECT_DIR$/Scheduler/Scheduler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Shell/Shell.iml" filepath="$PROJECT_DIR$/Shell/Shell.iml" />
+      <module fileurl="file://$PROJECT_DIR$/soproject.iml" filepath="$PROJECT_DIR$/soproject.iml" />
+    </modules>
+  </component>
+</project>
