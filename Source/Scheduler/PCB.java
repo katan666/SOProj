@@ -1,4 +1,6 @@
+package Scheduler
 public class PCB
+
 {
     private String name;
     private String pid;
