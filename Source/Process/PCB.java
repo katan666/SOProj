@@ -58,4 +58,85 @@ public class PCB {
 
     }
 
+    public int getReslTime() { return  realTime; }
+
+    public void setRealTime(int realTime)
+    {
+        this.realTime=realTime;
+    }
+
+
+    public int getPID() {
+        return PID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public byte getPC() {
+        return PC;
+    }
+
+    public void setPC(byte PC) {
+        this.PC = PC;
+    }
+
+    public ProcessState getProcessState(){
+        return state;
+    }
+
+    public void setState(ProcessState state) {
+
+        if (this.state != state){//in case of some error
+
+            Utils.log("Changed state of proces " + this.getSignature() + " from " + this.state
+                    + " to " + state);
+
+            switch (state){
+                //TODO: find some way to use it or delete
+                case READY:{
+                    break;
+                }
+                case RUNNING:{
+                    break;
+                }
+            }
+
+            this.state = state;
+        } //else do nothing
+
+    }
+
+    //Priority-------------------------------------------------------
+
+    public int getBasePriority() {
+        return basePriority;
+    }
+
+    public int getDynamicPriority() {
+        return dynamicPriority;
+    }
+
+    /**
+     * Adds given parameter to dynamic priority, if sum is bigger than 15,
+     * sum is set with value 15 and gives error log
+     *
+     * @param newPriority value to add for dynamic priority
+     */
+    public void setDynamicPriority(final int newPriority)
+    {
+        dynamicPriority = (newPriority < 15) ? newPriority : 15;
+        if(dynamicPriority < basePriority) {dynamicPriority=basePriority;}
+    }
+    /**
+     * Sets dynamic priority with it's base value
+     */
+    public void setBasePriority(){
+        if(dynamicPriority != basePriority) {
+            this.dynamicPriority = this.basePriority;
+            Utils.log("Changed priority of " + this.getSignature() + " from " + this.dynamicPriority +
+                    " to base value - " + this.basePriority);
+        }
+    }
 }
