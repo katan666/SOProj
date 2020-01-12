@@ -2,7 +2,7 @@ package FileSystem;
 
 public class DiskManager extends Disk {
 
-    public char[][] fillDisk(){
+    public static char[][] fillDisk(){
         for(int i = 0; i < diskSize/blockSize; i++){
             for(int j = 0; j < blockSize; j++){
                 disk[i][j] = '%';

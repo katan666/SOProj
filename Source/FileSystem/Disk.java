@@ -9,8 +9,8 @@ public class Disk {
      */
     public static int diskSize = 256;
     public static int blockSize = 8;
-    public int[] bitMap = new int[diskSize/blockSize];
-    public char[][] disk = new char[diskSize/blockSize][blockSize];
+    public static int[] bitMap = new int[diskSize/blockSize];
+    public static char[][] disk = new char[diskSize/blockSize][blockSize];
 
 
 }

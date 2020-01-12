@@ -4,8 +4,8 @@ import java.util.Vector;
 
 public class FileManager extends  Files{
 
-    public Vector<Files> mainCatalog = new Vector<Files>();
-    public Vector<Character> openedFiles = new Vector<Character>();
+    public static Vector<Files> mainCatalog = new Vector<Files>();
+    public static Vector<Character> openedFiles = new Vector<Character>();
 
     public static int readAddress(char index){
         int address = -1;
@@ -101,7 +101,7 @@ public class FileManager extends  Files{
         }
         return code;
     }
-    public boolean createFile(String name){
+    public static boolean createFile(String name){
         Files file = new Files();
         int i = 0;
         boolean created = false;
@@ -121,7 +121,7 @@ public class FileManager extends  Files{
         mainCatalog.add(file);
         return created;
     }
-    public boolean openFile(String name){
+    public static boolean openFile(String name){
         /*
         * opened == false plik nieistnieje
         * opened == true pomyslnie otwarto plik
@@ -138,7 +138,7 @@ public class FileManager extends  Files{
         }
         return opened;
     }
-    public int writeFile(String name, String data){
+    public static int writeFile(String name, String data){
         /*
         * Zmienna code oznacza status errorow
         * 1 - wszystko git
@@ -198,7 +198,7 @@ public class FileManager extends  Files{
         }
         return code;
     }
-    public void readFile(String name, int howMuch, short ramAddr){
+    public static void readFile(String name, int howMuch, short ramAddr){
         /*
         * code = 1 wszystko git
         *
