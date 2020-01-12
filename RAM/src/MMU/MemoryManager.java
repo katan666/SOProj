@@ -150,6 +150,7 @@ public class MemoryManager {
         return false;
     }
 
+
     public static void printMemory() {
         System.out.println("\n <MemoryManager> Zawartość pamięci fizycznej:");
         for (byte i = 0; i < frameTable.length; i++) {
