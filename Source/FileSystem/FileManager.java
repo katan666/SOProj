@@ -194,6 +194,7 @@ public class FileManager extends  Files{
         }
         return code;
     }
+    //TODO
     public static void readFile(String name, int howMuch, short ramAddr){
         /*
         * code = 1 wszystko git
@@ -222,6 +223,12 @@ public class FileManager extends  Files{
         }
 
 
+    }
+    //TODO
+    public static int closeFile(String name){
+        int code = -1;
+
+        return code;
     }
 
     public static int deleteFile(String name){
