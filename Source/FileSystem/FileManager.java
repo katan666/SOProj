@@ -129,7 +129,7 @@ public class FileManager extends  Files{
          */
         boolean opened = false;
         for(int i = 0; i < mainCatalog.size(); i++){
-            if(name == mainCatalog.get(i).fileName) {
+            if(name.equals(mainCatalog.get(i).fileName)) {
                 openedFiles.add(mainCatalog.get(i).indexBlock);
                 opened = true;
                 break;
@@ -163,7 +163,7 @@ public class FileManager extends  Files{
 
         if(code == 1){
             for(int i = 0; i < blockSize; i++){
-                if(disk[index][i] == '-'){
+                if(disk[readAddress(index)][i] == '-'){
                     blocksAmount++;
                 }
             }

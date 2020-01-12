@@ -1,5 +1,8 @@
 package Interpreter;
 
+import FileSystem.DiskManager;
+import FileSystem.FileManager;
+
 import java.util.Scanner;
 
 public class Interpreter {
@@ -28,6 +31,8 @@ public class Interpreter {
         if(string.equals("show")){
             System.out.printf("AX:%d\nBX:%d\nCX:%d\nDX:%d\n", rA,rB,rC,rD);
             return readCommand();
+        } else if (string.equals("showDisk")){
+            DiskManager.showDisk();
         }
         return string;
     }
@@ -63,8 +68,8 @@ public class Interpreter {
                 case DECREMENT:
                     decrement(strCommand.substring(3));
                     break;
-                case FORM_FILE:
-                    formFile(strCommand.substring(3));
+                case OPEN_FILE:
+                    openFile(strCommand.substring(3));
                     break;
                 case INCREMENT:
                     increment(strCommand.substring(3));
@@ -110,6 +115,9 @@ public class Interpreter {
                     break;
                 case MOVE_INT_TO_REGISTER:
                     moveIntToReg(strCommand.substring(3));
+                    break;
+                case CLOSE_FILE:
+                    closeFile();
                     break;
                 default:
                     System.out.println("Default");
@@ -433,25 +441,34 @@ public class Interpreter {
     private static void halt() {
         System.out.printf("halt args: %s\n", "");
     }
-    //TODO
-    private static void formFile(String args) {
-        System.out.printf("formFile args: %s\n", args);
+
+    private static void openFile (String argsStr) throws InvalidArgumentsInterpreterException{
+        String[] args = argsStr.split(" ");
+        if(args.length != 1) throw new InvalidArgumentsInterpreterException("Interpreter: Zla liczba argumentow.");
+        boolean isOkey = FileManager.openFile(args[0]);
+        if (!isOkey) throw new InvalidArgumentsInterpreterException("Interpreter: Problem z FileManager.openFile");
     }
+
+    private static void closeFile(){}
     //TODO
     private static void deleteFile(String args) {
         System.out.printf("deleteFile args: %s\n", args);
     }
-    //TODO
-    private static void createFile(String args) {
-        System.out.printf("createFile args: %s\n", args);
+
+    private static void createFile(String argsStr) throws InvalidArgumentsInterpreterException{
+        String[] args = argsStr.split(" ");
+        if(args.length != 1) throw new InvalidArgumentsInterpreterException("Interpreter: Zla liczba argumentow.");
+        boolean isOkey = FileManager.createFile(args[0]);
+        if (!isOkey) throw new InvalidArgumentsInterpreterException("Interpreter: Problem z FileManager.createFile");
     }
     //TODO
     private static void readFile(String args) {
         System.out.printf("readFile args: %s\n", args);
     }
     //TODO
-    private static void writeFile(String args) {
-        System.out.printf("writeFile args: %s\n", args);
+    private static void writeFile(String argsStr) {
+        String[] args = argsStr.split(" ");
+        System.out.println(FileManager.writeFile(args[0], "kurwa"));
     }
     //TODO
     private static void formProcess(String args) {

@@ -12,7 +12,8 @@ public enum CommandType {
     JUMP_TO(1),
     JUMP_ZERO(1),
     HALT(0),
-    FORM_FILE(2),
+    OPEN_FILE(1),
+    CLOSE_FILE(1),
     DELETE_FILE(2),
     CREATE_FILE(2),
     READ_FILE(3),
@@ -54,7 +55,8 @@ public enum CommandType {
         else if(name.equals("JT")) return JUMP_TO;
         else if(name.equals("JZ")) return JUMP_ZERO;
         else if(name.equals("HT")) return HALT;
-        else if(name.equals("FF")) return FORM_FILE;
+        else if(name.equals("OF")) return OPEN_FILE;
+        else if(name.equals("XF")) return CLOSE_FILE;
         else if(name.equals("DF")) return DELETE_FILE;
         else if(name.equals("CF")) return CREATE_FILE;
         else if(name.equals("RF")) return READ_FILE;
