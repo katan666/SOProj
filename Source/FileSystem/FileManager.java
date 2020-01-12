@@ -154,13 +154,11 @@ public class FileManager extends  Files{
 
         for(int i = 0; i < mainCatalog.size(); i++){
             if(name.equals(mainCatalog.get(i).fileName)){
-                int j = 0;
-                while(code != 1){
+                for(int j = 0; j < openedFiles.size(); j++){
                     if(mainCatalog.get(i).indexBlock == openedFiles.get(j)){
                         index = openedFiles.get(j);
                         code = 1;
                     }
-                    j++;
                 }
             }
         }
@@ -224,5 +222,39 @@ public class FileManager extends  Files{
         }
 
 
+    }
+
+    public static int deleteFile(String name){
+        /*
+        * code == 1 plik jest otwarty nie mozna usunac otwartego pliku
+        * code == 2 nie ma takiego pliku
+        * code == 3 usunieto pomyslnie
+         */
+        char index;
+        char toErase = '-';
+        int code = -1;
+        if(isOpened(name) == 0){
+            code = 1;
+        }
+        else{
+            for(int i = 0; i < mainCatalog.size(); i++){
+                code = 2;
+                if(name.equals(mainCatalog.get(i).fileName)){
+                    index = mainCatalog.get(i).indexBlock;
+                    for(int j = 0; j < blockSize; j++) {
+                        if (disk[index][j] != '-') {
+                            disk[index][j] = toErase;
+                            for (int g = 0; g < blockSize; g++) {
+                                disk[toErase][g] = '-';
+                            }
+                            disk[index][j] = '-';
+                        }
+                    }
+                    code = 3;
+                    break;
+                }
+            }
+        }
+        return code;
     }
 }

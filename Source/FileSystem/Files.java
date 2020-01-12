@@ -2,7 +2,7 @@ package FileSystem;
 
 public class Files extends DiskManager {
     public String fileName;
-    public int indexBlock;
+    public char indexBlock;
     public int Size = 0;
     public int readPointer;
     public int writePointer;
