@@ -7,8 +7,8 @@ public class Disk {
     np: bitMap[4] = 0; oznacza ze disk[4] jest pusty.
         bitMap[4] = 1; oznacza ze disk[4] jest zajety.
      */
-    public static int diskSize = 512;
-    public static int blockSize = 16;
+    public static int diskSize = 256;
+    public static int blockSize = 8;
     public int[] bitMap = new int[diskSize/blockSize];
     public char[][] disk = new char[diskSize/blockSize][blockSize];
 
