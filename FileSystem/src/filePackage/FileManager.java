@@ -18,8 +18,9 @@ public class FileManager extends  Files{
         boolean created = false;
         while(created == false && i < 256){
             if(bitMap[i] == 0){
-                for(int j = 0; j < blockSize; j++){
+                for(int j = 0; j < blockSize/2; j+=2){
                     disk[i][j] = '-';
+                    disk[i][j+1] = '1';
                 }
                 created = true;
                 file.indexBlock = i;
@@ -53,7 +54,7 @@ public class FileManager extends  Files{
         * 1 - wszystko git
         * 2 - brak wolnych blokow do zapisu. Plik osiagnal maksymalna wielkosc 128 bajtow
         * 3 - plik za duzy. Przekroczyl 128 znaki == 128 bajty
-        *
+        * 4 - Nie znaleziono pliku w wektorze otwartych plikow (czyt. plik nie zostal otwarty)
         * */
         int pointer = 0;
         int code = 0;
@@ -75,15 +76,15 @@ public class FileManager extends  Files{
         }
 
         if(code == 1){
-            for(int i = 0; i < blockSize; i++){
-                if(disk[index][i] == '-'){
+            for(int i = 0; i < blockSize/2; i+=2){
+                if(disk[index][i] == '-' && disk[index][i+1] == '1'){
                     blocksAmount++;
                 }
             }
             if(blocksAmount == 0){
                 code = 2;
             }
-            else if(blocksAmount * 8 < data.length()){
+            else if(blocksAmount * 16 < data.length()){
                 code = 3;
             }
             else{
@@ -94,11 +95,15 @@ public class FileManager extends  Files{
                             pointer++;
                         }
                         bitMap[i] = 1;
-
                     }
                 }
             }
         }
+        else if(code == 0){
+            code = 4;
+        }
+
         return code;
     }
+    
 }
