@@ -12,7 +12,7 @@ public class Scheduler
     private static PCB running; // uruchomiony proces
     private static Object Running;
     public static PCB init = new PCB ("init", "0","Running", 0, 0);
-
+    private int x;
     public static void set_init()//metoda ustawiająca init jako uruchomiony
     {
         running=init;
