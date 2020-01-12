@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="25665aec-1513-499e-9095-d7ab8c220f7d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/FileSystem/src/filePackage/FileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileSystem/src/filePackage/FileManager.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1WIrgXDrp9AvoplVci1ZJZP2BrB" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/FileSystem/src" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="25665aec-1513-499e-9095-d7ab8c220f7d" name="Default Changelist" comment="" />
+      <created>1578848061780</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1578848061780</updated>
+      <workItem from="1578848066974" duration="1898000" />
+    </task>
+    <task id="LOCAL-00001" summary="Added to GitLab">
+      <created>1578848559062</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1578848559062</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Added to GitLab">
+      <created>1578848685879</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1578848685879</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added to GitLab" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added to GitLab" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="432" y="164" key="#Project_Structure" timestamp="1578848827417">
+      <screen x="0" y="0" width="1680" height="1010" />
+    </state>
+    <state x="432" y="164" key="#Project_Structure/0.0.1680.1010/-900.-247.900.1400@0.0.1680.1010" timestamp="1578848827417" />
+    <state x="465" y="100" key="CommitChangelistDialog2" timestamp="1578850038893">
+      <screen x="0" y="0" width="1680" height="1010" />
+    </state>
+    <state x="465" y="100" key="CommitChangelistDialog2/0.0.1680.1010/-900.-247.900.1400@0.0.1680.1010" timestamp="1578850038893" />
+    <state x="432" y="238" key="Vcs.Push.Dialog.v2" timestamp="1578850064851">
+      <screen x="0" y="0" width="1680" height="1010" />
+    </state>
+    <state x="432" y="238" key="Vcs.Push.Dialog.v2/0.0.1680.1010/-900.-247.900.1400@0.0.1680.1010" timestamp="1578850064851" />
+    <state x="656" y="283" key="chooseDestDirectoryDialog" timestamp="1578848434712">
+      <screen x="0" y="0" width="1680" height="1010" />
+    </state>
+    <state x="656" y="283" key="chooseDestDirectoryDialog/0.0.1680.1010/-900.-247.900.1400@0.0.1680.1010" timestamp="1578848434712" />
+    <state x="590" y="297" key="git4idea.merge.GitPullDialog" timestamp="1578850146948">
+      <screen x="0" y="0" width="1680" height="1010" />
+    </state>
+    <state x="590" y="297" key="git4idea.merge.GitPullDialog/0.0.1680.1010/-900.-247.900.1400@0.0.1680.1010" timestamp="1578850146948" />
+    <state x="222" y="126" key="new project wizard" timestamp="1578848201363">
+      <screen x="0" y="0" width="1680" height="1010" />
+    </state>
+    <state x="222" y="126" key="new project wizard/0.0.1680.1010/-900.-247.900.1400@0.0.1680.1010" timestamp="1578848201363" />
+  </component>
+</project>
