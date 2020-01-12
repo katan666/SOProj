@@ -1,5 +1,6 @@
 package Shell;
 
+import Scheduler.Scheduler;
 import java.util.Scanner;
 
 public class Shell
@@ -31,6 +32,12 @@ public void Match(String line)
             break;
         case "LOCKS":
             System.out.println("Wyswietla zamki");
+            break;
+        case "PRINT_READY":
+            Scheduler.print_ready_queue();
+            break;
+        case "PRINT_RUNNING":
+            Scheduler.print_running_process();
             break;
         default:
             System.out.println("Niepoprawna komenda");

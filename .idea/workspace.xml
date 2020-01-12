@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="61837fae-e481-4f7a-89a2-8cb0a51d03c3" name="Default Changelist" comment="nic waznego" />
+    <list default="true" id="61837fae-e481-4f7a-89a2-8cb0a51d03c3" name="Default Changelist" comment="nic waznego">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Shell/Shell.java" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Shell/Shell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/soproject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/soproject.iml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,6 +66,26 @@
       </list>
     </option>
   </component>
+  <component name="RunManager">
+    <configuration name="Boot" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Shell.Boot" />
+      <module name="soproject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Shell.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Boot" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SvnConfiguration">
     <configuration>$USER_HOME$/.subversion</configuration>
   </component>
@@ -73,6 +97,7 @@
       <option name="presentableId" value="Default" />
       <updated>1578848749433</updated>
       <workItem from="1578848755637" duration="1271000" />
+      <workItem from="1578854634594" duration="172000" />
     </task>
     <task id="LOCAL-00001" summary="ehh">
       <created>1578849311070</created>
@@ -127,7 +152,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
