@@ -41,7 +41,6 @@ public class MemoryManager {
             return -1;
         }
         else {
-            // adres fizyczny = (numer ramki z tablicy stron * rozmiar ramki) + offset
             short physAdr = (short)(pcb.pageTable.get(adr / FRAME_SIZE) * FRAME_SIZE + (adr - ((adr / FRAME_SIZE) * FRAME_SIZE)));
             if (frameTable[physAdr / FRAME_SIZE].getPID() == pcb.getPID()) {
                 return byteToUShort(RAM[physAdr]);
@@ -62,7 +61,6 @@ public class MemoryManager {
             System.out.println("\n <MemoryManager> [BŁĄD] Procesowi \"" + pcb.getName() + "\"(" + pcb.getPID() + ") nie przydzielono żadnej pamięci. Najpierw zaalokuj ją za pomocą odpowiedniego polecenia.");
         }
         else {
-            // adres fizyczny = (numer ramki z tablicy stron * rozmiar ramki) + offset
             short physAdr = (short)(pcb.pageTable.get(adr / FRAME_SIZE) * FRAME_SIZE + (adr - ((adr / FRAME_SIZE) * FRAME_SIZE)));
             if (frameTable[physAdr / FRAME_SIZE].getPID() == pcb.getPID()) {
                 RAM[physAdr] = (byte)(data - 128);
@@ -79,10 +77,10 @@ public class MemoryManager {
 
     public static void allocateProcess (PCB pcb) {
         if (neededFrames(pcb) == 0) {
-            System.out.println("\n<MemoryManager> [BŁĄD] Proces \"" + pcb.getName() + "\"(" + pcb.getPID() + ") nie ma kodu, więc nie można go zaalokować.");
+            System.out.println("\n <MemoryManager> [BŁĄD] Proces \"" + pcb.getName() + "\"(" + pcb.getPID() + ") nie ma kodu, więc nie można go zaalokować.");
         }
         else if (neededFrames(pcb) > frameTable.length) {
-            System.out.println("\n<MemoryManager> [BŁĄD] Za duży rozmiar programu (ponad 256 bajtów).");
+            System.out.println("\n <MemoryManager> [BŁĄD] Za duży rozmiar programu (ponad 256 bajtów).");
         }
         else if (neededFrames(pcb) > freeFrames.size() ) {
             System.out.println("\n <MemoryManager> [BŁĄD] Za mało wolnych ramek (" + freeFrames.size() + "), by załadować kod procesu \"" + pcb.getName() + "\"(" + pcb.getPID() + ") [potrzebne ramki: " + neededFrames(pcb) + "].");
@@ -150,7 +148,6 @@ public class MemoryManager {
         return false;
     }
 
-
     public static void printMemory() {
         System.out.println("\n <MemoryManager> Zawartość pamięci fizycznej:");
         for (byte i = 0; i < frameTable.length; i++) {
@@ -210,9 +207,9 @@ public class MemoryManager {
 
     public static void printCellASCII(short physAddr) {
         if (physAddr >= 0 && physAddr < RAM.length) {
-            System.out.println("\n<MemoryManager> Zawartość pamięci fizycznej pod adresem " + physAddr + ",zrzutowana na ASCII:\t" + (char)RAM[physAddr]);
+            System.out.println("\n <MemoryManager> Zawartość pamięci fizycznej pod adresem " + physAddr + ",zrzutowana na ASCII:\t" + (char)RAM[physAddr]);
         } else {
-            System.out.println("\n<MemoryManager> [BŁĄD] Adres spoza zasięgu pamięci.");
+            System.out.println("\n <MemoryManager> [BŁĄD] Adres spoza zasięgu pamięci.");
         }
     }
 

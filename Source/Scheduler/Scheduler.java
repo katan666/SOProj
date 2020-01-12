@@ -2,7 +2,7 @@ package Scheduler;
 
 import java.util.Vector;
 
-class Scheduler
+public class Scheduler
 {
     private static final double alfa = 0.5; //stala z zakresu [0-1]
 
@@ -12,7 +12,7 @@ class Scheduler
     private static PCB running; // uruchomiony proces
     private static Object Running;
     public static PCB init = new PCB ("init", "0","Running", 0, 0);
-
+    private int x;
     public static void set_init()//metoda ustawiająca init jako uruchomiony
     {
         running=init;
