@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="61837fae-e481-4f7a-89a2-8cb0a51d03c3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Interpreter/Interpreter.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Interpreter/listofcommands.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Interpreter/src/CommandType.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Interpreter/src/Interpreter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Interpreter/src/InvalidArgumentsInterpreterException.java" beforeDir="false" />
-    </list>
+    <list default="true" id="61837fae-e481-4f7a-89a2-8cb0a51d03c3" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -57,11 +50,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Scheduler/Scheduler.iml">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/soproject.iml">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
@@ -103,6 +91,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="mateuszbiernacki &lt;mateuszbiernacki@icloud.com&gt;" />
+      </list>
+    </option>
     <option name="UPDATE_TYPE" value="REBASE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -127,17 +120,6 @@
             <path>
               <item name="soproject2" type="b2602c69:ProjectViewProjectNode" />
               <item name="soproject2" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="soproject2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="soproject2" type="462c0819:PsiDirectoryNode" />
-              <item name="Scheduler" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="soproject2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="soproject2" type="462c0819:PsiDirectoryNode" />
-              <item name="Scheduler" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="soproject2" type="b2602c69:ProjectViewProjectNode" />
@@ -240,11 +222,25 @@
       <option name="project" value="LOCAL" />
       <updated>1578850622268</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="commit">
+      <created>1578851007062</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1578851007062</updated>
+    </task>
+    <task id="LOCAL-00005" summary="delete module Scheduler">
+      <created>1578851139007</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1578851139007</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="721000" />
+    <option name="totallyTimeSpent" value="986000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="47" y="23" width="1920" height="973" extended-state="0" />
@@ -284,7 +280,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="ehh" />
-    <option name="LAST_COMMIT_MESSAGE" value="ehh" />
+    <MESSAGE value="commit" />
+    <MESSAGE value="delete module Scheduler" />
+    <option name="LAST_COMMIT_MESSAGE" value="delete module Scheduler" />
   </component>
   <component name="WindowStateProjectService">
     <state x="688" y="394" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1578850650886">
