@@ -2,7 +2,7 @@ package Scheduler;
 
 import java.util.Vector;
 
-class Scheduler
+public class Scheduler
 {
     private static final double alfa = 0.5; //stala z zakresu [0-1]
 
