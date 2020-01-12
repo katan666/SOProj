@@ -18,7 +18,7 @@ public class DiskManager extends Disk {
         return bitMap;
     }
 
-    public static void showDisk(char[][] disk){
+    public static void showDisk(){
         for(int i = 0; i < bitMap.length; i++){
             for(int j = 0; j < blockSize; j++){
                 System.out.println(disk[i][j]);
