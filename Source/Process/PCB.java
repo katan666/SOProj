@@ -32,6 +32,13 @@ public class PCB {
      */
     private int dynamicPriority;
 
+    private CPUState cpuState;
+
+
+    // temporary ram, see constructor
+    // private final byte[] code;
+    Memory ram;
+
 
     PCB(int PID, String name, int priority, Memory ram, byte PC, int codeLength) {
         this.PID = PID;
@@ -58,7 +65,7 @@ public class PCB {
 
     }
 
-    public int getReslTime() { return  realTime; }
+    public int getRealTime() { return  realTime; }
 
     public void setRealTime(int realTime)
     {
@@ -138,5 +145,66 @@ public class PCB {
             Utils.log("Changed priority of " + this.getSignature() + " from " + this.dynamicPriority +
                     " to base value - " + this.basePriority);
         }
+    }
+
+    //Assembler------------------------------------------------------
+
+    /**
+     * Executes one command from PCB's program starting from current {@link PCB#PC}
+     * <p>Before execution of program the state of {@link Assembler#cpu} should be updated with value from {@link PCB#cpuState}.</p>
+     * <p>After execution of program the state of {@link Assembler#cpu} should be saved to {@link PCB#cpuState}.</p>
+     *
+     * @return {@code false} if it was the last command
+     *
+     * @see Assembler#setCPUState(CPUState)
+     * @see Assembler#getCPUState()
+     */
+    public boolean execute() {
+        Utils.log(toString());
+        Assembler.execute(this);
+
+        return PC < codeLength;
+    }
+
+    public byte getByteAt(final byte address) {
+
+        return ram.read(this.getPID(), address);
+        //return this.code[address];
+    }
+    public void writeByteAt(final byte address, final byte value) {
+
+        ram.write(value, this.getPID(), address);
+        //this.code[address] = value;
+    }
+
+    public CPUState getCpuState() {
+        return cpuState;
+    }
+
+    public void setCPUState(CPUState cpuState) {
+        this.cpuState.set(cpuState);
+    }
+
+    @Override
+    public String toString() {
+        return "PCB{" +
+                "PID=" + PID +
+                ", name='" + name + '\'' +
+                ", state=" + state +
+                ", PC=" + PC +
+                ", basePriority=" + basePriority +
+                ", dynamicPriority=" + dynamicPriority +
+                ", readyTime=" + readyTime +
+                ", executedOrders=" + executedOrders +
+                '}';
+    }
+
+    public String getSignature() {
+        return name + " id: " + PID;
+    }
+
+    @Override
+    public int compareTo(PCB o) {
+        return 0;
     }
 }
