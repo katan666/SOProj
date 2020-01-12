@@ -1,6 +1,4 @@
-package filePackage;
-
-import diskPackage.DiskManager;
+package FileSystem;
 
 public class Files extends DiskManager {
     public String fileName;

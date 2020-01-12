@@ -1,10 +1,9 @@
-package filePackage;
+package FileSystem;
 
 /*
 DO POPRAWY INDEKSY BLOKOW NA DWUCYFROWE!!!!!!!!!!!!!!!!!!!!!!!
  */
 
-import java.io.File;
 import java.util.Vector;
 
 public class FileManager extends  Files{
@@ -105,5 +104,5 @@ public class FileManager extends  Files{
 
         return code;
     }
-    
+
 }

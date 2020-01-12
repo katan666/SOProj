@@ -1,4 +1,4 @@
-package diskPackage;
+package FileSystem;
 
 public class DiskManager extends Disk {
 
