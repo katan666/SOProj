@@ -128,14 +128,12 @@ public class FileManager extends  Files{
         * opened == true pomyslnie otwarto plik
          */
         boolean opened = false;
-        int i = 0;
-        while(opened == false && i < mainCatalog.size()){
+        for(int i = 0; i < mainCatalog.size(); i++){
             if(name == mainCatalog.get(i).fileName) {
-                openedFiles.add((char)mainCatalog.get(i).indexBlock);
+                openedFiles.add(mainCatalog.get(i).indexBlock);
                 opened = true;
                 break;
             }
-            i++;
         }
         return opened;
     }
