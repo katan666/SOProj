@@ -82,6 +82,25 @@ public class FileManager extends  Files{
         return index;
     }
 
+    public int isOpened(String name){
+        /*
+        * code == 0 plik otwarty
+        * code == 1 plik nie istnieje
+        * code == 2 plik nie zostal otwarty
+         */
+        int code = 2;
+        for(int i = 0; i < mainCatalog.size(); i++) {
+            if (name.equals(mainCatalog.get(i).fileName)){
+                code = 1;
+                for(int j = 0; j < openedFiles.size(); j++){
+                    if(mainCatalog.get(i).indexBlock == openedFiles.get(j)){
+                        code = 0;
+                    }
+                }
+            }
+        }
+        return code;
+    }
     public boolean createFile(String name){
         Files file = new Files();
         int i = 0;
@@ -202,7 +221,7 @@ public class FileManager extends  Files{
 
         for(int i = 0; i < blockSize; i++){
             if(disk[index][i] != '-'){
-                
+
             }
         }
 
