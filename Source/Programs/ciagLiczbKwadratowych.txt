@@ -6,4 +6,6 @@ DC DX
 JZ [17]
 MV AX BX
 MX BX 0
+MX CX 0
+MX DX 0
 HT
