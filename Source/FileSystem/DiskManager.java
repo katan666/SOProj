@@ -11,12 +11,10 @@ public class DiskManager extends Disk {
         return disk;
     }
 
-    public int[] setBitMap() {
+    public static int[] setBitMap() {
         for(int i = 0; i<(diskSize/blockSize); i++){
             bitMap[i] = 0;
         }
         return bitMap;
     }
-
-
 }

@@ -82,19 +82,20 @@ public class FileManager extends  Files{
         return index;
     }
 
-    public int isOpened(String name){
+    public static int isOpened(String name){
         /*
         * code == 0 plik otwarty
-        * code == 1 plik nie istnieje
-        * code == 2 plik nie zostal otwarty
+        * code == 1 plik nie zotal otwarty
+        * code == 2 plik nie istnieje
          */
         int code = 2;
         for(int i = 0; i < mainCatalog.size(); i++) {
             if (name.equals(mainCatalog.get(i).fileName)){
                 code = 1;
                 for(int j = 0; j < openedFiles.size(); j++){
-                    if(mainCatalog.get(i).indexBlock == openedFiles.get(j)){
+                    if (mainCatalog.get(i).indexBlock == openedFiles.get(j)) {
                         code = 0;
+                        break;
                     }
                 }
             }
@@ -142,8 +143,8 @@ public class FileManager extends  Files{
         /*
         * Zmienna code oznacza status errorow
         * 1 - wszystko git
-        * 2 - brak wolnych blokow do zapisu. Plik osiagnal maksymalna wielkosc 64 bajtow
-        * 3 - plik za duzy. Przekroczyl 64 znaki == 64 bajty
+        * 2 - brak wolnych blokow do zapisu.
+        * 3 - Plik osiagnal maksymalna wielkosc 64 bajtow plik za duzy. Przekroczyl 64 znaki == 64 bajty
         * 4 - Nie znaleziono pliku w wektorze otwartych plikow (czyt. plik nie zostal otwarty)
         * */
         int pointer = 0;
@@ -192,9 +193,6 @@ public class FileManager extends  Files{
                     }
                 }
             }
-        }
-        else if(code == 0){
-            code = 4;
         }
         return code;
     }
