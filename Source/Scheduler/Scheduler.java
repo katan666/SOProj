@@ -1,16 +1,16 @@
 package Scheduler;
 
 import java.util.Vector;
+import Process.PCB;
 
 public class Scheduler
 {
     private static final double alfa = 0.5; //stala z zakresu [0-1]
 
     private static double expected_time = 5; //przewidywany czas pracy
-    private static double real_time = 0; // rzeczywisty czas pracy
+    private static int real_time = 0; // rzeczywisty czas pracy
     static Vector<PCB> readyQueue = new Vector<PCB>();//wektor procesow gotowych do przydzielenia procesora
     private static PCB running; // uruchomiony proces
-    private static Object Running;
     public static PCB init = new PCB ("init", "0","Running", 0, 0);
     private int x;
     public static void set_init()//metoda ustawiająca init jako uruchomiony
@@ -20,27 +20,7 @@ public class Scheduler
 
     private static void calculate_srt()//metoda obliczajaca srednia wykladnicza ostatnich procesow
     {
-        running.expected_time = alfa * running.real_time + ((1 - alfa) * running.expected_time); //oblicza kazdemu procesowi w kolejce gotowych przewidywany czas
-    }
-
-    public static void add_process(PCB process)//metoda dodajaca proces do kolejki procesow gotowych
-    {
-        if(process.expected_time==0)
-        {
-            process.expected_time=expected_time;
-        }
-        if(readyQueue.size()==0 && running==init)//jezeli kolejka gotowych procesow jest pusta
-        {
-            running=process; //jako proces uruchomiony ustawiam process poniewaz innych nie ma
-            running.state=state_running();
-        }
-        else
-        {
-            readyQueue.add(process);//dodanie procesu do kolejki procesow gotowych
-            calculate_srt();
-            process.state=state_ready();
-            set_process_running();//wybieranie procesu o najmniejszym TAU
-        }
+        running.expected_time = alfa * running.realTime + ((1 - alfa) * running.expected_time); //oblicza kazdemu procesowi w kolejce gotowych przewidywany czas
     }
 
     public static void set_process_running()//wybranie procesu o najmniejszym pzrewidywanym czasie
