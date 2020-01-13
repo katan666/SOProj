@@ -23,4 +23,10 @@ public class DiskManager extends Disk {
             }
         }
     }
+
+    public static void showBitMap(){
+        for(int i = 0; i<bitMap.length; i++){
+            System.out.println(bitMap[i]);
+        }
+    }
 }

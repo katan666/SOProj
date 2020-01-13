@@ -137,6 +137,7 @@ public class FileManager extends  Files{
         }
         return opened;
     }
+    //TODO
     public static int writeFile(String name, String data){
         /*
         * Zmienna code oznacza status errorow
@@ -149,6 +150,7 @@ public class FileManager extends  Files{
         int code = 0;
         char index = '-';
         int blocksAmount = 0;
+        int blocksToSave = 0;
 
         for(int i = 0; i < mainCatalog.size(); i++){
             if(name.equals(mainCatalog.get(i).fileName)){
@@ -176,16 +178,20 @@ public class FileManager extends  Files{
             else{
                 for(int i = 0; i < bitMap.length; i++){
                     if(bitMap[i] == 0){
-                        for(int j = 0; j < blockSize; j++){
+                        for(int j = 0; j < data.length() && j < 8; j++) {
                             disk[i][j] = data.charAt(pointer + j);
-                            pointer++;
                         }
+                        pointer += 8;
                         bitMap[i] = 1;
                         for(int g = 0; g < blockSize; g++){
-                            if(disk[index][g] == '-'){
-                                disk[index][g] = writeAddress(i);
+                            if(disk[readAddress(index)][g] == '-'){
+                                disk[readAddress(index)][g] = writeAddress(i);
                             }
                         }
+                        if(data.length()>8){
+
+                        }
+                        break;
                     }
                 }
             }
