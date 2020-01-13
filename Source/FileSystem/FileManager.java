@@ -186,10 +186,8 @@ public class FileManager extends  Files{
                         for(int g = 0; g < blockSize; g++){
                             if(disk[readAddress(index)][g] == '-'){
                                 disk[readAddress(index)][g] = writeAddress(i);
+                                break;
                             }
-                        }
-                        if(data.length()>8){
-
                         }
                         break;
                     }
