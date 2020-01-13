@@ -3,11 +3,13 @@ package RAM.MMU;
 import java.util.Stack;
 
 public class MemoryManager {
+    final static private int FRAMES = 64;
+    final static private int FRAME_SIZE = 16;
 
-    private static FrameTableEntry[] frameTable = new FrameTableEntry[32];
+    private static FrameTableEntry[] frameTable = new FrameTableEntry[FRAMES];
     private static Stack<Byte> freeFrames = new Stack<Byte>();
-    private static byte[] RAM = new byte[256];
-    private static final byte FRAME_SIZE = 8;
+    private static byte[] RAM = new byte[FRAMES*FRAME_SIZE];
+    //private static final byte FRAME_SIZE = 16;
 
     private static short byteToUShort (byte c) {
         if (c < 0)
@@ -24,7 +26,7 @@ public class MemoryManager {
             freeFrames.push(x);
         }
         for (short g = 0; g < RAM.length; g++) {
-            RAM[g] = 0;
+            RAM[g] = '%';
         }
     }
 
@@ -53,7 +55,11 @@ public class MemoryManager {
     }
 
     public static short readInRAM (short physAdr) {
-        return byteToUShort(RAM[physAdr]);
+        //Nie rozumiem po co w ten sposob
+        //
+        //return byteToUShort(RAM[physAdr]);
+        return (short) RAM[physAdr];
+
     }
 
     public static void writeInProcess (PCB pcb, short adr, short data) {
@@ -72,7 +78,10 @@ public class MemoryManager {
     }
 
     public static void writeInRAM (short physAdr, short data) {
-        RAM[physAdr] = (byte)(data - 128);
+        //Znowu nie rozumiem dlaczego tak
+        //
+        //RAM[physAdr] = (byte)(data - 128);
+        RAM[physAdr] = (byte)(data);
     }
 
     public static void allocateProcess (PCB pcb) {
