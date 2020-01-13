@@ -1,14 +1,20 @@
 package Process;
 
+import RAM.MMU.MemoryManager;
+
 import java.util.Vector;
 import java.util.Stack;
 
 public class PCB {
-
+    //Identyfikator procesu
     final private int PID;
+    //Nazwa procesu
     public final String name;
+    //Stan procesu
     private ProcessState state;
-    //program counter
+    //Rejestry i licznik
+    private int counter, rA, rB, rC, rD;
+
     private byte PC;
     //nwm
     int expectedTime;
@@ -16,7 +22,7 @@ public class PCB {
     private int realTime;
     //tablica stron
     public Stack <Byte> pageTable;
-    //dlugosc kodu?
+    //dlugosc kodu
     private final int codeLength;
     /**
      * Unchangeable base priority, set in constructor,
@@ -32,23 +38,25 @@ public class PCB {
      */
     private int dynamicPriority;
 
-    private CPUState cpuState;
+    //??? ~MB
+    //private CPUState cpuState;
 
 
-    // temporary ram, see constructor
-    // private final byte[] code;
-    Memory ram;
 
+    MemoryManager ram;
 
-    PCB(int PID, String name, int priority, Memory ram, byte PC, int codeLength) {
+                                            //~MB
+    PCB(int PID, String name, int priority, /*Memory ram,*/ byte PC, int codeLength) {
         this.PID = PID;
         this.name = name;
 
         if (priority < 0){
-            Utils.log("Priority is too low, cannot create process", true);
+            //??? ~MB
+            //Utils.log("Priority is too low, cannot create process", true);
         }
         if (priority > 17) {
-            Utils.log("Priority is too high, changed to priority max size - 17", true);
+            //??? MB
+            //Utils.log("Priority is too high, changed to priority max size - 17", true);
             priority = 17;
         }
         this.basePriority = priority;
@@ -60,8 +68,12 @@ public class PCB {
 
         this.state = ProcessState.READY;
 
-        Utils.log("Created process " + this.name + " with pid " + this.PID
-                + " and with priority " + this.basePriority);
+        //??? ~MB
+        //Utils.log("Created process " + this.name + " with pid " + this.PID
+        //        + " and with priority " + this.basePriority);
+
+        //~MB
+        counter = rA = rB = rC = rD = 0;
 
     }
 
@@ -97,8 +109,9 @@ public class PCB {
 
         if (this.state != state){//in case of some error
 
-            Utils.log("Changed state of proces " + this.getSignature() + " from " + this.state
-                    + " to " + state);
+            //??? ~MB
+            //Utils.log("Changed state of proces " + this.getSignature() + " from " + this.state
+            //        + " to " + state);
 
             switch (state){
                 //TODO: find some way to use it or delete
@@ -142,49 +155,43 @@ public class PCB {
     public void setBasePriority(){
         if(dynamicPriority != basePriority) {
             this.dynamicPriority = this.basePriority;
-            Utils.log("Changed priority of " + this.getSignature() + " from " + this.dynamicPriority +
-                    " to base value - " + this.basePriority);
+            //~MB
+            //Utils.log("Changed priority of " + this.getSignature() + " from " + this.dynamicPriority +
+            //        " to base value - " + this.basePriority);
         }
     }
 
-    //Assembler------------------------------------------------------
 
-    /**
-     * Executes one command from PCB's program starting from current {@link PCB#PC}
-     * <p>Before execution of program the state of {@link Assembler#cpu} should be updated with value from {@link PCB#cpuState}.</p>
-     * <p>After execution of program the state of {@link Assembler#cpu} should be saved to {@link PCB#cpuState}.</p>
-     *
-     * @return {@code false} if it was the last command
-     *
-     * @see Assembler#setCPUState(CPUState)
-     * @see Assembler#getCPUState()
-     */
-    public boolean execute() {
-        Utils.log(toString());
-        Assembler.execute(this);
 
-        return PC < codeLength;
-    }
+    //~MB
+    //public boolean execute() {
+    //    Utils.log(toString());
+    //    Assembler.execute(this);
+    //
+    // return PC < codeLength;
+    //}
 
     public byte getByteAt(final byte address) {
 
-        return ram.read(this.getPID(), address);
+        return (byte) ram.readInRAM(address);
         //return this.code[address];
     }
     public void writeByteAt(final byte address, final byte value) {
 
-        ram.write(value, this.getPID(), address);
+        ram.writeInRAM(address, value);
         //this.code[address] = value;
     }
 
-    public CPUState getCpuState() {
-        return cpuState;
-    }
+    //~MB
+    //public CPUState getCpuState() {
+    //    return cpuState;
+    //}
+    //
+    //public void setCPUState(CPUState cpuState) {
+    //    this.cpuState.set(cpuState);
+    //}
 
-    public void setCPUState(CPUState cpuState) {
-        this.cpuState.set(cpuState);
-    }
-
+    /*~MB
     @Override
     public String toString() {
         return "PCB{" +
@@ -197,14 +204,57 @@ public class PCB {
                 ", readyTime=" + readyTime +
                 ", executedOrders=" + executedOrders +
                 '}';
-    }
+    }*/
 
     public String getSignature() {
         return name + " id: " + PID;
     }
 
+    /*
     @Override
     public int compareTo(PCB o) {
         return 0;
+    }*/
+
+    //~MB
+    //Gettery i settery
+    public int getCounter() {
+        return counter;
+    }
+
+    public void setCounter(int counter) {
+        this.counter = counter;
+    }
+
+    public int getrA() {
+        return rA;
+    }
+
+    public void setrA(int rA) {
+        this.rA = rA;
+    }
+
+    public int getrB() {
+        return rB;
+    }
+
+    public void setrB(int rB) {
+        this.rB = rB;
+    }
+
+    public int getrC() {
+        return rC;
+    }
+
+    public void setrC(int rC) {
+        this.rC = rC;
+    }
+
+    public int getrD() {
+        return rD;
+    }
+
+    public void setrD(int rD) {
+        this.rD = rD;
     }
 }

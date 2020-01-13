@@ -1,52 +1,26 @@
 package Process;
 
+import java.util.*;
+
+
 public class PCBList {
 
     /** Instance of PCBList */
     public static final PCBList list = new PCBList();
-
-    /**
-     * Stores process control blocks
-     */
     private List<PCB> data;
-
-    /**
-     * Stores pid that are used at that moment
-     */
     private List<Integer> usedPids;
-
-    /**
-     * Generator for random numbers
-     */
     private Random generator;
+    //public Processor processor = new Processor(this);
 
-    /**
-     * Reference to virtual memory manager
-     */
-    private Memory ram;
-    public virtualmemory vm;
-
-
-    public Processor processor = new Processor(this);
-
-    /**
-     * Initilaizes PCBList
-     */
-    public PCBList(/*virtualmemory vm*/) {
+    public PCBList() {
         data = new ArrayList<>();
         usedPids = new ArrayList<>();
         generator = new Random();
-
-        this.ram = new Memory();
-        this.vm = new virtualmemory(ram);
-//        ram.GetReference(vm);
     }
 
-    /**
-     * Generates an unique process id (pid) and adds it to used adresses arraylist
-     *
-     * @return generated pid
-     */
+
+
+    //Generates an unique process id (pid) and adds it to used adresses arraylist
     private int pidGen(){
         boolean notIn = false;
         int temp = -1;
@@ -66,35 +40,16 @@ public class PCBList {
 
     public static final int DUMMY_ID = 0;
 
-    public void addDummy(final byte[] dummyExec) {
-        final byte PC = (byte) (dummyExec[0] + 1);
-        final PCB dummy = new PCB(DUMMY_ID, "DUMMY", 0, ram, PC, dummyExec.length);
-        vm.createProcess(DUMMY_ID, toObjects(dummyExec));
-        data.add(dummy);
-        processor.addReadyProcess(dummy, false);
+    public void addDummy(final String dummyExec) {
+        //To trzeba bedzie innaczej zrobic
     }
 
-    /**
-     * Creates a new process and adds it to
-     *
-     * @param name name of new process
-     * @param priority base priority of new process
-     */
-    public void newProcess(final String name, final int priority, final byte[] exec){
-        final int id = pidGen();
-        final byte PC = (byte) (exec[0] + 1);
-        final PCB newProcess = new PCB(id, name, priority, ram, PC, exec.length);
-        vm.createProcess(id, toObjects(exec));
-        data.add(newProcess);
-        processor.addReadyProcess(newProcess, false);
+
+    public void newProcess(final String name, final int priority, String exec){
+        //To trzeba bedzie innaczej zrobic
     }
 
-    /**
-     * Changes byte array to Byte vector
-     *
-     * @param bytesPrim byte array
-     * @return Byte vector
-     */
+    //raczej niepotrzebne
     public Vector<Byte> toObjects(byte[] bytesPrim) {
         Vector<Byte> bytes = new Vector<>();
 
@@ -104,12 +59,7 @@ public class PCBList {
         return bytes;
     }
 
-    /**
-     * Changes Byte vector to byte array
-     *
-     * @param oBytes Byte vector
-     * @return byte array
-     */
+    //raczej niepotrzebne
     public byte[] toPrimitives(Vector<Byte> oBytes)
     {
         byte[] bytes = new byte[oBytes.size()];
@@ -122,28 +72,25 @@ public class PCBList {
     }
 
     public void makeProcessWait(final PCB process) {
-        process.setState(ProcessState.WAITING);
-        processor.removeFromQueue(process);
+        //To trzeba bedzie innaczej zrobic
     }
 
-    public void signal(final PCB process) {
-        process.setState(ProcessState.READY);
-        processor.addReadyProcess(process, true);
-    }
+    //Nie mam pojecia co to ma robic na razie ~MB
+    //public void signal(final PCB process) {
+    //    process.setState(ProcessState.READY);
+    //    processor.addReadyProcess(process, true);
+    //}
 
-    /**
-     * Deletes process and frees it's pid
-     *
-     * @param pid id of deleted process
-     */
+
     public void deleteProcess(int pid){
         Iterator itr = data.iterator();
         while (itr.hasNext()){
             PCB temp = (PCB) itr.next();
             if (temp.getPID() == pid){
-                Utils.log("Deleted process \"" + temp.getName() +
-                        "\", PID: " + temp.getPID());
-                vm.removeProcess(temp.getPID());
+                //Nie mamy ani logow ani pamieci wirtualnej
+                //Utils.log("Deleted process \"" + temp.getName() +
+                //        "\", PID: " + temp.getPID());
+                //vm.removeProcess(temp.getPID());
 
                 itr.remove();
             }
@@ -169,8 +116,9 @@ public class PCBList {
         return data;
     }
 
-    public void print(){
-        for (final PCB pcb: data) Shell.println(pcb.toString());
-    }
+    //??? ~MB
+    //public void print(){
+    //    for (final PCB pcb: data) Shell.println(pcb.toString());
+    //}
 
 }
