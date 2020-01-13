@@ -2,6 +2,7 @@ package Interpreter;
 
 import FileSystem.DiskManager;
 import FileSystem.FileManager;
+import RAM.MMU.MemoryManager;
 
 import java.util.Scanner;
 
@@ -33,6 +34,16 @@ public class Interpreter {
             return readCommand();
         } else if (string.equals("showDisk")){
             DiskManager.showDisk();
+            return readCommand();
+        } else if (string.equals("showRAM")){
+            MemoryManager.printMemory();
+            return readCommand();
+        } else if (string.equals("showRAM ascii")){
+            MemoryManager.printMemoryASCII();
+            return readCommand();
+        } else if (string.equals("writeRAM")){
+            MemoryManager.writeInRAM((short)7, (short)60);
+            return readCommand();
         }
         return string;
     }
@@ -328,7 +339,7 @@ public class Interpreter {
         }
         counter += argsStr.length() + 3;
     }
-    //TODO
+
     private static void multiplyInt(String argsStr) throws InvalidArgumentsInterpreterException {
         String[] args = argsStr.split(" ");
         if (args.length != 2) {
@@ -506,7 +517,7 @@ public class Interpreter {
         }
         counter += argsStr.length() + 3;
     }
-    //TODO
+
     private static void increment(String argsStr) throws InvalidArgumentsInterpreterException {
         String[] args = argsStr.split(" ");
         if (args.length != 1) {
