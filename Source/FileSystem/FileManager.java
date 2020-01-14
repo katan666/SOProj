@@ -211,7 +211,7 @@ public class FileManager extends  Files{
          * code == 0 - Zapisywanie zakonczone pomyslnie
          * code == 1 - Nie znaleziono pliku w wektorze otwartych plikow (czyt. plik nie zostal otwarty)
          * code == 2 - Plik nie istnieje
-         * code == 3 - brak wolnych blokow do zapisu.
+         * code == 3 - Brak wolnych blokow do zapisu.
          * code == 4 - Plik przekroczyl maksymalna wielkosc do zapisu. Plik za duzy
          * */
         int code;
@@ -260,7 +260,6 @@ public class FileManager extends  Files{
         }
         return code;
     }
-    //TODO
     public static int appendFile(String name, String data){
         /*
         * Zmienna code oznacza status errorow
@@ -315,7 +314,7 @@ public class FileManager extends  Files{
         }
         return code;
     }
-    //TODO bez zwracania do RAMU
+    //TODO
     public static void readFile(String name, int howMuch, short ramAddr){
         /*
          * Zmienna code oznacza status errorow
@@ -331,6 +330,25 @@ public class FileManager extends  Files{
 
         }
 
+    }
+    public static int renameFile(String oldName, String newName){
+        /*
+        * code == 0 Nazwa zmieniona pomyslnie
+        * code == 1 Plik nie został otwarty
+        * code == 2 Plik nie istnieje
+         */
+
+        int code;
+
+        code = isOpened(oldName);
+        if(code == 0) {
+            for (int i = 0; i < mainCatalog.size(); i++) {
+                if (oldName.equals(mainCatalog.get(i).fileName)) {
+                    mainCatalog.get(i).fileName = newName;
+                }
+            }
+        }
+        return code;
     }
     public static int closeFile(String name){
         /*
