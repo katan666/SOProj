@@ -102,12 +102,20 @@ public class FileManager extends  Files{
         }
         return address;
     }
-
-    public static void main(String[] args) {
-        System.out.println(readAddress('a'));
-
+    public static int indexOfOpened(String name){
+        int index = -1;
+        for(int i = 0; i < mainCatalog.size(); i++) {
+            if (name.equals(mainCatalog.get(i).fileName)){
+                for(int j = 0; j < openedFiles.size(); j++){
+                    if (mainCatalog.get(i).indexBlock == openedFiles.get(j)) {
+                        index = j;
+                        break;
+                    }
+                }
+            }
+        }
+        return index;
     }
-
     public static int isOpened(String name){
         /*
         * code == 0 plik otwarty
@@ -132,7 +140,7 @@ public class FileManager extends  Files{
         Files file = new Files();
         int i = 0;
         boolean created = false;
-        while(created == false && i < bitMap.length){
+        while(!created && i < bitMap.length){
             if(bitMap[i] == 0){
                 for(int j = 0; j < blockSize; j++){
                     disk[i][j] = '-';
@@ -167,39 +175,31 @@ public class FileManager extends  Files{
     public static int writeFile(String name, String data){
         /*
         * Zmienna code oznacza status errorow
-        * 1 - wszystko git
-        * 2 - brak wolnych blokow do zapisu.
-        * 3 - Plik osiagnal maksymalna wielkosc 64 bajtow plik za duzy. Przekroczyl 64 znaki == 64 bajty
-        * 4 - Nie znaleziono pliku w wektorze otwartych plikow (czyt. plik nie zostal otwarty)
+        * 0 - wszystko git
+        * 1 - Nie znaleziono pliku w wektorze otwartych plikow (czyt. plik nie zostal otwarty)
+        * 2 - Plik nie istnieje
+        * 3 - brak wolnych blokow do zapisu.
+        * 4 - Plik przekroczyl maksymalna wielkosc do zapisu. Plik za duzy
         * */
         int pointer = 0;
-        int code = 0;
+        int code;
         char index = '-';
         int blocksAmount = 0;
         int blocksToSave = 0;
 
-        for(int i = 0; i < mainCatalog.size(); i++){
-            if(name.equals(mainCatalog.get(i).fileName)){
-                for(int j = 0; j < openedFiles.size(); j++){
-                    if(mainCatalog.get(i).indexBlock == openedFiles.get(j)){
-                        index = openedFiles.get(j);
-                        code = 1;
-                    }
-                }
-            }
-        }
+        code = isOpened(name);
 
-        if(code == 1){
+        if(code == 0){
             for(int i = 0; i < blockSize; i++){
                 if(disk[readAddress(index)][i] == '-'){
                     blocksAmount++;
                 }
             }
             if(blocksAmount == 0){
-                code = 2;
-            }
-            else if(blocksAmount * 16 < data.length()){
                 code = 3;
+            }
+            else if(blocksAmount * blockSize < data.length()){
+                code = 4;
             }
             else{
                 for(int i = 0; i < bitMap.length; i++){
@@ -225,38 +225,28 @@ public class FileManager extends  Files{
     //TODO
     public static void readFile(String name, int howMuch, short ramAddr){
         /*
-        * code = 1 wszystko git
-        *
-        *
-        *
-         */
-        int code = 0;
+         * Zmienna code oznacza status errorow
+         * 0 - wszystko git
+         * 1 - Nie znaleziono pliku w wektorze otwartych plikow (czyt. plik nie zostal otwarty)
+         * 2 - Plik nie istnieje
+         * */
+        int code;
         char index = '-';
 
-        for(int i = 0; i < mainCatalog.size(); i++){
-            if(name.equals(mainCatalog.get(i).fileName)){
-                for(int j = 0; j < openedFiles.size(); j++){
-                    if(mainCatalog.get(i).indexBlock == openedFiles.get(j)){
-                        index = openedFiles.get(j);
-                        code = 1;
-                    }
-                }
-            }
-        }
-
-        for(int i = 0; i < blockSize; i++){
-            if(disk[index][i] != '-'){
-
-            }
-        }
-
+        code = isOpened(name);
 
     }
     //TODO
     public static int closeFile(String name){
-        int code = -1;
-        if(isOpened(name) == 0){
-
+        /*
+         * Zmienna code oznacza status errorow
+         * 0 - wszystko git
+         * 1 - Nie znaleziono pliku w wektorze otwartych plikow (czyt. plik nie zostal otwarty)
+         * 2 - Plik nie istnieje
+         * */
+        int code = isOpened(name);
+        if(code == 0){
+            openedFiles.remove(indexOfOpened(name));
         }
         return code;
     }
