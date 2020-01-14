@@ -1,9 +1,15 @@
 package Interpreter;
 
+import FileSystem.Disk;
 import FileSystem.DiskManager;
 import FileSystem.FileManager;
+import Programs.FileLoader;
+import RAM.MMU.MemoryManager;
+import RAM.MMU.PCB;
 
 import java.util.Scanner;
+import java.util.Stack;
+import java.util.Vector;
 
 public class Interpreter {
     private final static String REG_A = "AX";
@@ -33,6 +39,30 @@ public class Interpreter {
             return readCommand();
         } else if (string.equals("showDisk")){
             DiskManager.showDisk();
+            return readCommand();
+        } else if (string.equals("showRAM")){
+            MemoryManager.printMemory();
+            return readCommand();
+        } else if (string.equals("showRAM ascii")){
+            MemoryManager.printMemoryASCII();
+            return readCommand();
+        } else if (string.equals("writeRAM")){
+            MemoryManager.writeInRAM((short)16, (short)60);
+            return readCommand();
+        } else if (string.equals("showBitMap")){
+            DiskManager.showBitMap();
+            return readCommand();
+        } else if (string.equals("test0")){
+            Stack<Byte> v1 = new Stack<>();
+            Stack<Byte> v2 = new Stack<>();
+            RAM.MMU.PCB pcb0 = new RAM.MMU.PCB((short)6,"nazwa", v1, FileLoader.readAllBytesFromFileToShortVec("Source/Programs/dummy.txt"));
+            RAM.MMU.PCB pcb1 = new RAM.MMU.PCB((short)23,"nazwa", v2, FileLoader.readAllBytesFromFileToShortVec("Source/Programs/ciagLiczbKwadratowych.txt"));
+            MemoryManager.allocateProcess(pcb0);
+            MemoryManager.allocateProcess(pcb1);
+            for (Byte e : pcb0.pageTable){
+                System.out.println(e);
+            }
+            return readCommand();
         }
         return string;
     }
@@ -328,7 +358,7 @@ public class Interpreter {
         }
         counter += argsStr.length() + 3;
     }
-    //TODO
+
     private static void multiplyInt(String argsStr) throws InvalidArgumentsInterpreterException {
         String[] args = argsStr.split(" ");
         if (args.length != 2) {
@@ -506,7 +536,7 @@ public class Interpreter {
         }
         counter += argsStr.length() + 3;
     }
-    //TODO
+
     private static void increment(String argsStr) throws InvalidArgumentsInterpreterException {
         String[] args = argsStr.split(" ");
         if (args.length != 1) {

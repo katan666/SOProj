@@ -19,14 +19,18 @@ public class DiskManager extends Disk {
     public static void showDisk(){
         for(int i = 0; i < bitMap.length; i++){
             for(int j = 0; j < blockSize; j++){
-                System.out.println(disk[i][j]);
+                System.out.print(disk[i][j]);
+            }
+            System.out.print(' ');
+            if((i+1)%4==0){
+                System.out.println();
             }
         }
     }
 
     public static void showBitMap(){
         for(int i = 0; i<bitMap.length; i++){
-            System.out.println(bitMap[i]);
+            System.out.print(bitMap[i]);
         }
     }
 }

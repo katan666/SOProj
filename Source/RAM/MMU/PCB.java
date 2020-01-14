@@ -17,4 +17,11 @@ public class PCB {
     public void setPID (Short PID) {
         this.PID = PID;
     }
+
+    public PCB(Short PID, String name, Stack<Byte> pageTable, Vector<Short> code) {
+        this.PID = PID;
+        this.name = name;
+        this.pageTable = pageTable;
+        this.code = code;
+    }
 }
