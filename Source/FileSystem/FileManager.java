@@ -102,7 +102,7 @@ public class FileManager extends  Files{
         }
         return address;
     }
-    public static int indexOfOpened(String name){
+    public static int whereIsOpened(String name){
         int index = -1;
         for(int i = 0; i < mainCatalog.size(); i++) {
             if (name.equals(mainCatalog.get(i).fileName)){
@@ -222,7 +222,7 @@ public class FileManager extends  Files{
         }
         return code;
     }
-    //TODO
+    //TODO bez zwracania do RAMU
     public static void readFile(String name, int howMuch, short ramAddr){
         /*
          * Zmienna code oznacza status errorow
@@ -234,9 +234,11 @@ public class FileManager extends  Files{
         char index = '-';
 
         code = isOpened(name);
+        if(code == 0){
+
+        }
 
     }
-    //TODO
     public static int closeFile(String name){
         /*
          * Zmienna code oznacza status errorow
@@ -246,11 +248,10 @@ public class FileManager extends  Files{
          * */
         int code = isOpened(name);
         if(code == 0){
-            openedFiles.remove(indexOfOpened(name));
+            openedFiles.remove(whereIsOpened(name));
         }
         return code;
     }
-
     public static int deleteFile(String name){
         /*
         * code == 1 plik jest otwarty nie mozna usunac otwartego pliku
