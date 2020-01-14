@@ -25,6 +25,7 @@ public enum CommandType {
     INCREMENT(1),
     DO_NOTHING(0),
     SWAP_BYTE(3),
+    APPEND_FILE(2),
 
     INVALID_COMMAND(0);
 

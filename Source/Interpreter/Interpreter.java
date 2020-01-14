@@ -68,7 +68,11 @@ public class Interpreter {
             System.out.println(ProcessMenager.listOfProcess());
 
             return readCommand();
-    }
+        }else if (string.equals("addProcess")){
+            ProcessMenager.newProcess("ppp", "Source/Programs/ciagLiczbKwadratowych.txt");
+
+            return readCommand();
+        }
         return string;
     }
     //Na podstawie pierwszych 2 znakow w argumencie str okresla typ komendy
@@ -153,6 +157,9 @@ public class Interpreter {
                     break;
                 case CLOSE_FILE:
                     closeFile(strCommand.substring(3));
+                    break;
+                case APPEND_FILE:
+                    appendFile(strCommand.substring(3));
                     break;
                 default:
                     System.out.println("Default");
@@ -584,7 +591,13 @@ public class Interpreter {
     }
 
 
-
+    private static void appendFile(String argsStr) throws InvalidArgumentsInterpreterException {
+        String[] args = argsStr.split(" ");
+        if (args.length != 2) {
+            throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawna liczba argumentow");
+        }
+        FileManager.appendFile(args[0], args[1]);
+    }
 
 
 }
