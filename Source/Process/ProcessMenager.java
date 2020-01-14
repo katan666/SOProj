@@ -14,8 +14,12 @@ import static Process.ProcessState.TERMINATED;
 public class ProcessMenager {
     public static final int DUMMY_PID = 0;
     public static Vector<PCB> list;
-
+    public static int pidG = 1;
     public ProcessMenager() {
+        list = new Vector<PCB>();
+        addDummy();
+    }
+    public static void init(){
         list = new Vector<PCB>();
         addDummy();
     }
@@ -27,32 +31,27 @@ public class ProcessMenager {
     }
 
     public static int pidGen(){
-        int i = 1;
-        while (true){
-            for(PCB pcb : list){
-                if(pcb.getPid() != i)return i;
-                i++;
-            }
-        }
+        return pidG++;
     }
 
     public static PCB getDummy(){
-        list = new Vector<PCB>();
-        addDummy();
+
         return list.elementAt(0);
     }
 
     public static void newProcess(String name, String filePath){
         PCB pcb = new PCB(name, pidGen(), NEW, 0,filePath);
+        System.out.println(pcb.toStringReg());
         list.add(pcb);
+
         Scheduler.add_process(pcb);
     }
 
     public static String listOfProcess(){
         String tem = "";
-        int i = 1;
-        for(PCB pcb : list){
-            tem =+ i + ". " + pcb.getName() + "\t PID: " + pcb.getPid() + "\t STATE: " + pcb.state + '\n';
+        for(int i = 0; i < list.size(); i++){
+            tem = tem + (i+1) + ". " + list.elementAt(i).getName() + "\t PID: " + list.elementAt(i).getPid() + "\t STATE: " + list.elementAt(i).state + '\n';
+
         }
         return tem;
     }

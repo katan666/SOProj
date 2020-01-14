@@ -7,6 +7,7 @@ import Programs.FileLoader;
 import RAM.MMU.MemoryManager;
 import Process.ProcessMenager;
 import RAM.MMU.PCB;
+import Scheduler.Scheduler;
 
 import java.util.Scanner;
 import java.util.Stack;
@@ -68,10 +69,8 @@ public class Interpreter {
             System.out.println(ProcessMenager.listOfProcess());
 
             return readCommand();
-        }else if (string.equals("addProcess")){
-            ProcessMenager.newProcess("ppp", "Source/Programs/ciagLiczbKwadratowych.txt");
-
-            return readCommand();
+        } else if (string.equals("showRun")){
+            System.out.println(Scheduler.get_running().getPid());
         }
         return string;
     }
@@ -522,8 +521,11 @@ public class Interpreter {
         System.out.println(FileManager.writeFile(args[0], "kurwa to kazdy oprocz mnie ale nie wiem do konca kto"));
     }
     //TODO
-    private static void formProcess(String args) {
-        System.out.printf("formProcess args: %s\n", args);
+    private static void formProcess(String argsStr) throws InvalidArgumentsInterpreterException{
+        String[] args = argsStr.split(" ");
+        if(args.length != 2) throw new InvalidArgumentsInterpreterException("Interpreter: Zla liczba argumentow.");
+        String path = "Source/Programs/" + args[1];
+        ProcessMenager.newProcess(args[0], path);
     }
     //TODO
     private static void deleteProcess(String argsStr) throws InvalidArgumentsInterpreterException{
