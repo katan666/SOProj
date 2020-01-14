@@ -6,7 +6,9 @@ public class FileManager extends  Files{
 
     public static Vector<Files> mainCatalog = new Vector<Files>();
     public static Vector<Character> openedFiles = new Vector<Character>();
-/*
+
+    //stare adresy
+    /*
     public static int readAddress(char index){
         int address = -1;
         if(index == '0')address = 0;
@@ -82,9 +84,11 @@ public class FileManager extends  Files{
         return index;
     }
 */
+
     private final static char BEGIN = '0';
     private final static int LENGTH = 64;
 
+    //TODO sprawdzenie
     public static Vector<String> showMainCatalog(){
         Vector<String>filesInCatalog = new Vector();
         for(int i = 0; i < mainCatalog.size(); i++){
@@ -92,7 +96,7 @@ public class FileManager extends  Files{
         }
         return filesInCatalog;
     }
-
+    //TODO sprawdzenie
     public static Vector<String> showOpenedFiles(){
         Vector<String>of = new Vector();
         for(int i = 0; i < openedFiles.size(); i++) {
@@ -346,8 +350,7 @@ public class FileManager extends  Files{
         }
         return code;
     }
-
-    //TODO
+    //TODO cale
     public static void readFile(String name, int howMuch, short ramAddr){
         /*
          * Zmienna code oznacza status errorow
@@ -364,7 +367,7 @@ public class FileManager extends  Files{
         }
 
     }
-
+    //TODO sprawdzenie
     public static int renameFile(String oldName, String newName){
         /*
         * code == 0 Nazwa zmieniona pomyslnie
