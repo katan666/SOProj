@@ -34,6 +34,10 @@ public class ProcessMenager {
         }
     }
 
+    public static PCB getDummy(){
+        return list.elementAt(0);
+    }
+
     public static void newProcess(String name, String filePath){
         PCB pcb = new PCB(name, pidGen(), NEW, 0,filePath);
     }
