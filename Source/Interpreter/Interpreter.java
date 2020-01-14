@@ -5,6 +5,7 @@ import FileSystem.DiskManager;
 import FileSystem.FileManager;
 import Programs.FileLoader;
 import RAM.MMU.MemoryManager;
+import Process.ProcessMenager;
 import RAM.MMU.PCB;
 
 import java.util.Scanner;
@@ -63,7 +64,11 @@ public class Interpreter {
                 System.out.println(e);
             }
             return readCommand();
-        }
+        } else if (string.equals("showProcessList")){
+            System.out.println(ProcessMenager.listOfProcess());
+
+            return readCommand();
+    }
         return string;
     }
     //Na podstawie pierwszych 2 znakow w argumencie str okresla typ komendy

@@ -37,6 +37,8 @@ public class ProcessMenager {
     }
 
     public static PCB getDummy(){
+        list = new Vector<PCB>();
+        addDummy();
         return list.elementAt(0);
     }
 
