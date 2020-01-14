@@ -56,9 +56,9 @@ public class MemoryManager {
 
     public static short readInRAM (short physAdr) {
         //Nie rozumiem po co w ten sposob
-        //
-        //return byteToUShort(RAM[physAdr]);
-        return (short) RAM[physAdr];
+
+        return byteToUShort(RAM[physAdr]);
+        //return (short) RAM[physAdr];
 
     }
 
@@ -79,9 +79,9 @@ public class MemoryManager {
 
     public static void writeInRAM (short physAdr, short data) {
         //Znowu nie rozumiem dlaczego tak
-        //
-        //RAM[physAdr] = (byte)(data - 128);
-        RAM[physAdr] = (byte)(data);
+
+        RAM[physAdr] = (byte)(data - 128);
+        //RAM[physAdr] = (byte)(data);
     }
 
     public static void allocateProcess (PCB pcb) {

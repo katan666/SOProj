@@ -2,9 +2,13 @@ package Interpreter;
 
 import FileSystem.DiskManager;
 import FileSystem.FileManager;
+import Programs.FileLoader;
 import RAM.MMU.MemoryManager;
+import RAM.MMU.PCB;
 
 import java.util.Scanner;
+import java.util.Stack;
+import java.util.Vector;
 
 public class Interpreter {
     private final static String REG_A = "AX";
@@ -42,7 +46,18 @@ public class Interpreter {
             MemoryManager.printMemoryASCII();
             return readCommand();
         } else if (string.equals("writeRAM")){
-            MemoryManager.writeInRAM((short)7, (short)60);
+            MemoryManager.writeInRAM((short)16, (short)60);
+            return readCommand();
+        } else if (string.equals("test0")){
+            Stack<Byte> v1 = new Stack<>();
+            Stack<Byte> v2 = new Stack<>();
+            RAM.MMU.PCB pcb0 = new RAM.MMU.PCB((short)6,"nazwa", v1, FileLoader.readAllBytesFromFileToShortVec("Source/Programs/dummy.txt"));
+            RAM.MMU.PCB pcb1 = new RAM.MMU.PCB((short)23,"nazwa", v2, FileLoader.readAllBytesFromFileToShortVec("Source/Programs/ciagLiczbKwadratowych.txt"));
+            MemoryManager.allocateProcess(pcb0);
+            MemoryManager.allocateProcess(pcb1);
+            for (Byte e : pcb0.pageTable){
+                System.out.println(e);
+            }
             return readCommand();
         }
         return string;
