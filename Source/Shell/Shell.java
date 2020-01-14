@@ -27,7 +27,22 @@ public void Match(String line)
             System.out.println("Wyswietlenie pamieci ram");
             break;
         case "RENAME":
-                System.out.println("Zmiana nazwy pliku");
+            if(command.length == 3)
+            {
+                if(FileManager.renameFile(command[1],command[2]) == 0)
+                {
+                    System.out.println("Nazwa zostala pomyslnie zmieniona.");
+                }
+                else if(FileManager.renameFile(command[1],command[2])==1)
+                {
+                    System.out.println("Plik nie zostal otwarty");
+                }
+                else if(FileManager.renameFile(command[1],command[2])==2)
+                {
+                    System.out.println("Plik nie istnieje");
+                }
+            }
+            else System.out.println("Zbyt wiele parametrow.");
             break;
         case "DELETE":
             System.out.println("Usuniecie pliku");
