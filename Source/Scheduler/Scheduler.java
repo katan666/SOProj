@@ -1,48 +1,33 @@
 package Scheduler;
 
 import java.util.Vector;
+
+import Interpreter.Interpreter;
 import Process.PCB;
+
+import Process.ProcessMenager;
+import static Process.ProcessState.NEW;
+import static Process.ProcessState.READY;
+import static Process.ProcessState.RUNNING;
+import static Process.ProcessState.WAITING;
+import static Process.ProcessState.TERMINATED;
 
 public class Scheduler
 {
     private static final double alfa = 0.5; //stala z zakresu [0-1]
 
     private static double expected_time = 5; //przewidywany czas pracy
-    private static int real_time = 0; // rzeczywisty czas pracy
     static Vector<PCB> readyQueue = new Vector<PCB>();//wektor procesow gotowych do przydzielenia procesora
     private static PCB running; // uruchomiony proces
-    public static PCB init = new PCB ("init", "0","Running", 0, 0, "Source/Programs/dummy.txt");
     private int x;
-    public static void set_init()//metoda ustawiająca init jako uruchomiony
+    public static void set_init()//metoda ustawiająca init jako uruchomiony                                                                                                <---------- DOMINIK
     {
-        running=init;
+        running= ProcessMenager.getDummy();
     }
 
     private static void calculate_srt()//metoda obliczajaca srednia wykladnicza ostatnich procesow
     {
-        running.expected_time = alfa * running.realTime + ((1 - alfa) * running.expected_time); //oblicza kazdemu procesowi w kolejce gotowych przewidywany czas
-    }
-
-    public static void set_process_running()//wybranie procesu o najmniejszym pzrewidywanym czasie
-    {
-        int min=999999; //zmienna pomocnicza przy wybieraniu najmnijszej wartosci czasu
-        int index=0;
-        for(int i=0; i<readyQueue.size();i++)
-        {
-            if(readyQueue.get(i).expected_time<min)
-            {
-                min= (int) readyQueue.get(i).expected_time;
-                index=i;
-            }
-        }
-        if(running.expected_time>readyQueue.get(index).expected_time)
-        {
-            add_running(running);
-            running.state=state_ready();
-            running = readyQueue.get(index);
-            running.state=state_running();
-            remove_process(readyQueue.get(index).getPid());
-        }
+        running.expected_time = alfa * running.getCounter() + ((1 - alfa) * running.expected_time); //oblicza kazdemu procesowi w kolejce gotowych przewidywany czas
     }
 
     public static void add_running(PCB x)
@@ -50,18 +35,17 @@ public class Scheduler
         readyQueue.add(x);
     }
 
-    public static void remove_process(String pid)//metoda usuwajaca proces z kolejki gotowych procesow
+    public static void remove_process(int pid)//metoda usuwajaca proces z kolejki gotowych procesow
     {
         int x=0;
         for(int i=0;i<readyQueue.size();i++)
         {
-            if(readyQueue.get(i).getPid().equals(pid))
+            if(readyQueue.get(i).getPid()==(pid))
             {
                 readyQueue.remove(i);
                 x=1;
             }
         }
-
         if(x==1)
         {
             System.out.println("SCHEDULER ->" + " usunieto proces z kolejki procesow gotowych");
@@ -84,9 +68,11 @@ public class Scheduler
                 index=i;
             }
         }
+        running.state=TERMINATED;
         running=readyQueue.get(index);
         remove_process(readyQueue.get(index).getPid());
     }
+
 
     public static void print_ready_queue() //wypisywanie calej tablicy procesow gotowych
     {
@@ -98,77 +84,59 @@ public class Scheduler
         {
             for (int i = 0; i < readyQueue.size(); i++)
             {
-                System.out.println("SCHEDULER -> " + "|ID:" + readyQueue.get(i).getPid() + "| |Name:" + readyQueue.get(i).getName() + "| |Tau:" + readyQueue.get(i).expected_time + "| |Tn:" + readyQueue.get(i).realTime + "| |State:" + readyQueue.get(i).state + "|"); //wypisuje numer procesu, nazwe oraz Tau
+                System.out.println("SCHEDULER -> " + "|ID:" + readyQueue.get(i).getPid() + "| |Name:" + readyQueue.get(i).getName() + "| |Tau:" + readyQueue.get(i).expected_time + "| |Tn:" + readyQueue.get(i).getCounter() + "| |State:" + readyQueue.get(i).state + "|"); //wypisuje numer procesu, nazwe oraz Tau
             }
         }
     }
 
     public static void print_running_process()
     {
-        System.out.println("SCHEDULER -> " + "|ID:" + running.getPid() + "| |Name:" + running.getName() + "| |Tau:" + running.expected_time + "| |Tn:" + running.realTime + "| |State:" + running.state + "|"); //wypisuje uruchomiony proces
+        System.out.println("SCHEDULER -> " + "|ID:" + running.getPid() + "| |Name:" + running.getName() + "| |Tau:" + running.expected_time + "| |Tn:" + running.getCounter() + "| |State:" + running.state + "|"); //wypisuje uruchomiony proces
     }
 
-    public static void print_process(PCB p)
+    public static void add_process(PCB process)//metoda dodajaca proces do kolejki procesow gotowych
     {
-        System.out.println("|ID:" + p.getPid() + "| |Name:" + p.getName() + "| |Tau:" + p.expected_time + "| |Tn:" + p.realTime + "| |State:" + p.state + "|");
+        if(process.expected_time==0)
+        {
+            process.expected_time=expected_time;
+        }
+        if(readyQueue.size()==0 && running== ProcessMenager.getDummy())//jezeli kolejka gotowych procesow jest pusta
+        {
+            running=process; //jako proces uruchomiony ustawiam process poniewaz innych nie ma
+            running.state=RUNNING;
+        }
+        else
+        {
+            readyQueue.add(process);//dodanie procesu do kolejki procesow gotowych
+            calculate_srt();
+            process.state=READY;
+            set_process_running();//wybieranie procesu o najmniejszym TAU
+        }
     }
 
+    public static void set_process_running()//wybranie procesu o najmniejszym pzrewidywanym czasie
+    {
+        int min=999999; //zmienna pomocnicza przy wybieraniu najmnijszej wartosci czasu
+        int index=0;
+        for(int i=0; i<readyQueue.size();i++)
+        {
+            if(readyQueue.get(i).expected_time<min)
+            {
+                min= (int) readyQueue.get(i).expected_time;
+                index=i;
+            }
+        }
+        if(running.expected_time>readyQueue.get(index).expected_time)
+        {
+            add_running(running);
+            running.state=READY;
+            running = readyQueue.get(index);
+            running.state=RUNNING;
+            remove_process(readyQueue.get(index).getPid());
+        }
+    }
     public static PCB get_running()
     {
-        return running;//zwraca uruchomiony proces
-    }
-
-    public static String state_running()
-    {
-        return "Running";
-    }
-    public static String state_ready()
-    {
-        return "Ready";
-    }
-    public static String state_waiting()
-    {
-        return "Waiting";
-    }
-
-    public static void ready()
-    {
-        int min=999999; //zmienna pomocnicza przy wybieraniu najmnijszej wartosci czasu
-        int index=0;
-        for(int i=0; i<readyQueue.size();i++)
-        {
-            if(readyQueue.get(i).expected_time<min)
-            {
-                min= (int) readyQueue.get(i).expected_time;
-                index=i;
-            }
-        }
-        running.state=state_ready();
-        System.out.println("Stan zmieniony na ready");
-        add_running(running);
-        running=readyQueue.get(index);
-        running.state=state_running();
-        remove_process(readyQueue.get(index).getPid());
-    }
-    public static void waiting()
-    {
-        int min=999999; //zmienna pomocnicza przy wybieraniu najmnijszej wartosci czasu
-        int index=0;
-        for(int i=0; i<readyQueue.size();i++)
-        {
-            if(readyQueue.get(i).expected_time<min)
-            {
-                min= (int) readyQueue.get(i).expected_time;
-                index=i;
-            }
-        }
-        running.state=state_waiting();
-        System.out.println("Stan zmieniony na waiting");
-        running=readyQueue.get(index);
-        running.state=state_running();
-        remove_process(readyQueue.get(index).getPid());
+        return running;//zwraca uruchomiony proces                                                                              <---------- Do wykorzystania
     }
 }
-
-
-//PCB, expected_time=0, real_time-zlicza rozkazy, state
