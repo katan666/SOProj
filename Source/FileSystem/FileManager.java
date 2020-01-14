@@ -6,7 +6,7 @@ public class FileManager extends  Files{
 
     public static Vector<Files> mainCatalog = new Vector<Files>();
     public static Vector<Character> openedFiles = new Vector<Character>();
-
+/*
     public static int readAddress(char index){
         int address = -1;
         if(index == '0')address = 0;
@@ -81,6 +81,32 @@ public class FileManager extends  Files{
         if(address == 32)index = 'w';
         return index;
     }
+*/
+    private final static char BEGIN = '0';
+    private final static int LENGTH = 64;
+    public static int readAddress(char address){
+        /*
+        * address == -1 błąd
+        * else zwraca adres komorki jako liczbe int
+         */
+        int index = -1;
+        if(address <= (LENGTH + BEGIN) && address >= BEGIN) {
+            index = address - BEGIN;
+        }
+        return index;
+    }
+    public static char writeAddress(int index){
+        char address = '~';
+        if(index <= LENGTH && index >= 0) {
+            address = (char) (index + BEGIN);
+        }
+        return address;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(readAddress('a'));
+
+    }
 
     public static int isOpened(String name){
         /*
@@ -106,7 +132,7 @@ public class FileManager extends  Files{
         Files file = new Files();
         int i = 0;
         boolean created = false;
-        while(created == false && i < 256){
+        while(created == false && i < bitMap.length){
             if(bitMap[i] == 0){
                 for(int j = 0; j < blockSize; j++){
                     disk[i][j] = '-';

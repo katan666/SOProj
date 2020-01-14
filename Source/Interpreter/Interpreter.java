@@ -1,5 +1,6 @@
 package Interpreter;
 
+import FileSystem.Disk;
 import FileSystem.DiskManager;
 import FileSystem.FileManager;
 import Programs.FileLoader;
@@ -47,6 +48,9 @@ public class Interpreter {
             return readCommand();
         } else if (string.equals("writeRAM")){
             MemoryManager.writeInRAM((short)16, (short)60);
+            return readCommand();
+        } else if (string.equals("showBitMap")){
+            DiskManager.showBitMap();
             return readCommand();
         } else if (string.equals("test0")){
             Stack<Byte> v1 = new Stack<>();
