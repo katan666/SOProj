@@ -9,11 +9,11 @@ import static Process.ProcessState.RUNNING;
 import static Process.ProcessState.WAITING;
 import static Process.ProcessState.TERMINATED;
 
-public class PCBList {
+public class ProcessMenager {
     public static final int DUMMY_PID = 0;
     public static Vector<PCB> list;
 
-    public PCBList() {
+    public ProcessMenager() {
         list = new Vector<PCB>();
     }
 

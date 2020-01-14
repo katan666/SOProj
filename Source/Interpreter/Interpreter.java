@@ -147,7 +147,7 @@ public class Interpreter {
                     moveIntToReg(strCommand.substring(3));
                     break;
                 case CLOSE_FILE:
-                    closeFile();
+                    closeFile(strCommand.substring(3));
                     break;
                 default:
                     System.out.println("Default");
@@ -479,10 +479,19 @@ public class Interpreter {
         if (!isOkey) throw new InvalidArgumentsInterpreterException("Interpreter: Problem z FileManager.openFile");
     }
 
-    private static void closeFile(){}
-    //TODO
-    private static void deleteFile(String args) {
-        System.out.printf("deleteFile args: %s\n", args);
+    private static void closeFile(String argsStr) throws InvalidArgumentsInterpreterException{
+        String[] args = argsStr.split(" ");
+        if(args.length != 1) throw new InvalidArgumentsInterpreterException("Interpreter: Zla liczba argumentow.");
+        int isOkey = FileManager.closeFile(args[0]);
+        if (isOkey != 0) throw new InvalidArgumentsInterpreterException("Interpreter: Problem z FileManager.closeFile");
+
+    }
+
+    private static void deleteFile(String argsStr) throws InvalidArgumentsInterpreterException{
+        String[] args = argsStr.split(" ");
+        if(args.length != 1) throw new InvalidArgumentsInterpreterException("Interpreter: Zla liczba argumentow.");
+        int isOkey = FileManager.deleteFile(args[0]);
+        if (isOkey != 0) throw new InvalidArgumentsInterpreterException("Interpreter: Problem z FileManager.deleteFile");
     }
 
     private static void createFile(String argsStr) throws InvalidArgumentsInterpreterException{
@@ -505,8 +514,8 @@ public class Interpreter {
         System.out.printf("formProcess args: %s\n", args);
     }
     //TODO
-    private static void deleteProcess(String args) {
-        System.out.printf("deleteProcess args: %s\n", args);
+    private static void deleteProcess(String argsStr) throws InvalidArgumentsInterpreterException{
+        String[] args = argsStr.split(" ");
     }
     //TODO
     private static void runProcess(String args) {
