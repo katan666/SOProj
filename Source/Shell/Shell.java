@@ -56,18 +56,18 @@ public void Match(String line)
         case "FCREATE":
                 FileManager.createFile(command[1]);
                 break;
-        case "WRITE":
+        case "APPEND":
             if(command.length == 2) {
                 if (FileManager.isOpened(command[1]) == 0) {
                     String data;
                     System.out.println("Prosze podac dane do zapisania w pliku");
                     Scanner read = new Scanner(System.in);
                     data = read.next();
-                    if (FileManager.appendFile(command[1], data) == 1) {
+                    if (FileManager.appendFile(command[1], data) == 0) {
                         System.out.println("Dane wpisane pomyslnie");
-                    } else if (FileManager.appendFile(command[1], data) == 2) {
-                        System.out.println("Brak wolnych blokow do zapisu na dysku");
                     } else if (FileManager.appendFile(command[1], data) == 3) {
+                        System.out.println("Brak wolnych blokow do zapisu na dysku");
+                    } else if (FileManager.appendFile(command[1], data) == 4) {
                         System.out.println("Plik przekroczyl maksymalna wielkosc");
                     }
                 } else if (FileManager.isOpened(command[1]) == 2) {
@@ -77,6 +77,40 @@ public void Match(String line)
                 }
             }
             else System.out.println("Zbyt wiele parametrow.");
+            break;
+        case "WRITE":
+            if(command.length == 2) {
+                if (FileManager.isOpened(command[1]) == 0) {
+                    String data;
+                    System.out.println("Prosze podac dane do zapisania w pliku");
+                    Scanner read = new Scanner(System.in);
+                    data = read.next();
+                    if (FileManager.writeFile(command[1], data) == 0) {
+                        System.out.println("Dane wpisane pomyslnie");
+                    } else if (FileManager.writeFile(command[1], data) == 3) {
+                        System.out.println("Brak wolnych blokow do zapisu na dysku");
+                    } else if (FileManager.writeFile(command[1], data) == 4) {
+                        System.out.println("Plik przekroczyl maksymalna wielkosc");
+                    }
+                } else if (FileManager.isOpened(command[1]) == 2) {
+                    System.out.println("Plik nie istnieje.");
+                } else if (FileManager.isOpened(command[1]) == 1) {
+                    System.out.println("Plik nie zostal otwarty.");
+                }
+            }
+            else System.out.println("Zbyt wiele parametrow.");
+            break;
+        case "FCLOSE":
+            if(command.length == 2) {
+                if (FileManager.closeFile(command[0]) == 0) {
+                    System.out.println("Plik zostal pomyslnie zamkniety.");
+                } else if (FileManager.closeFile(command[0]) == 1) {
+                    System.out.println("Plik nie zostal otwarty");
+                } else if (FileManager.closeFile(command[0]) == 2) {
+                    System.out.println("Plik nie istnieje.");
+                }
+            }
+            else System.out.println("Zbyt wiele parametrow");
             break;
         case "DATE":
             DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
