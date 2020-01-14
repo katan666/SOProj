@@ -45,7 +45,21 @@ public void Match(String line)
             else System.out.println("Zbyt wiele parametrow.");
             break;
         case "DELETE":
-            System.out.println("Usuniecie pliku");
+            if(command.length == 2)
+            {
+                if(FileManager.deleteFile(command[1])==0)
+                {
+                    System.out.println("Plik usuniety pomyslnie");
+                }
+                else if(FileManager.deleteFile(command[1])==1)
+                {
+                    System.out.println("Nie mozna usunac pliku, poniewaz jest on otwarty.");
+                }
+                else if(FileManager.deleteFile(command[1])==2) {
+                    System.out.println("Plik nie istnieje.");
+                }
+            }
+            else System.out.println("Zla liczba argumentow.");
             break;
         case "PL":
             System.out.println("Wyswietlenie listy wszystkich procesow");
