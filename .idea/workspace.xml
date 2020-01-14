@@ -3,7 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="61837fae-e481-4f7a-89a2-8cb0a51d03c3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/FileSystem/FileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Source/FileSystem/FileManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Interpreter/Interpreter.java" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Interpreter/Interpreter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Scheduler/Scheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Scheduler/Scheduler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Shell/Shell.java" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Shell/Shell.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -220,7 +222,42 @@
       <option name="project" value="LOCAL" />
       <updated>1578945534355</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Drobne zmiany">
+      <created>1579028677084</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1579028677084</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Drobne zmiany">
+      <created>1579031393858</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1579031393858</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Drobne zmiany">
+      <created>1579031637479</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1579031637479</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Drobne zmiany">
+      <created>1579031915300</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1579031915300</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Drobne zmiany">
+      <created>1579038672403</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1579038672403</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -270,22 +307,64 @@
       <screen x="0" y="0" width="1680" height="1010" />
     </state>
     <state x="688" y="394" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1680.1010/-900.-247.900.1400@0.0.1680.1010" timestamp="1578850650886" />
-    <state x="393" y="7" key="CommitChangelistDialog2" timestamp="1578852106208">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="430" y="9" key="CommitChangelistDialog2" timestamp="1579038993270">
+      <screen x="0" y="0" width="1680" height="1010" />
     </state>
     <state x="393" y="7" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1578852106208" />
+    <state x="430" y="9" key="CommitChangelistDialog2/0.0.1680.1010/-900.-247.900.1400@0.0.1680.1010" timestamp="1579038993270" />
     <state x="147" y="71" key="DiffContextDialog" timestamp="1578850063671">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="147" y="71" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1578850063671" />
-    <state x="361" y="146" key="Vcs.Push.Dialog.v2" timestamp="1578850172730">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1637" height="204" key="GridCell.Tab.0.bottom" timestamp="1579038595541">
+      <screen x="0" y="0" width="1680" height="1010" />
+    </state>
+    <state width="1637" height="204" key="GridCell.Tab.0.bottom/0.0.1680.1010/-900.-247.900.1400@0.0.1680.1010" timestamp="1579038595541" />
+    <state width="1637" height="204" key="GridCell.Tab.0.center" timestamp="1579038595540">
+      <screen x="0" y="0" width="1680" height="1010" />
+    </state>
+    <state width="1637" height="204" key="GridCell.Tab.0.center/0.0.1680.1010/-900.-247.900.1400@0.0.1680.1010" timestamp="1579038595540" />
+    <state width="1637" height="204" key="GridCell.Tab.0.left" timestamp="1579038595540">
+      <screen x="0" y="0" width="1680" height="1010" />
+    </state>
+    <state width="1637" height="204" key="GridCell.Tab.0.left/0.0.1680.1010/-900.-247.900.1400@0.0.1680.1010" timestamp="1579038595540" />
+    <state width="1637" height="204" key="GridCell.Tab.0.right" timestamp="1579038595541">
+      <screen x="0" y="0" width="1680" height="1010" />
+    </state>
+    <state width="1637" height="204" key="GridCell.Tab.0.right/0.0.1680.1010/-900.-247.900.1400@0.0.1680.1010" timestamp="1579038595541" />
+    <state width="1637" height="193" key="GridCell.Tab.1.bottom" timestamp="1579037921797">
+      <screen x="0" y="0" width="1680" height="1010" />
+    </state>
+    <state width="1637" height="193" key="GridCell.Tab.1.bottom/0.0.1680.1010/-900.-247.900.1400@0.0.1680.1010" timestamp="1579037921797" />
+    <state width="1637" height="193" key="GridCell.Tab.1.center" timestamp="1579037921797">
+      <screen x="0" y="0" width="1680" height="1010" />
+    </state>
+    <state width="1637" height="193" key="GridCell.Tab.1.center/0.0.1680.1010/-900.-247.900.1400@0.0.1680.1010" timestamp="1579037921797" />
+    <state width="1637" height="193" key="GridCell.Tab.1.left" timestamp="1579037921797">
+      <screen x="0" y="0" width="1680" height="1010" />
+    </state>
+    <state width="1637" height="193" key="GridCell.Tab.1.left/0.0.1680.1010/-900.-247.900.1400@0.0.1680.1010" timestamp="1579037921797" />
+    <state width="1637" height="193" key="GridCell.Tab.1.right" timestamp="1579037921797">
+      <screen x="0" y="0" width="1680" height="1010" />
+    </state>
+    <state width="1637" height="193" key="GridCell.Tab.1.right/0.0.1680.1010/-900.-247.900.1400@0.0.1680.1010" timestamp="1579037921797" />
+    <state x="688" y="216" key="RollbackChangesDialog" timestamp="1579039001438">
+      <screen x="0" y="0" width="1680" height="1010" />
+    </state>
+    <state x="688" y="216" key="RollbackChangesDialog/0.0.1680.1010/-900.-247.900.1400@0.0.1680.1010" timestamp="1579039001438" />
+    <state x="395" y="179" key="Vcs.Push.Dialog.v2" timestamp="1579031926851">
+      <screen x="0" y="0" width="1680" height="1010" />
     </state>
     <state x="361" y="146" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1578850172730" />
+    <state x="395" y="179" key="Vcs.Push.Dialog.v2/0.0.1680.1010/-900.-247.900.1400@0.0.1680.1010" timestamp="1579031926851" />
     <state x="578" y="330" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1578852108723">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="578" y="330" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1578852108723" />
+    <state x="590" y="297" key="git4idea.merge.GitPullDialog" timestamp="1579032134151">
+      <screen x="0" y="0" width="1680" height="1010" />
+    </state>
+    <state x="590" y="297" key="git4idea.merge.GitPullDialog/0.0.1680.1010/-900.-247.900.1400@0.0.1680.1010" timestamp="1579032134151" />
     <state x="209" y="33" key="new project wizard" timestamp="1578848896204">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -297,10 +376,18 @@
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/Source/RAM/MMU/MemoryManager.java</url>
           <line>86</line>
-          <properties class="RAM.MMU.MemoryManager">
+          <properties class="RAM.MMU.MemoryManager" method="allocateProcess">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/Source/FileSystem/FileManager.java</url>
+          <line>208</line>
+          <properties class="FileSystem.FileManager" method="writeFile">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

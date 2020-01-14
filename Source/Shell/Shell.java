@@ -1,7 +1,7 @@
 package Shell;
 
 import FileSystem.FileManager;
-import Scheduler.Scheduler;
+//import Scheduler.Scheduler;
 import java.util.Scanner;
 
 public class Shell
@@ -35,10 +35,10 @@ public void Match(String line)
             System.out.println("Wyswietla zamki");
             break;
         case "PRINT_READY":
-            Scheduler.print_ready_queue();
+            //Scheduler.print_ready_queue();
             break;
         case "PRINT_RUNNING":
-            Scheduler.print_running_process();
+            //Scheduler.print_running_process();
             break;
         case "FOPEN":
            if( FileManager.openFile(command[1]))
@@ -59,15 +59,15 @@ public void Match(String line)
                 System.out.println("Prosze podac dane do zapisania w pliku");
                 Scanner read = new Scanner(System.in);
                 data = read.next();
-                if(FileManager.writeFile(command[1],data)==1)
+                if(FileManager.appendFile(command[1],data)==1)
                 {
                     System.out.println("Dane wpisane pomyslnie");
                 }
-                else if(FileManager.writeFile(command[1],data)==2)
+                else if(FileManager.appendFile(command[1],data)==2)
                 {
                     System.out.println("Brak wolnych blokow do zapisu na dysku");
                 }
-                else if(FileManager.writeFile(command[1],data)==3)
+                else if(FileManager.appendFile(command[1],data)==3)
                 {
                     System.out.println("Plik przekroczyl maksymalna wielkosc");
                 }

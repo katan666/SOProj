@@ -205,6 +205,11 @@ public class FileManager extends  Files{
         }
         return opened;
     }
+    public static int writeFile(String name, String data){
+        int code = 0;
+
+        return 0;
+    }
     //TODO
     public static int appendFile(String name, String data){
         /*
