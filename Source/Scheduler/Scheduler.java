@@ -1,7 +1,11 @@
 package Scheduler;
 
 import java.util.Vector;
+
+import Interpreter.Interpreter;
 import Process.PCB;
+
+import Process.ProcessMenager;
 import static Process.ProcessState.NEW;
 import static Process.ProcessState.READY;
 import static Process.ProcessState.RUNNING;
@@ -13,19 +17,17 @@ public class Scheduler
     private static final double alfa = 0.5; //stala z zakresu [0-1]
 
     private static double expected_time = 5; //przewidywany czas pracy
-    private static int counter = 0; // rzeczywisty czas pracy
     static Vector<PCB> readyQueue = new Vector<PCB>();//wektor procesow gotowych do przydzielenia procesora
     private static PCB running; // uruchomiony proces
-    public static PCB init = new PCB ("init", 0,RUNNING, 0, 0, "Source/Programs/dummy.txt");
     private int x;
     public static void set_init()//metoda ustawiająca init jako uruchomiony
     {
-        running=init;
+        running= ProcessMenager.getDummy();
     }
 
     private static void calculate_srt()//metoda obliczajaca srednia wykladnicza ostatnich procesow
     {
-        running.expected_time = alfa * running.realTime + ((1 - alfa) * running.expected_time); //oblicza kazdemu procesowi w kolejce gotowych przewidywany czas
+        running.expected_time = alfa * running.getCounter() + ((1 - alfa) * running.expected_time); //oblicza kazdemu procesowi w kolejce gotowych przewidywany czas
     }
 
     public static void add_running(PCB x)
@@ -65,14 +67,14 @@ public class Scheduler
         {
             for (int i = 0; i < readyQueue.size(); i++)
             {
-                System.out.println("SCHEDULER -> " + "|ID:" + readyQueue.get(i).getPid() + "| |Name:" + readyQueue.get(i).getName() + "| |Tau:" + readyQueue.get(i).expected_time + "| |Tn:" + readyQueue.get(i).realTime + "| |State:" + readyQueue.get(i).state + "|"); //wypisuje numer procesu, nazwe oraz Tau
+                System.out.println("SCHEDULER -> " + "|ID:" + readyQueue.get(i).getPid() + "| |Name:" + readyQueue.get(i).getName() + "| |Tau:" + readyQueue.get(i).expected_time + "| |Tn:" + readyQueue.get(i).getCounter() + "| |State:" + readyQueue.get(i).state + "|"); //wypisuje numer procesu, nazwe oraz Tau
             }
         }
     }
 
     public static void print_running_process()
     {
-        System.out.println("SCHEDULER -> " + "|ID:" + running.getPid() + "| |Name:" + running.getName() + "| |Tau:" + running.expected_time + "| |Tn:" + running.realTime + "| |State:" + running.state + "|"); //wypisuje uruchomiony proces
+        System.out.println("SCHEDULER -> " + "|ID:" + running.getPid() + "| |Name:" + running.getName() + "| |Tau:" + running.expected_time + "| |Tn:" + running.getCounter() + "| |State:" + running.state + "|"); //wypisuje uruchomiony proces
     }
 
     public static void add_process(PCB process)//metoda dodajaca proces do kolejki procesow gotowych
@@ -81,7 +83,7 @@ public class Scheduler
         {
             process.expected_time=expected_time;
         }
-        if(readyQueue.size()==0 && running==init)//jezeli kolejka gotowych procesow jest pusta
+        if(readyQueue.size()==0 && running== ProcessMenager.getDummy())//jezeli kolejka gotowych procesow jest pusta
         {
             running=process; //jako proces uruchomiony ustawiam process poniewaz innych nie ma
             running.state=RUNNING;
