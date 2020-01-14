@@ -12,14 +12,16 @@ public class PCB {
 
     private int counter, rA, rB, rC, rD;
     private String name;
-    private String pid;
+    private int pid;
     public String state;
     public double expected_time;
     public int realTime;
     public Stack <Byte> pageTable;
     public Vector <Short> code;
+    public PCB parent;
+    public Vector<PCB> children;
 
-    public PCB(String name, String pid, String state, double expected_time, int real_time, String filePath) {
+    public PCB(String name, int pid, String state, double expected_time, int real_time, String filePath) {
         this.name = name;
         this.pid = pid;
         this.state = state;
@@ -44,7 +46,7 @@ public class PCB {
         return name;
     }
 
-    public String getPid() {
+    public int getPid() {
         return pid;
     }
 
