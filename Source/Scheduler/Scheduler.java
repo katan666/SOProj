@@ -20,7 +20,7 @@ public class Scheduler
     static Vector<PCB> readyQueue = new Vector<PCB>();//wektor procesow gotowych do przydzielenia procesora
     private static PCB running; // uruchomiony proces
     private int x;
-    public static void set_init()//metoda ustawiająca init jako uruchomiony
+    public static void set_init()//metoda ustawiająca init jako uruchomiony                                                                                                <---------- DOMINIK
     {
         running= ProcessMenager.getDummy();
     }
@@ -46,7 +46,6 @@ public class Scheduler
                 x=1;
             }
         }
-
         if(x==1)
         {
             System.out.println("SCHEDULER ->" + " usunieto proces z kolejki procesow gotowych");
@@ -56,6 +55,24 @@ public class Scheduler
             System.out.println("SCHEDULER ->" + " w kolejce procesow gotowych nie ma procesu o podanym id: " + pid);
         }
     }
+
+    public static void remove_running()
+    {
+        int min=999999; //zmienna pomocnicza przy wybieraniu najmnijszej wartosci czasu
+        int index=0;
+        for(int i=0; i<readyQueue.size();i++)
+        {
+            if(readyQueue.get(i).expected_time<min)
+            {
+                min= (int) readyQueue.get(i).expected_time;
+                index=i;
+            }
+        }
+        running.state=TERMINATED;
+        running=readyQueue.get(index);
+        remove_process(readyQueue.get(index).getPid());
+    }
+
 
     public static void print_ready_queue() //wypisywanie calej tablicy procesow gotowych
     {
@@ -120,61 +137,6 @@ public class Scheduler
     }
     public static PCB get_running()
     {
-        return running;//zwraca uruchomiony proces
-    }
-
-    public static void ready()
-    {
-        int min=999999; //zmienna pomocnicza przy wybieraniu najmnijszej wartosci czasu
-        int index=0;
-        for(int i=0; i<readyQueue.size();i++)
-        {
-            if(readyQueue.get(i).expected_time<min)
-            {
-                min= (int) readyQueue.get(i).expected_time;
-                index=i;
-            }
-        }
-        running.state=READY;
-        System.out.println("Stan zmieniony na ready");
-        add_running(running);
-        running=readyQueue.get(index);
-        running.state=RUNNING;
-        remove_process(readyQueue.get(index).getPid());
-    }
-
-    public static void remove_running()
-    {
-        int min=999999; //zmienna pomocnicza przy wybieraniu najmnijszej wartosci czasu
-        int index=0;
-        for(int i=0; i<readyQueue.size();i++)
-        {
-            if(readyQueue.get(i).expected_time<min)
-            {
-                min= (int) readyQueue.get(i).expected_time;
-                index=i;
-            }
-        }
-        running=readyQueue.get(index);
-        remove_process(readyQueue.get(index).getPid());
-    }
-
-    public static void waiting()
-    {
-        int min=999999; //zmienna pomocnicza przy wybieraniu najmnijszej wartosci czasu
-        int index=0;
-        for(int i=0; i<readyQueue.size();i++)
-        {
-            if(readyQueue.get(i).expected_time<min)
-            {
-                min= (int) readyQueue.get(i).expected_time;
-                index=i;
-            }
-        }
-        running.state=WAITING;
-        System.out.println("Stan zmieniony na waiting");
-        running=readyQueue.get(index);
-        running.state=RUNNING;
-        remove_process(readyQueue.get(index).getPid());
+        return running;//zwraca uruchomiony proces                                                                              <---------- Do wykorzystania
     }
 }
