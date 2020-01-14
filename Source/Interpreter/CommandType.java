@@ -25,6 +25,7 @@ public enum CommandType {
     INCREMENT(1),
     DO_NOTHING(0),
     SWAP_BYTE(3),
+    APPEND_FILE(2),
 
     INVALID_COMMAND(0);
 
@@ -68,6 +69,7 @@ public enum CommandType {
         else if(name.equals("IC")) return INCREMENT;
         else if(name.equals("DN")) return DO_NOTHING;
         else if(name.equals("SW")) return SWAP_BYTE;
+        else if(name.equals("AF")) return APPEND_FILE;
 
         else return INVALID_COMMAND;
 

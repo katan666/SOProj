@@ -1,7 +1,11 @@
 package Shell;
 
 import FileSystem.FileManager;
-//import Scheduler.Scheduler;
+import Scheduler.Scheduler;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Shell
@@ -53,33 +57,31 @@ public void Match(String line)
                 FileManager.createFile(command[1]);
                 break;
         case "WRITE":
-            if(FileManager.isOpened(command[1])==0)
-            {
-                String data;
-                System.out.println("Prosze podac dane do zapisania w pliku");
-                Scanner read = new Scanner(System.in);
-                data = read.next();
-                if(FileManager.appendFile(command[1],data)==1)
-                {
-                    System.out.println("Dane wpisane pomyslnie");
-                }
-                else if(FileManager.appendFile(command[1],data)==2)
-                {
-                    System.out.println("Brak wolnych blokow do zapisu na dysku");
-                }
-                else if(FileManager.appendFile(command[1],data)==3)
-                {
-                    System.out.println("Plik przekroczyl maksymalna wielkosc");
+            if(command.length == 2) {
+                if (FileManager.isOpened(command[1]) == 0) {
+                    String data;
+                    System.out.println("Prosze podac dane do zapisania w pliku");
+                    Scanner read = new Scanner(System.in);
+                    data = read.next();
+                    if (FileManager.appendFile(command[1], data) == 1) {
+                        System.out.println("Dane wpisane pomyslnie");
+                    } else if (FileManager.appendFile(command[1], data) == 2) {
+                        System.out.println("Brak wolnych blokow do zapisu na dysku");
+                    } else if (FileManager.appendFile(command[1], data) == 3) {
+                        System.out.println("Plik przekroczyl maksymalna wielkosc");
+                    }
+                } else if (FileManager.isOpened(command[1]) == 2) {
+                    System.out.println("Plik nie istnieje.");
+                } else if (FileManager.isOpened(command[1]) == 1) {
+                    System.out.println("Plik nie zostal otwarty.");
                 }
             }
-            else if(FileManager.isOpened(command[1])==2)
-            {
-                System.out.println("Plik nie istnieje.");
-            }
-            else if(FileManager.isOpened(command[1])==1)
-            {
-                System.out.println("Plik nie zostal otwarty.");
-            }
+            else System.out.println("Zbyt wiele parametrow.");
+            break;
+        case "DATE":
+            DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+            Date dateobj = new Date();
+            System.out.println(df.format(dateobj));
             break;
         default:
             System.out.println("Niepoprawna komenda");
