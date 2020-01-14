@@ -229,7 +229,9 @@ public class FileManager extends  Files{
     //TODO
     public static int closeFile(String name){
         int code = -1;
+        if(isOpened(name) == 0){
 
+        }
         return code;
     }
 
