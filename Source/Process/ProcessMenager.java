@@ -46,4 +46,13 @@ public class ProcessMenager {
         Scheduler.add_process(pcb);
     }
 
+    public static String listOfProcess(){
+        String tem = "";
+        int i = 1;
+        for(PCB pcb : list){
+            tem =+ i + ". " + pcb.getName() + "\t PID: " + pcb.getPid() + "\t STATE: " + pcb.state + '\n';
+        }
+        return tem;
+    }
+
 }

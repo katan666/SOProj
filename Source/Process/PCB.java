@@ -39,7 +39,7 @@ public class PCB {
 
 
 
-    //Gettery i settery
+    //Gettery i settery jo
     public String getName() {
         return name;
     }
