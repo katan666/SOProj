@@ -2,6 +2,10 @@ package Shell;
 
 import FileSystem.FileManager;
 import Scheduler.Scheduler;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Shell
@@ -81,6 +85,10 @@ public void Match(String line)
                 System.out.println("Plik nie zostal otwarty.");
             }
             break;
+        case "DATE":
+            DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+            Date dateobj = new Date();
+            System.out.println(df.format(dateobj));
         default:
             System.out.println("Niepoprawna komenda");
             break;
