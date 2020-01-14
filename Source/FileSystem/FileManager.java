@@ -84,6 +84,27 @@ public class FileManager extends  Files{
 */
     private final static char BEGIN = '0';
     private final static int LENGTH = 64;
+
+    public static Vector<String> showMainCatalog(){
+        Vector<String>filesInCatalog = new Vector();
+        for(int i = 0; i < mainCatalog.size(); i++){
+            filesInCatalog.add(mainCatalog.get(i).fileName);
+        }
+        return filesInCatalog;
+    }
+
+    public static Vector<String> showOpenedFiles(){
+        Vector<String>of = new Vector();
+        for(int i = 0; i < openedFiles.size(); i++) {
+            for(int j = 0; j < mainCatalog.size(); j++){
+                if (mainCatalog.get(j).indexBlock == openedFiles.get(i)) {
+                    of.add(mainCatalog.get(j).fileName);
+                }
+            }
+        }
+        return of;
+    }
+
     public static int readAddress(char address){
         /*
         * address == -1 błąd
@@ -95,6 +116,7 @@ public class FileManager extends  Files{
         }
         return index;
     }
+
     public static char writeAddress(int index){
         char address = '~';
         if(index <= LENGTH && index >= 0) {
@@ -102,6 +124,9 @@ public class FileManager extends  Files{
         }
         return address;
     }
+
+    // writePointers
+    /*
     public static int getWritePointer(String name){
         int writePointer = 0;
         for (int i = 0; i < mainCatalog.size(); i++) {
@@ -120,7 +145,8 @@ public class FileManager extends  Files{
                     mainCatalog.get(i).writePointer = writePointer;
             }
         }
-    }
+    }*/
+
     public static char getIndexBlock(String name){
         char index = '-';
         if(isOpened(name) == 0) {
@@ -132,6 +158,7 @@ public class FileManager extends  Files{
         }
         return index;
     }
+
     public static int whereIsOpened(String name){
         int index = -1;
         for(int i = 0; i < mainCatalog.size(); i++) {
@@ -146,6 +173,7 @@ public class FileManager extends  Files{
         }
         return index;
     }
+
     public static int isOpened(String name){
         /*
         * code == 0 plik otwarty
@@ -166,6 +194,7 @@ public class FileManager extends  Files{
         }
         return code;
     }
+
     public static boolean createFile(String name){
         /*
         * created == false Nie udalo sie utworzyc pliku
@@ -190,6 +219,7 @@ public class FileManager extends  Files{
         mainCatalog.add(file);
         return created;
     }
+
     public static boolean openFile(String name){
         /*
         * opened == false plik nieistnieje
@@ -205,6 +235,7 @@ public class FileManager extends  Files{
         }
         return opened;
     }
+
     public static int writeFile(String name, String data){
         /*
          * Zmienna code oznacza status errorow
@@ -260,6 +291,7 @@ public class FileManager extends  Files{
         }
         return code;
     }
+
     public static int appendFile(String name, String data){
         /*
         * Zmienna code oznacza status errorow
@@ -314,6 +346,7 @@ public class FileManager extends  Files{
         }
         return code;
     }
+
     //TODO
     public static void readFile(String name, int howMuch, short ramAddr){
         /*
@@ -331,6 +364,7 @@ public class FileManager extends  Files{
         }
 
     }
+
     public static int renameFile(String oldName, String newName){
         /*
         * code == 0 Nazwa zmieniona pomyslnie
@@ -350,6 +384,7 @@ public class FileManager extends  Files{
         }
         return code;
     }
+
     public static int closeFile(String name){
         /*
          * Zmienna code oznacza status errorow
@@ -363,6 +398,7 @@ public class FileManager extends  Files{
         }
         return code;
     }
+
     public static int deleteFile(String name){
         /*
         * code == 0 usunieto pomyslnie
@@ -398,6 +434,7 @@ public class FileManager extends  Files{
         }
         return code;
     }
+
     private static int clearFile(String name){
         /*
          * code == 0 wyczyszczono pomyslnie
