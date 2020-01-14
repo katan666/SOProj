@@ -507,7 +507,7 @@ public class Interpreter {
     //TODO
     private static void writeFile(String argsStr) {
         String[] args = argsStr.split(" ");
-        System.out.println(FileManager.writeFile(args[0], "kurwa"));
+        System.out.println(FileManager.writeFile(args[0], "kurwa to kazdy oprocz mnie ale nie wiem do konca kto"));
     }
     //TODO
     private static void formProcess(String args) {

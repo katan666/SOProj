@@ -102,6 +102,36 @@ public class FileManager extends  Files{
         }
         return address;
     }
+    public static int getWritePointer(String name){
+        int writePointer = 0;
+        for (int i = 0; i < mainCatalog.size(); i++) {
+            if (name.equals(mainCatalog.get(i).fileName)) {
+                writePointer = mainCatalog.get(i).writePointer;
+            }
+        }
+        if(writePointer > 0){
+            writePointer += 1;
+        }
+        return writePointer;
+    }
+    public static void setWritePointer(String name, int writePointer){
+        for (int i = 0; i < mainCatalog.size(); i++) {
+            if (name.equals(mainCatalog.get(i).fileName)) {
+                    mainCatalog.get(i).writePointer = writePointer;
+            }
+        }
+    }
+    public static char getIndexBlock(String name){
+        char index = '-';
+        if(isOpened(name) == 0) {
+            for (int i = 0; i < mainCatalog.size(); i++) {
+                if (name.equals(mainCatalog.get(i).fileName)) {
+                    index = mainCatalog.get(i).indexBlock;
+                }
+            }
+        }
+        return index;
+    }
     public static int whereIsOpened(String name){
         int index = -1;
         for(int i = 0; i < mainCatalog.size(); i++) {
@@ -176,7 +206,7 @@ public class FileManager extends  Files{
         return opened;
     }
     //TODO
-    public static int writeFile(String name, String data){
+    public static int appendFile(String name, String data){
         /*
         * Zmienna code oznacza status errorow
         * code == 0 - Zapisywanie zakonczone pomyslnie
@@ -185,13 +215,13 @@ public class FileManager extends  Files{
         * code == 3 - brak wolnych blokow do zapisu.
         * code == 4 - Plik przekroczyl maksymalna wielkosc do zapisu. Plik za duzy
         * */
-        int pointer = 0;
         int code;
         char index = '-';
         int blocksAmount = 0;
-        int blocksToSave = 0;
+        int counter = 0;
 
         code = isOpened(name);
+        index = getIndexBlock(name);
 
         if(code == 0){
             for(int i = 0; i < blockSize; i++){
@@ -208,10 +238,12 @@ public class FileManager extends  Files{
             else{
                 for(int i = 0; i < bitMap.length; i++){
                     if(bitMap[i] == 0){
-                        for(int j = 0; j < data.length() && j < 8; j++) {
-                            disk[i][j] = data.charAt(pointer + j);
+                        int pointer = 0;
+                        for(int j = 0; j + counter < data.length() && j < blockSize; j++) {
+                            disk[i][j] = data.charAt(counter + j);
+                            pointer++;
                         }
-                        pointer += 8;
+                        counter += pointer;
                         bitMap[i] = 1;
                         for(int g = 0; g < blockSize; g++){
                             if(disk[readAddress(index)][g] == '-'){
@@ -219,7 +251,9 @@ public class FileManager extends  Files{
                                 break;
                             }
                         }
-                        break;
+                        if(counter >= data.length()) {
+                            break;
+                        }
                     }
                 }
             }
@@ -274,13 +308,15 @@ public class FileManager extends  Files{
                 if(name.equals(mainCatalog.get(i).fileName)){
                     index = mainCatalog.get(i).indexBlock;
                     for(int j = 0; j < blockSize; j++) {
-                        if (disk[index][j] != '-') {
-                            disk[index][j] = toErase;
+                        if (disk[readAddress(index)][j] != '-') {
+                            toErase = disk[readAddress(index)][j];
                             for (int g = 0; g < blockSize; g++) {
-                                disk[toErase][g] = '-';
+                                disk[readAddress(toErase)][g] = '%';
                             }
-                            disk[index][j] = '-';
+                            bitMap[readAddress(index)] = 0;
+                            bitMap[readAddress(toErase)] = 0;
                         }
+                        disk[readAddress(index)][j] = '%';
                     }
                     code = 0;
                     break;

@@ -31,6 +31,11 @@ public class DiskManager extends Disk {
     public static void showBitMap(){
         for(int i = 0; i<bitMap.length; i++){
             System.out.print(bitMap[i]);
+            System.out.print("  ");
+            if((i+1)%8==0){
+                System.out.println();
+            }
         }
+
     }
 }
