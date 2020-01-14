@@ -254,9 +254,9 @@ public class FileManager extends  Files{
     }
     public static int deleteFile(String name){
         /*
+        * code == 0 usunieto pomyslnie
         * code == 1 plik jest otwarty nie mozna usunac otwartego pliku
         * code == 2 nie ma takiego pliku
-        * code == 3 usunieto pomyslnie
          */
         char index;
         char toErase = '-';
@@ -278,7 +278,7 @@ public class FileManager extends  Files{
                             disk[index][j] = '-';
                         }
                     }
-                    code = 3;
+                    code = 0;
                     break;
                 }
             }
