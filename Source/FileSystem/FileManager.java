@@ -219,6 +219,7 @@ public class FileManager extends  Files{
         int blocksAmount = 0;
         int counter = 0;
 
+        clearFile(name);
         code = isOpened(name);
         index = getIndexBlock(name);
 
