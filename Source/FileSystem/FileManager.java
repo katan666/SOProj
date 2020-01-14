@@ -137,6 +137,10 @@ public class FileManager extends  Files{
         return code;
     }
     public static boolean createFile(String name){
+        /*
+        * created == false Nie udalo sie utworzyc pliku
+        * created == true Tworzenie pliku zakonczone pomyslnie
+         */
         Files file = new Files();
         int i = 0;
         boolean created = false;
@@ -175,11 +179,11 @@ public class FileManager extends  Files{
     public static int writeFile(String name, String data){
         /*
         * Zmienna code oznacza status errorow
-        * 0 - wszystko git
-        * 1 - Nie znaleziono pliku w wektorze otwartych plikow (czyt. plik nie zostal otwarty)
-        * 2 - Plik nie istnieje
-        * 3 - brak wolnych blokow do zapisu.
-        * 4 - Plik przekroczyl maksymalna wielkosc do zapisu. Plik za duzy
+        * code == 0 - Zapisywanie zakonczone pomyslnie
+        * code == 1 - Nie znaleziono pliku w wektorze otwartych plikow (czyt. plik nie zostal otwarty)
+        * code == 2 - Plik nie istnieje
+        * code == 3 - brak wolnych blokow do zapisu.
+        * code == 4 - Plik przekroczyl maksymalna wielkosc do zapisu. Plik za duzy
         * */
         int pointer = 0;
         int code;
@@ -226,9 +230,9 @@ public class FileManager extends  Files{
     public static void readFile(String name, int howMuch, short ramAddr){
         /*
          * Zmienna code oznacza status errorow
-         * 0 - wszystko git
-         * 1 - Nie znaleziono pliku w wektorze otwartych plikow (czyt. plik nie zostal otwarty)
-         * 2 - Plik nie istnieje
+         * code == 0 - wszystko git
+         * code == 1 - Nie znaleziono pliku w wektorze otwartych plikow (czyt. plik nie zostal otwarty)
+         * code == 2 - Plik nie istnieje
          * */
         int code;
         char index = '-';
@@ -242,9 +246,9 @@ public class FileManager extends  Files{
     public static int closeFile(String name){
         /*
          * Zmienna code oznacza status errorow
-         * 0 - wszystko git
-         * 1 - Nie znaleziono pliku w wektorze otwartych plikow (czyt. plik nie zostal otwarty)
-         * 2 - Plik nie istnieje
+         * code == 0 - Plik zamkniety pomyslnie
+         * code == 1 - Nie znaleziono pliku w wektorze otwartych plikow (czyt. plik nie zostal otwarty)
+         * code == 2 - Plik nie istnieje
          * */
         int code = isOpened(name);
         if(code == 0){
