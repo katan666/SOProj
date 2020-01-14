@@ -15,11 +15,12 @@ public class ProcessMenager {
 
     public ProcessMenager() {
         list = new Vector<PCB>();
+        addDummy();
     }
 
 
     public static void addDummy(){
-        PCB dummy = new PCB("dummy", DUMMY_PID, RUNNING, 0, 0, "Source/Programs/dummy.txt");
+        PCB dummy = new PCB("dummy", DUMMY_PID, RUNNING, 0, "Source/Programs/dummy.txt");
         list.add(dummy);
     }
 
@@ -31,5 +32,9 @@ public class ProcessMenager {
                 i++;
             }
         }
+    }
+
+    public static void newProcess(String name, String filePath){
+        PCB pcb = new PCB(name, pidGen(), NEW, 0,filePath);
     }
 }

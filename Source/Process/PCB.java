@@ -15,18 +15,16 @@ public class PCB {
     private int pid;
     public String state;
     public double expected_time;
-    public int realTime;
     public Stack <Byte> pageTable;
     public Vector <Short> code;
     public PCB parent;
     public Vector<PCB> children;
 
-    public PCB(String name, int pid, String state, double expected_time, int real_time, String filePath) {
+    public PCB(String name, int pid, String state, double expected_time,  String filePath) {
         this.name = name;
         this.pid = pid;
         this.state = state;
         this.expected_time = expected_time;
-        this.realTime = real_time;
         counter = rA = rB = rC = rD = 0;
         code = FileLoader.readAllBytesFromFileToShortVec(filePath);
         pageTable = new Stack<>();
@@ -64,14 +62,6 @@ public class PCB {
 
     public void setExpected_time(double expected_time) {
         this.expected_time = expected_time;
-    }
-
-    public int getReal_time() {
-        return realTime;
-    }
-
-    public void setReal_time(int real_time) {
-        this.realTime = real_time;
     }
 
     public int getCounter() {
