@@ -15,7 +15,6 @@ import static Process.ProcessState.TERMINATED;
 public class Scheduler
 {
     private static final double alfa = 0.5; //stala z zakresu [0-1]
-
     private static double expected_time = 5; //przewidywany czas pracy
     static Vector<PCB> readyQueue = new Vector<PCB>();//wektor procesow gotowych do przydzielenia procesora
     private static PCB running; // uruchomiony proces
@@ -35,29 +34,39 @@ public class Scheduler
         readyQueue.add(x);
     }
 
-    public static void remove_process(int pid)//metoda usuwajaca proces z kolejki gotowych procesow
+    public static int remove_process(int pid)//metoda usuwajaca proces z kolejki gotowych procesow
     {
-        int x=0;
+        int code=0;
         for(int i=0;i<readyQueue.size();i++)
         {
             if(readyQueue.get(i).getPid()==(pid))
             {
                 readyQueue.remove(i);
-                x=1;
+                code=1;
             }
         }
-        if(x==1)
+
+        /*
+        if(code==1)
         {
             System.out.println("SCHEDULER ->" + " usunieto proces z kolejki procesow gotowych");
         }
-        else if(x==0)
+        else if(code==0)
         {
             System.out.println("SCHEDULER ->" + " w kolejce procesow gotowych nie ma procesu o podanym id: " + pid);
         }
+        */
+        return code;
     }
 
-    public static void remove_running()
+    public static int remove_running()
     {
+        int code=1;
+        if (running==ProcessMenager.getDummy())
+        {
+            code=0;
+        }
+
         int min=999999; //zmienna pomocnicza przy wybieraniu najmnijszej wartosci czasu
         int index=0;
         for(int i=0; i<readyQueue.size();i++)
@@ -71,11 +80,29 @@ public class Scheduler
         running.state=TERMINATED;
         running=readyQueue.get(index);
         remove_process(readyQueue.get(index).getPid());
+
+        return code;
+
+
+        /*if (code==0)
+        {
+            //System.out.println("Nie mozna usunac poniewaz runing jest initem");
+        }
+        else
+        {
+            //System.out.println("usunieto proces running");
+        }
+
+
+         */
     }
 
 
-    public static void print_ready_queue() //wypisywanie calej tablicy procesow gotowych
+    public static Vector<PCB> print_ready_queue() //wypisywanie calej tablicy procesow gotowych
     {
+
+        /*
+
         if(readyQueue.size()==0)//jezeli kolejka procesow gotowych jest pusta wypisuje info
         {
             System.out.println("SCHEDULER ->" + " kolejka gotowych procesow jest pusta");
@@ -87,11 +114,15 @@ public class Scheduler
                 System.out.println("SCHEDULER -> " + "|ID:" + readyQueue.get(i).getPid() + "| |Name:" + readyQueue.get(i).getName() + "| |Tau:" + readyQueue.get(i).expected_time + "| |Tn:" + readyQueue.get(i).getCounter() + "| |State:" + readyQueue.get(i).state + "|"); //wypisuje numer procesu, nazwe oraz Tau
             }
         }
+
+         */
+        return readyQueue;
     }
 
-    public static void print_running_process()
+    public static PCB print_running_process()
     {
-        System.out.println("SCHEDULER -> " + "|ID:" + running.getPid() + "| |Name:" + running.getName() + "| |Tau:" + running.expected_time + "| |Tn:" + running.getCounter() + "| |State:" + running.state + "|"); //wypisuje uruchomiony proces
+        return running;
+     //   System.out.println("SCHEDULER -> " + "|ID:" + running.getPid() + "| |Name:" + running.getName() + "| |Tau:" + running.expected_time + "| |Tn:" + running.getCounter() + "| |State:" + running.state + "|"); //wypisuje uruchomiony proces
     }
 
     public static void add_process(PCB process)//metoda dodajaca proces do kolejki procesow gotowych
