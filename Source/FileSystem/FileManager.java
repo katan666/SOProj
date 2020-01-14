@@ -206,9 +206,58 @@ public class FileManager extends  Files{
         return opened;
     }
     public static int writeFile(String name, String data){
-        int code = 0;
+        /*
+         * Zmienna code oznacza status errorow
+         * code == 0 - Zapisywanie zakonczone pomyslnie
+         * code == 1 - Nie znaleziono pliku w wektorze otwartych plikow (czyt. plik nie zostal otwarty)
+         * code == 2 - Plik nie istnieje
+         * code == 3 - brak wolnych blokow do zapisu.
+         * code == 4 - Plik przekroczyl maksymalna wielkosc do zapisu. Plik za duzy
+         * */
+        int code;
+        char index = '-';
+        int blocksAmount = 0;
+        int counter = 0;
 
-        return 0;
+        code = isOpened(name);
+        index = getIndexBlock(name);
+
+        if(code == 0){
+            for(int i = 0; i < blockSize; i++){
+                if(disk[readAddress(index)][i] == '-'){
+                    blocksAmount++;
+                }
+            }
+            if(blocksAmount == 0){
+                code = 3;
+            }
+            else if(blocksAmount * blockSize < data.length()){
+                code = 4;
+            }
+            else{
+                for(int i = 0; i < bitMap.length; i++){
+                    if(bitMap[i] == 0){
+                        int pointer = 0;
+                        for(int j = 0; j + counter < data.length() && j < blockSize; j++) {
+                            disk[i][j] = data.charAt(counter + j);
+                            pointer++;
+                        }
+                        counter += pointer;
+                        bitMap[i] = 1;
+                        for(int g = 0; g < blockSize; g++){
+                            if(disk[readAddress(index)][g] == '-'){
+                                disk[readAddress(index)][g] = writeAddress(i);
+                                break;
+                            }
+                        }
+                        if(counter >= data.length()) {
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return code;
     }
     //TODO
     public static int appendFile(String name, String data){
@@ -327,6 +376,36 @@ public class FileManager extends  Files{
                     break;
                 }
             }
+        }
+        return code;
+    }
+    private static int clearFile(String name){
+        /*
+         * code == 0 wyczyszczono pomyslnie
+         * code == 1 plik jest otwarty nie mozna usunac otwartego pliku
+         * code == 2 nie ma takiego pliku
+         */
+        char index;
+        char toErase = '-';
+        int code = -1;
+
+        index = getIndexBlock(name);
+
+        if(isOpened(name) == 0){
+            code = 1;
+        }
+        else{
+            for(int j = 0; j < blockSize; j++) {
+                if (disk[readAddress(index)][j] != '-') {
+                    toErase = disk[readAddress(index)][j];
+                    for (int g = 0; g < blockSize; g++) {
+                        disk[readAddress(toErase)][g] = '%';
+                    }
+                    bitMap[readAddress(toErase)] = 0;
+                }
+                disk[readAddress(index)][j] = '-';
+            }
+            code = 0;
         }
         return code;
     }
