@@ -388,14 +388,12 @@ public class FileManager extends  Files{
          */
         char index;
         char toErase = '-';
-        int code = -1;
+        int code;
 
         index = getIndexBlock(name);
+        code = isOpened(name);
 
-        if(isOpened(name) == 0){
-            code = 1;
-        }
-        else{
+        if(code == 0){
             for(int j = 0; j < blockSize; j++) {
                 if (disk[readAddress(index)][j] != '-') {
                     toErase = disk[readAddress(index)][j];
@@ -406,7 +404,6 @@ public class FileManager extends  Files{
                 }
                 disk[readAddress(index)][j] = '-';
             }
-            code = 0;
         }
         return code;
     }
