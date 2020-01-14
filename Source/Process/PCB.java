@@ -14,7 +14,7 @@ public class PCB {
     private String name;
     private int pid;
     public String state;
-    public double expected_time;
+    public double expected_time;//tau
     public Stack <Byte> pageTable;
     public Vector <Short> code;
     public PCB parent;

@@ -1,6 +1,8 @@
 package Process;
 
 
+import Scheduler.Scheduler;
+
 import java.util.Random;
 import java.util.Vector;
 import static Process.ProcessState.NEW;
@@ -40,5 +42,8 @@ public class ProcessMenager {
 
     public static void newProcess(String name, String filePath){
         PCB pcb = new PCB(name, pidGen(), NEW, 0,filePath);
+        list.add(pcb);
+        Scheduler.add_process(pcb);
     }
+
 }
