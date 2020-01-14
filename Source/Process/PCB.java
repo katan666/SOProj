@@ -1,223 +1,77 @@
 package Process;
 
-import RAM.MMU.MemoryManager;
+import Programs.FileLoader;
 
 import java.util.Vector;
 import java.util.Stack;
 
 public class PCB {
-    //Identyfikator procesu
-    final private int PID;
-    //Nazwa procesu
-    public final String name;
-    //Stan procesu
-    private ProcessState state;
-    //Rejestry i licznik
+
+
+
+
     private int counter, rA, rB, rC, rD;
-
-    private byte PC;
-    //nwm
-    int expectedTime;
-    //zlicza rozkazy
-    private int realTime;
-    //tablica stron
+    private String name;
+    private String pid;
+    public String state;
+    public double expected_time;
+    public int realTime;
     public Stack <Byte> pageTable;
-    //dlugosc kodu
-    private final int codeLength;
-    /**
-     * Unchangeable base priority, set in constructor,
-     * Value 0 - idle process,
-     * Values 1-15 - dynamic priority,
-     * Values 16-17 - real-time priority
-     */
-    private final int basePriority;
-    /**
-     * Dynamically changed priority,
-     * Values 1-15 - dynamic priority
-     * Values 16-17 - real-time priority
-     */
-    private int dynamicPriority;
+    public Vector <Short> code;
 
-    //??? ~MB
-    //private CPUState cpuState;
-
-
-
-    MemoryManager ram;
-
-                                            //~MB
-    PCB(int PID, String name, int priority, /*Memory ram,*/ byte PC, int codeLength) {
-        this.PID = PID;
+    public PCB(String name, String pid, String state, double expected_time, int real_time, String filePath) {
         this.name = name;
-
-        if (priority < 0){
-            //??? ~MB
-            //Utils.log("Priority is too low, cannot create process", true);
-        }
-        if (priority > 17) {
-            //??? MB
-            //Utils.log("Priority is too high, changed to priority max size - 17", true);
-            priority = 17;
-        }
-        this.basePriority = priority;
-        this.dynamicPriority = priority;
-
-        this.expectedTime=0;
-        this.codeLength = codeLength;
-        this.PC = PC;
-
-        this.state = ProcessState.READY;
-
-        //??? ~MB
-        //Utils.log("Created process " + this.name + " with pid " + this.PID
-        //        + " and with priority " + this.basePriority);
-
-        //~MB
+        this.pid = pid;
+        this.state = state;
+        this.expected_time = expected_time;
+        this.realTime = real_time;
         counter = rA = rB = rC = rD = 0;
-
-    }
-
-    public int getRealTime() { return  realTime; }
-
-    public void setRealTime(int realTime)
-    {
-        this.realTime=realTime;
+        code = FileLoader.readAllBytesFromFileToShortVec(filePath);
+        pageTable = new Stack<>();
     }
 
 
-    public int getPID() {
-        return PID;
+    public String toStringReg(){
+        return "AX: "+String.valueOf(rA) + "\t" + "BX: "+String.valueOf(rB) + "\t" +
+                "CX: "+String.valueOf(rC) + "\t" + "DX: "+String.valueOf(rD) + "\t" +
+                "DX: "+String.valueOf(rD);
     }
 
+
+
+    //Gettery i settery
     public String getName() {
         return name;
     }
 
-    public byte getPC() {
-        return PC;
+    public String getPid() {
+        return pid;
     }
 
-    public void setPC(byte PC) {
-        this.PC = PC;
-    }
-
-    public ProcessState getProcessState(){
+    public String getState() {
         return state;
     }
 
-    public void setState(ProcessState state) {
-
-        if (this.state != state){//in case of some error
-
-            //??? ~MB
-            //Utils.log("Changed state of proces " + this.getSignature() + " from " + this.state
-            //        + " to " + state);
-
-            switch (state){
-                //TODO: find some way to use it or delete
-                case READY:{
-                    break;
-                }
-                case RUNNING:{
-                    break;
-                }
-            }
-
-            this.state = state;
-        } //else do nothing
-
+    public void setState(String state) {
+        this.state = state;
     }
 
-    //Priority-------------------------------------------------------
-
-    public int getBasePriority() {
-        return basePriority;
+    public double getExpected_time() {
+        return expected_time;
     }
 
-    public int getDynamicPriority() {
-        return dynamicPriority;
+    public void setExpected_time(double expected_time) {
+        this.expected_time = expected_time;
     }
 
-    /**
-     * Adds given parameter to dynamic priority, if sum is bigger than 15,
-     * sum is set with value 15 and gives error log
-     *
-     * @param newPriority value to add for dynamic priority
-     */
-    public void setDynamicPriority(final int newPriority)
-    {
-        dynamicPriority = (newPriority < 15) ? newPriority : 15;
-        if(dynamicPriority < basePriority) {dynamicPriority=basePriority;}
-    }
-    /**
-     * Sets dynamic priority with it's base value
-     */
-    public void setBasePriority(){
-        if(dynamicPriority != basePriority) {
-            this.dynamicPriority = this.basePriority;
-            //~MB
-            //Utils.log("Changed priority of " + this.getSignature() + " from " + this.dynamicPriority +
-            //        " to base value - " + this.basePriority);
-        }
+    public int getReal_time() {
+        return realTime;
     }
 
-
-
-    //~MB
-    //public boolean execute() {
-    //    Utils.log(toString());
-    //    Assembler.execute(this);
-    //
-    // return PC < codeLength;
-    //}
-
-    public byte getByteAt(final byte address) {
-
-        return (byte) ram.readInRAM(address);
-        //return this.code[address];
-    }
-    public void writeByteAt(final byte address, final byte value) {
-
-        ram.writeInRAM(address, value);
-        //this.code[address] = value;
+    public void setReal_time(int real_time) {
+        this.realTime = real_time;
     }
 
-    //~MB
-    //public CPUState getCpuState() {
-    //    return cpuState;
-    //}
-    //
-    //public void setCPUState(CPUState cpuState) {
-    //    this.cpuState.set(cpuState);
-    //}
-
-    /*~MB
-    @Override
-    public String toString() {
-        return "PCB{" +
-                "PID=" + PID +
-                ", name='" + name + '\'' +
-                ", state=" + state +
-                ", PC=" + PC +
-                ", basePriority=" + basePriority +
-                ", dynamicPriority=" + dynamicPriority +
-                ", readyTime=" + readyTime +
-                ", executedOrders=" + executedOrders +
-                '}';
-    }*/
-
-    public String getSignature() {
-        return name + " id: " + PID;
-    }
-
-    /*
-    @Override
-    public int compareTo(PCB o) {
-        return 0;
-    }*/
-
-    //~MB
-    //Gettery i settery
     public int getCounter() {
         return counter;
     }
