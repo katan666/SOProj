@@ -168,6 +168,47 @@ public class Scheduler
             remove_process(readyQueue.get(index).getPid());
         }
     }
+
+    public static int process_waiting()
+        {
+        calculate_srt();
+        int code=1;
+        if (running==ProcessMenager.getDummy())
+        {
+            code=0;
+        }
+
+        int min=999999; //zmienna pomocnicza przy wybieraniu najmnijszej wartosci czasu
+        int index=0;
+        for(int i=0; i<readyQueue.size();i++)
+        {
+            if(readyQueue.get(i).expected_time<min)
+            {
+                min= (int) readyQueue.get(i).expected_time;
+                index=i;
+            }
+        }
+        running.state=WAITING;
+       // waitingQueue.add(running); <----------------------------------- ProcessMenager (kolejka procesow czekajacych)
+        running=readyQueue.get(index);
+        remove_process(readyQueue.get(index).getPid());
+
+        return code;
+
+              /*if (code==0)
+        {
+            //System.out.println("Nie mozna zmienic stanu powniewaz running jest init");
+        }
+        else
+        {
+            //System.out.println("zmieniono stan na waiting");
+        }
+
+
+         */
+
+    }
+
     public static PCB get_running()
     {
         return running;//zwraca uruchomiony proces                                                                              <---------- Do wykorzystania
