@@ -177,7 +177,7 @@ public class FileManager extends Files{
             }
         }
 
-        return fileLength - 1;
+        return fileLength;
     }
 
 /*
