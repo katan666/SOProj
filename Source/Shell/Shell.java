@@ -7,6 +7,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.Vector;
 
 public class Shell
 {
@@ -74,21 +75,23 @@ public void Match(String line)
             //Scheduler.print_running_process();
             break;
         case "FOPEN":
-           if( FileManager.openFile(command[1]) == true)
-           {
-               System.out.println("Pomyslnie otworzono plik");
-           }
-           else {
-               System.out.println("Nie udalo sie otworzyc pliku.");
-           }
+            if(command.length==2) {
+                if (FileManager.openFile(command[1]) == true) {
+                    System.out.println("Pomyslnie otworzono plik");
+                } else {
+                    System.out.println("Nie udalo sie otworzyc pliku.");
+                }
+            }
+            else System.out.println("Nieprawidlowa ilosc argumentow");
            break;
         case "FCREATE":
-                if(FileManager.createFile(command[1])==true)
-                {
+            if(command.length==2) {
+                if (FileManager.createFile(command[1]) == true) {
                     System.out.println("Pomyslnie utworzono plik.");
-                }
-                else System.out.println("Nie udalo sie utworzyc pliku.");
-                break;
+                } else System.out.println("Nie udalo sie utworzyc pliku.");
+            }
+            else System.out.println("Nieprawidlowa ilosc argumentow");
+            break;
         case "APPEND":
             if(command.length == 2) {
                 if (FileManager.isOpened(command[1]) == 0) {
@@ -149,6 +152,26 @@ public void Match(String line)
             DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
             Date dateobj = new Date();
             System.out.println(df.format(dateobj));
+            break;
+        case "DIR":
+            if(command.length == 1)
+            {
+                for(String e : FileManager.showMainCatalog())
+                {
+                    System.out.println(e);
+                }
+            }
+            else System.out.println("Nieprawidlowa ilosc argumentow");
+            break;
+        case "DIROPEN":
+            if(command.length == 1)
+            {
+                for(String e : FileManager.showOpenedFiles())
+                {
+                    System.out.println(e);
+                }
+            }
+            else System.out.println("Nieprawidlowa ilosc argumentow");
             break;
         default:
             System.out.println("Niepoprawna komenda");
