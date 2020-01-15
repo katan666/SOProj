@@ -4,8 +4,6 @@ import java.util.Vector;
 
 public class FileManager extends Files{
 
-
-
     public static void main(String[] args) {
         String l = "l";
         String r;
@@ -25,10 +23,7 @@ public class FileManager extends Files{
         showOpenedFiles();
         deleteFile(l);
         showMainCatalog();
-        showDisk();
     }
-
-
 
     public static Vector<Files> mainCatalog = new Vector<Files>();
     public static Vector<Character> openedFiles = new Vector<Character>();
@@ -183,7 +178,7 @@ public class FileManager extends Files{
         return fileLength - 1;
     }
 
-/*
+
     public static int getWritePointer(String name){
         int writePointer = 0;
         for (int i = 0; i < mainCatalog.size(); i++) {
@@ -228,7 +223,7 @@ public class FileManager extends Files{
             }
         }
     }
-*/
+
 
     private static char getIndexBlock(String name){
         char index = '-';
@@ -315,9 +310,21 @@ public class FileManager extends Files{
         boolean opened = false;
         for(int i = 0; i < mainCatalog.size(); i++){
             if(name.equals(mainCatalog.get(i).fileName)) {
-                openedFiles.add(mainCatalog.get(i).indexBlock);
-                opened = true;
-                break;
+                
+                int temp = mainCatalog.get(i).zamek.lock();
+                
+                if (temp == 0) {
+                    
+                    Scheduler.get_running().openFiles.add(OpenFile(mainCatalog.get(i)));
+                    openedFiles.add(mainCatalog.get(i).indexBlock);
+                    opened = true;
+                    break;
+                    
+                } else if (temp == 1 || temp == 2) {
+                    
+                    opened = false;
+                    break;
+                }
             }
         }
         return opened;
@@ -338,7 +345,7 @@ public class FileManager extends Files{
         int blocksAmount = 0;
         int counter = 0;
 
-
+        setWritePointer(name, 0);
         clearFile(name);
         code = isOpened(name);
         index = getIndexBlock(name);
@@ -372,6 +379,7 @@ public class FileManager extends Files{
                             }
                         }
                         if(counter >= data.length()) {
+                            setWritePointer(name, counter);
                             break;
                         }
                     }
@@ -430,6 +438,7 @@ public class FileManager extends Files{
                             }
                         }
                         if(counter >= data.length()) {
+                            setWritePointer(name, getWritePointer(name) + counter);
                             break;
                         }
                     }
@@ -446,6 +455,7 @@ public class FileManager extends Files{
         char toRead = '-';
         int code;
 
+        getReadPointer(name);
         code = isOpened(name);
         index = getIndexBlock(name);
 
@@ -461,6 +471,7 @@ public class FileManager extends Files{
                         }
                     }
                 }
+                setReadPointer(name, stream.length());
             }
         return stream;
     }
@@ -510,14 +521,9 @@ public class FileManager extends Files{
          */
         char index;
         char toErase = '-';
-        int code = -1;
+        int code;
 
-        if(isOpened(name) == 1){
-            code = 0;
-        }
-        else if(isOpened(name) == 0){
-            code = 1;
-        }
+        code = isOpened(name);
 
         if(code == 0){
             for(int i = 0; i < mainCatalog.size(); i++){
