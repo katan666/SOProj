@@ -8,9 +8,9 @@ public class Boot
 {
 
     public static void main(String[] args) {
+        MemoryManager.init();
         ProcessMenager.init();
         Scheduler.set_init();
-        MemoryManager.init();
         Shell roboczy;
         roboczy = new Shell();
         roboczy.loopStart();

@@ -10,6 +10,7 @@ import java.util.Scanner;
 import java.util.Vector;
 import Process.PCB;
 import Process.ProcessMenager;
+import RAM.MMU.MemoryManager;
 
 
 public class Shell
@@ -28,7 +29,7 @@ public void Match(String line)
             finish = 1;
             break;
         case "MEMORY":
-            System.out.println("Wyswietlenie pamieci ram");
+            MemoryManager.printMemory();
             break;
         case "RENAME":
             if(command.length == 3)
