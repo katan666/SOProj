@@ -173,6 +173,24 @@ public void Match(String line)
             }
             else System.out.println("Zbyt wiele parametrow");
             break;
+        case "READ":
+            if(command.length == 2)
+            {
+                    if(FileManager.isOpened(command[1]) == 0)
+                    {
+                        System.out.println("Ten plik zawiera: ");
+                    }
+                    else if(FileManager.isOpened(command[1]) == 1)
+                    {
+
+                    }
+                    else if(FileManager.isOpened(command[1]) == 2)
+                    {
+
+                    }
+            }
+            else System.out.println("Niepoprawna ilosc argumentow,");
+            break;
         case "DATE":
             DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
             Date dateobj = new Date();
