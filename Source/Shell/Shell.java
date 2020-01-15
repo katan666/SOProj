@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.Scanner;
 import java.util.Vector;
 import Process.PCB;
+import Process.ProcessMenager;
 
 
 public class Shell
@@ -65,7 +66,11 @@ public void Match(String line)
             else System.out.println("Zla liczba argumentow.");
             break;
         case "PL":
-            System.out.println("Wyswietlenie listy wszystkich procesow");
+            if(command.length==1)
+            {
+                System.out.println(ProcessMenager.listOfProcess());
+            }
+            else System.out.println("Niepoprawna liczba argumentow.");
             break;
         case "LOCKS":
             System.out.println("Wyswietla zamki");
@@ -80,7 +85,7 @@ public void Match(String line)
                         System.out.println("Kolejka gotowych procesow jest pusta.");
                 }
                 else {
-                    for (int i = 0; i > temp.size(); i++) {
+                    for (int i = 0; i < temp.size(); i++) {
                         System.out.println("ID: " + temp.get(i).getPID() + " Name: " + temp.get(i).getName() + " Tau: " + temp.get(i).expected_time + " Tn: " + temp.get(i).getCounter() + " State: " + temp.get(i).state);
                     }
                 }
@@ -188,6 +193,13 @@ public void Match(String line)
                 }
             }
             else System.out.println("Nieprawidlowa ilosc argumentow");
+            break;
+        case "CREATE_PROCESS":
+            if(command.length==3)
+            {
+                ProcessMenager.newProcess(command[1],command[2]);
+            }
+            else System.out.println("Niepoprawna liczba argumentow.");
             break;
         default:
             System.out.println("Niepoprawna komenda");
