@@ -56,6 +56,7 @@ public class Interpreter {
             String string = scanner.nextLine();
             if (string.equals("show")) {
                 System.out.printf("AX:%d\nBX:%d\nCX:%d\nDX:%d\n", rA, rB, rC, rD);
+                System.out.println(counter);
                 return readCommand();
             } else if (string.equals("showDisk")) {
                 DiskManager.showDisk();
@@ -259,7 +260,6 @@ public class Interpreter {
             default:
                 throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawny argument");
         }
-        counter += argsStr.length() + 3;
 
     }
 
@@ -519,7 +519,8 @@ public class Interpreter {
     }
     //TODO
     private static void halt() {
-        Scheduler.remove_running();
+        ProcessMenager.terminateProcess(Scheduler.get_running().getName());
+        getRegisters();
     }
 
     private static void openFile (String argsStr) throws InvalidArgumentsInterpreterException{

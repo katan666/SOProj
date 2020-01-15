@@ -2,5 +2,5 @@ FP process3_1 pr1.txt;
 DN;
 DN;
 DN;
-DP process3_1 pr1.txt;
+DP process3_1;
 HT;
