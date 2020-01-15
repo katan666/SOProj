@@ -6,7 +6,6 @@ import Interpreter.Interpreter;
 import Process.PCB;
 
 import Process.ProcessMenager;
-import static Process.ProcessState.NEW;
 import static Process.ProcessState.READY;
 import static Process.ProcessState.RUNNING;
 import static Process.ProcessState.WAITING;
@@ -47,17 +46,6 @@ public class Scheduler
                 code=1;
             }
         }
-
-        /*
-        if(code==1)
-        {
-            System.out.println("SCHEDULER ->" + " usunieto proces z kolejki procesow gotowych");
-        }
-        else if(code==0)
-        {
-            System.out.println("SCHEDULER ->" + " w kolejce procesow gotowych nie ma procesu o podanym id: " + pid);
-        }
-        */
         return code;
     }
 
@@ -89,19 +77,6 @@ public class Scheduler
             remove_process(readyQueue.get(index).getPid());
         }
         return code;
-
-
-        /*if (code==0)
-        {
-            //System.out.println("Nie mozna usunac poniewaz runing jest initem");
-        }
-        else
-        {
-            //System.out.println("usunieto proces running");
-        }
-
-
-         */
     }
 
 
@@ -168,21 +143,20 @@ public class Scheduler
             code=0;
         }
 
-        int min=999999; //zmienna pomocnicza przy wybieraniu najmnijszej wartosci czasu
-        int index=0;
-        for(int i=0; i<readyQueue.size();i++)
-        {
-            if(readyQueue.get(i).expected_time<min)
-            {
-                min= (int) readyQueue.get(i).expected_time;
-                index=i;
+        else {
+            int min = 999999; //zmienna pomocnicza przy wybieraniu najmnijszej wartosci czasu
+            int index = 0;
+            for (int i = 0; i < readyQueue.size(); i++) {
+                if (readyQueue.get(i).expected_time < min) {
+                    min = (int) readyQueue.get(i).expected_time;
+                    index = i;
+                }
             }
+            running.state = WAITING;
+            ProcessMenager.getWaitingList().add(running);
+            running = readyQueue.get(index);
+            remove_process(readyQueue.get(index).getPid());
         }
-        running.state=WAITING;
-        ProcessMenager.getWaitingList().add(running);
-        running=readyQueue.get(index);
-        remove_process(readyQueue.get(index).getPid());
-
         return code;
 
               /*if (code==0)
