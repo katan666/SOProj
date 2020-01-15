@@ -8,6 +8,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 import java.util.Vector;
+import Process.PCB;
+
 
 public class Shell
 {
@@ -70,6 +72,15 @@ public void Match(String line)
             break;
         case "PRINT_READY":
             //Scheduler.print_ready_queue();
+            if(command.length==1)
+            {
+                Vector<PCB> temp = Scheduler.print_ready_queue();
+                for(int i=0;i>temp.size();i++)
+                {
+                    System.out.println("ID: " + temp.get(i).getPID() +" Name: " + temp.get(i).getName() +" Tau: " + temp.get(i).expected_time + " Tn: "+ temp.get(i).getCounter() + " State: "+temp.get(i).state);
+                }
+            }
+            else System.out.println("Niepoprawna ilosc argumentow.");
             break;
         case "PRINT_RUNNING":
             //Scheduler.print_running_process();
