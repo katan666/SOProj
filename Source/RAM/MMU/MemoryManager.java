@@ -5,11 +5,9 @@ import Process.PCB;
 public class MemoryManager {
     final static public int FRAMES = 64;
     final static public int FRAME_SIZE = 16;
-
     private static FrameTableEntry[] frameTable = new FrameTableEntry[FRAMES];
     private static Stack<Byte> freeFrames = new Stack<Byte>();
     private static byte[] RAM = new byte[FRAMES*FRAME_SIZE];
-    //private static final byte FRAME_SIZE = 16;
 
     private static short byteToUShort (byte c) {
         if (c < 0)
