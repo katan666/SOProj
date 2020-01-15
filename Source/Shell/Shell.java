@@ -28,8 +28,26 @@ public void Match(String line)
         case "EXIT":
             finish = 1;
             break;
-        case "MEMORY":
-            MemoryManager.printMemory();
+        case "PRINT_MEMORY":
+            if(command.length == 1)
+            {
+                MemoryManager.printMemory();
+            }
+            else System.out.println("Niepoprawna ilosc argumentow.");
+            break;
+        case "PRINT_FRAME":
+            if(command.length == 2)
+            {
+               int temp = Integer.parseInt(command[1]);
+               if(temp >=0 && temp <=63)
+               {
+                   byte temp2 = (byte) temp;
+                   System.out.println(temp2);
+                   MemoryManager.printFrame(temp2);
+               }
+               else System.out.println("Nie ma ramki o tym numerze.");
+            }
+            else System.out.println("Nieprawidlowa liczba parametrow");
             break;
         case "RENAME":
             if(command.length == 3)
