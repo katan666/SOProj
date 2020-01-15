@@ -28,6 +28,7 @@ public class FileManager extends Files{
     public static Vector<Files> mainCatalog = new Vector<Files>();
     public static Vector<Character> openedFiles = new Vector<Character>();
 
+
     //stare adresy
     /*
     public static int readAddress(char index){
@@ -106,11 +107,11 @@ public class FileManager extends Files{
     }
 */
 
+
     private final static char BEGIN = '0';
     private final static int LENGTH = 64;
 
 
-    //TODO sprawdzenie
     public static Vector<String> showMainCatalog(){
         Vector<String>filesInCatalog = new Vector();
         for(int i = 0; i < mainCatalog.size(); i++){
@@ -119,7 +120,7 @@ public class FileManager extends Files{
         return filesInCatalog;
     }
 
-    //TODO sprawdzenie
+
     public static Vector<String> showOpenedFiles(){
         Vector<String>of = new Vector();
         for(int i = 0; i < openedFiles.size(); i++) {
@@ -273,7 +274,6 @@ public class FileManager extends Files{
         }
         return code;
     }
-
 
 
     public static boolean createFile(String name){
@@ -436,7 +436,7 @@ public class FileManager extends Files{
         return code;
     }
 
-    //TODO
+
     public static String readFile(String name, int howMuch){
         String stream = "";
         char index;
@@ -464,7 +464,7 @@ public class FileManager extends Files{
         return stream;
     }
 
-    //TODO sprawdzenie
+
     public static int renameFile(String oldName, String newName){
         /*
         * code == 0 Nazwa zmieniona pomyslnie

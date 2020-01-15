@@ -1,5 +1,6 @@
 package Process;
 
+import FileSystem.Files;
 import Programs.FileLoader;
 
 import java.util.Vector;
@@ -7,8 +8,20 @@ import java.util.Stack;
 
 public class PCB {
 
+    public class OpenFile {
 
+        public Files file;
+        public int readPointer;
+        public int writePointer;
 
+        public OpenFile(){
+            this.readPointer = 0;
+            this.writePointer = 0;
+            openFiles = new Vector();
+        }
+    }
+
+    public Vector<OpenFile> openFiles;
 
     private int counter, rA, rB, rC, rD;
     private String name;
