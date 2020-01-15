@@ -103,27 +103,7 @@ public class FileManager extends Files{
     private final static char BEGIN = '0';
     private final static int LENGTH = 64;
 
-    public static int fileLength(String name){
-        int fileLength = 0;
-        char index;
-        int code;
-        char toCheck;
 
-        index = getIndexBlock(name);
-
-        for(int j = 0; j < blockSize; j++) {
-            if (disk[readAddress(index)][j] != '-') {
-                toCheck = disk[readAddress(index)][j];
-                for (int g = 0; g < blockSize; g++) {
-                    if(disk[readAddress(toCheck)][g] != '%'){
-                        fileLength++;
-                    }
-                }
-            }
-        }
-
-        return fileLength - 1;
-    }
     //TODO sprawdzenie
     public static Vector<String> showMainCatalog(){
         Vector<String>filesInCatalog = new Vector();
@@ -144,6 +124,29 @@ public class FileManager extends Files{
             }
         }
         return of;
+    }
+
+
+    public static int fileLength(String name){
+        int fileLength = 0;
+        char index;
+        int code;
+        char toCheck;
+
+        index = getIndexBlock(name);
+
+        for(int j = 0; j < blockSize; j++) {
+            if (disk[readAddress(index)][j] != '-') {
+                toCheck = disk[readAddress(index)][j];
+                for (int g = 0; g < blockSize; g++) {
+                    if(disk[readAddress(toCheck)][g] != '%'){
+                        fileLength++;
+                    }
+                }
+            }
+        }
+
+        return fileLength - 1;
     }
 
 
@@ -168,9 +171,7 @@ public class FileManager extends Files{
         return address;
     }
 
-
     // writePointers
-    /*
     public static int getWritePointer(String name){
         int writePointer = 0;
         for (int i = 0; i < mainCatalog.size(); i++) {
@@ -183,13 +184,15 @@ public class FileManager extends Files{
         }
         return writePointer;
     }
+
+
     public static void setWritePointer(String name, int writePointer){
         for (int i = 0; i < mainCatalog.size(); i++) {
             if (name.equals(mainCatalog.get(i).fileName)) {
                     mainCatalog.get(i).writePointer = writePointer;
             }
         }
-    }*/
+    }
 
 
     private static char getIndexBlock(String name){
@@ -356,11 +359,8 @@ public class FileManager extends Files{
         char index = '-';
         int blocksAmount = 0;
         int counter = 0;
-        int fileLength;
-        char toWrite;
         int pointer = 0;
 
-        fileLength = fileLength(name);
         code = isOpened(name);
         index = getIndexBlock(name);
 
@@ -376,23 +376,6 @@ public class FileManager extends Files{
             else if(blocksAmount * blockSize < data.length()){
                 code = 4;
             }
-            /*
-            else if(fileLength % blockSize != 0 && fileLength > 0){
-                for(int j = 0; j < blockSize; j++) {
-                    if (disk[readAddress(index)][j] == '-') {
-                        toWrite = disk[readAddress(index)][j - 1];
-                        for (int g = 0; g < blockSize; g++) {
-                            if(disk[readAddress(toWrite)][g] == '%'){
-                                disk[readAddress(toWrite)][g] = data.charAt(counter + j);
-                                pointer++;
-                            }
-                        }
-                        counter += pointer;
-                        break;
-                    }
-                }
-            }
-            */
             else{
                 for(int i = 0; i < bitMap.length; i++){
                     if(bitMap[i] == 0){
