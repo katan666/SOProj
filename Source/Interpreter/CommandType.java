@@ -53,7 +53,7 @@ public enum CommandType {
         else if(name.equals("MI")) return MULTIPLY_INT;
         else if(name.equals("MV")) return MOVE;
         else if(name.equals("MX")) return MOVE_INT_TO_REGISTER;
-        else if(name.equals("JT")) return JUMP_TO;
+        else if(name.equals("JP")) return JUMP_TO;
         else if(name.equals("JZ")) return JUMP_ZERO;
         else if(name.equals("HT")) return HALT;
         else if(name.equals("OF")) return OPEN_FILE;

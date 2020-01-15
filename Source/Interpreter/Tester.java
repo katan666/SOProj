@@ -16,7 +16,6 @@ public class Tester {
         Scheduler.set_init();
 
         while (true) {
-
             Interpreter.executeInstruction();
         }
     }

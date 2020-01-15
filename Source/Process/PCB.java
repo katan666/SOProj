@@ -28,13 +28,14 @@ public class PCB {
         counter = rA = rB = rC = rD = 0;
         code = FileLoader.readAllBytesFromFileToShortVec(filePath);
         pageTable = new Stack<>();
+        System.out.println(filePath);
     }
 
 
     public String toStringReg(){
-        return "AX: "+String.valueOf(rA) + "\t" + "BX: "+String.valueOf(rB) + "\t" +
-                "CX: "+String.valueOf(rC) + "\t" + "DX: "+String.valueOf(rD) + "\t" +
-                "DX: "+String.valueOf(rD);
+        return "AX: "+ rA + "\t" + "BX: "+ rB + "\t" +
+                "CX: "+ rC + "\t" + "DX: "+ rD + "\t" +
+                "DX: "+ rD;
     }
 
 

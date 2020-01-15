@@ -81,7 +81,7 @@ public class Interpreter {
                 System.out.println(Scheduler.get_running().getPid());
             } else if (string.equals("showFr")) {
                 System.out.println(ProcessMenager.list.elementAt(3).pageTable.toString());
-            }else if (string.equals("testOFF")) {
+            }else if (string.equals("step")) {
                 isTest = false;
                 return readCommand();
             }
@@ -499,12 +499,23 @@ public class Interpreter {
         }
     }
     //TODO
-    private static void jumpTo(String args) {
-        System.out.printf("jumpTo args: %s\n", args);
+    private static void jumpTo(String argsStr) throws InvalidArgumentsInterpreterException{
+        String[] args = argsStr.split(" ");
+        if (args.length != 1) {
+            throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawna liczba argumentow");
+        }
+        String buff = args[0].replace("[","").replace("]","");
+        counter =  Integer.parseInt(buff);
     }
     //TODO
-    private static void jumpZero(String args) {
-        System.out.printf("jumpZero args: %s\n", args);
+    private static void jumpZero(String argsStr) throws InvalidArgumentsInterpreterException{
+        String[] args = argsStr.split(" ");
+        if (args.length != 1) {
+            throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawna liczba argumentow");
+        }
+
+        String buff = args[0].replace("[","").replace("]","");
+        if(rD == 0)counter =  Integer.parseInt(buff);
     }
     //TODO
     private static void halt() {
@@ -530,6 +541,7 @@ public class Interpreter {
         String[] args = argsStr.split(" ");
         if(args.length != 1) throw new InvalidArgumentsInterpreterException("Interpreter: Zla liczba argumentow.");
         int isOkey = FileManager.deleteFile(args[0]);
+        System.out.println();
         if (isOkey != 0) throw new InvalidArgumentsInterpreterException("Interpreter: Problem z FileManager.deleteFile");
     }
 
