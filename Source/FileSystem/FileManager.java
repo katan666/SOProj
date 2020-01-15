@@ -4,6 +4,21 @@ import java.util.Vector;
 
 public class FileManager extends Files{
 
+    public static void main(String[] args) {
+        String l = "l";
+        String r;
+        fillDisk();
+        createFile(l);
+        openFile(l);
+        writeFile(l, "Siema siema o tej porze kazdy wypic moze");
+        int k = fileLength(l);
+        showDisk();
+        showBitMap();
+        r = readFile(l, 39);
+        System.out.println(k);
+        System.out.println(r);
+    }
+
     public static Vector<Files> mainCatalog = new Vector<Files>();
     public static Vector<Character> openedFiles = new Vector<Character>();
 
@@ -88,7 +103,27 @@ public class FileManager extends Files{
     private final static char BEGIN = '0';
     private final static int LENGTH = 64;
 
+    private static int fileLength(String name){
+        int fileLength = 0;
+        char index;
+        int code;
+        char toCheck;
 
+        index = getIndexBlock(name);
+
+        for(int j = 0; j < blockSize; j++) {
+            if (disk[readAddress(index)][j] != '-') {
+                toCheck = disk[readAddress(index)][j];
+                for (int g = 0; g < blockSize; g++) {
+                    if(disk[readAddress(toCheck)][g] != '%'){
+                        fileLength++;
+                    }
+                }
+            }
+        }
+
+        return fileLength - 1;
+    }
     //TODO sprawdzenie
     public static Vector<String> showMainCatalog(){
         Vector<String>filesInCatalog = new Vector();
@@ -321,7 +356,11 @@ public class FileManager extends Files{
         char index = '-';
         int blocksAmount = 0;
         int counter = 0;
+        int fileLength;
+        char toWrite;
+        int pointer = 0;
 
+        fileLength = fileLength(name);
         code = isOpened(name);
         index = getIndexBlock(name);
 
@@ -337,10 +376,27 @@ public class FileManager extends Files{
             else if(blocksAmount * blockSize < data.length()){
                 code = 4;
             }
+            /*
+            else if(fileLength % blockSize != 0 && fileLength > 0){
+                for(int j = 0; j < blockSize; j++) {
+                    if (disk[readAddress(index)][j] == '-') {
+                        toWrite = disk[readAddress(index)][j - 1];
+                        for (int g = 0; g < blockSize; g++) {
+                            if(disk[readAddress(toWrite)][g] == '%'){
+                                disk[readAddress(toWrite)][g] = data.charAt(counter + j);
+                                pointer++;
+                            }
+                        }
+                        counter += pointer;
+                        break;
+                    }
+                }
+            }
+            */
             else{
                 for(int i = 0; i < bitMap.length; i++){
                     if(bitMap[i] == 0){
-                        int pointer = 0;
+                        pointer = 0;
                         for(int j = 0; j + counter < data.length() && j < blockSize; j++) {
                             disk[i][j] = data.charAt(counter + j);
                             pointer++;
@@ -372,21 +428,29 @@ public class FileManager extends Files{
     }
 
     //TODO cale
-    public static void readFile(String name, int howMuch, short ramAddr){
-        /*
-         * Zmienna code oznacza status errorow
-         * code == 0 - wszystko git
-         * code == 1 - Nie znaleziono pliku w wektorze otwartych plikow (czyt. plik nie zostal otwarty)
-         * code == 2 - Plik nie istnieje
-         * */
+    public static String readFile(String name, int howMuch){
+        String stream = "";
+        char index;
+        char toRead = '-';
         int code;
-        char index = '-';
 
         code = isOpened(name);
-        if(code == 0){
+        index = getIndexBlock(name);
 
+            if(code == 0){
+                for(int j = 0; j < blockSize && howMuch > 0; j++) {
+                    if (disk[readAddress(index)][j] != '-') {
+                        toRead = disk[readAddress(index)][j];
+                        for (int g = 0; g < blockSize; g++) {
+                            if(disk[readAddress(toRead)][g] != '%'){
+                                stream += disk[readAddress(toRead)][g];
+                                howMuch--;
+                            }
+                        }
+                    }
+                }
         }
-
+        return stream;
     }
 
     //TODO sprawdzenie
@@ -434,11 +498,11 @@ public class FileManager extends Files{
          */
         char index;
         char toErase = '-';
-        int code = -1;
-        if(isOpened(name) == 0){
-            code = 1;
-        }
-        else{
+        int code;
+
+        code = isOpened(name);
+
+        if(code == 0){
             for(int i = 0; i < mainCatalog.size(); i++){
                 code = 2;
                 if(name.equals(mainCatalog.get(i).fileName)){
