@@ -133,6 +133,7 @@ public class Scheduler
         }
         if(readyQueue.size()==0 && running== ProcessMenager.getDummy())//jezeli kolejka gotowych procesow jest pusta
         {
+            running.state="NULL";
             running=process; //jako proces uruchomiony ustawiam process poniewaz innych nie ma
             running.state=RUNNING;
         }
