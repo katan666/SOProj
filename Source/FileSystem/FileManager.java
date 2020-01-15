@@ -14,9 +14,15 @@ public class FileManager extends Files{
         int k = fileLength(l);
         showDisk();
         showBitMap();
+        showMainCatalog();
+        showOpenedFiles();
         r = readFile(l, 39);
         System.out.println(k);
         System.out.println(r);
+        closeFile(l);
+        showOpenedFiles();
+        deleteFile(l);
+        showMainCatalog();
     }
 
     public static Vector<Files> mainCatalog = new Vector<Files>();
@@ -127,6 +133,28 @@ public class FileManager extends Files{
     }
 
 
+    private static int readAddress(char address){
+        /*
+        * address == -1 błąd
+        * else zwraca adres komorki jako liczbe int
+         */
+        int index = -1;
+        if(address <= (LENGTH + BEGIN) && address >= BEGIN) {
+            index = address - BEGIN;
+        }
+        return index;
+    }
+
+
+    private static char writeAddress(int index){
+        char address = '~';
+        if(index <= LENGTH && index >= 0) {
+            address = (char) (index + BEGIN);
+        }
+        return address;
+    }
+
+
     public static int fileLength(String name){
         int fileLength = 0;
         char index;
@@ -150,28 +178,6 @@ public class FileManager extends Files{
     }
 
 
-    private static int readAddress(char address){
-        /*
-        * address == -1 błąd
-        * else zwraca adres komorki jako liczbe int
-         */
-        int index = -1;
-        if(address <= (LENGTH + BEGIN) && address >= BEGIN) {
-            index = address - BEGIN;
-        }
-        return index;
-    }
-
-
-    private static char writeAddress(int index){
-        char address = '~';
-        if(index <= LENGTH && index >= 0) {
-            address = (char) (index + BEGIN);
-        }
-        return address;
-    }
-
-    // writePointers
     public static int getWritePointer(String name){
         int writePointer = 0;
         for (int i = 0; i < mainCatalog.size(); i++) {
@@ -190,6 +196,29 @@ public class FileManager extends Files{
         for (int i = 0; i < mainCatalog.size(); i++) {
             if (name.equals(mainCatalog.get(i).fileName)) {
                     mainCatalog.get(i).writePointer = writePointer;
+            }
+        }
+    }
+
+
+    public static int getReadPointer(String name){
+        int readPointer = 0;
+        for (int i = 0; i < mainCatalog.size(); i++) {
+            if (name.equals(mainCatalog.get(i).fileName)) {
+                readPointer = mainCatalog.get(i).readPointer;
+            }
+        }
+        if(readPointer > 0){
+            readPointer += 1;
+        }
+        return readPointer;
+    }
+
+
+    public static void setReadPointer(String name, int readPointer){
+        for (int i = 0; i < mainCatalog.size(); i++) {
+            if (name.equals(mainCatalog.get(i).fileName)) {
+                mainCatalog.get(i).readPointer = readPointer;
             }
         }
     }
@@ -244,6 +273,7 @@ public class FileManager extends Files{
         }
         return code;
     }
+
 
 
     public static boolean createFile(String name){
@@ -303,6 +333,7 @@ public class FileManager extends Files{
         int blocksAmount = 0;
         int counter = 0;
 
+        setWritePointer(name, 0);
         clearFile(name);
         code = isOpened(name);
         index = getIndexBlock(name);
@@ -336,6 +367,7 @@ public class FileManager extends Files{
                             }
                         }
                         if(counter >= data.length()) {
+                            setWritePointer(name, counter);
                             break;
                         }
                     }
@@ -359,7 +391,8 @@ public class FileManager extends Files{
         char index = '-';
         int blocksAmount = 0;
         int counter = 0;
-        int pointer = 0;
+        int pointer;
+
 
         code = isOpened(name);
         index = getIndexBlock(name);
@@ -393,6 +426,7 @@ public class FileManager extends Files{
                             }
                         }
                         if(counter >= data.length()) {
+                            setWritePointer(name, getWritePointer(name) + counter);
                             break;
                         }
                     }
@@ -402,13 +436,14 @@ public class FileManager extends Files{
         return code;
     }
 
-    //TODO cale
+    //TODO
     public static String readFile(String name, int howMuch){
         String stream = "";
         char index;
         char toRead = '-';
         int code;
 
+        getReadPointer(name);
         code = isOpened(name);
         index = getIndexBlock(name);
 
@@ -424,7 +459,8 @@ public class FileManager extends Files{
                         }
                     }
                 }
-        }
+                setReadPointer(name, stream.length());
+            }
         return stream;
     }
 
