@@ -201,7 +201,14 @@ public void Match(String line)
         case "CREATE_PROCESS":
             if(command.length==3)
             {
-                ProcessMenager.newProcess(command[1],command[2]);
+               if(ProcessMenager.newProcess(command[1],command[2]) == 0)
+               {
+                   System.out.println("Proces utworzony pomyslnie.");
+               }
+               else if(ProcessMenager.newProcess(command[1],command[2]) ==1)
+                {
+                    System.out.println("Nie udalo sie utworzyc procesu. Ta nazwa jest juz zajeta.");
+                }
             }
             else System.out.println("Niepoprawna liczba argumentow.");
             break;
