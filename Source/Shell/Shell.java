@@ -74,16 +74,20 @@ public void Match(String line)
             //Scheduler.print_running_process();
             break;
         case "FOPEN":
-           if( FileManager.openFile(command[1]))
+           if( FileManager.openFile(command[1]) == true)
            {
-               System.out.println("Nie udalo sie otworzyc pliku.");
+               System.out.println("Pomyslnie otworzono plik");
            }
            else {
-               System.out.println("Plik Otwarty Pomyslnie.");
+               System.out.println("Nie udalo sie otworzyc pliku.");
            }
            break;
         case "FCREATE":
-                FileManager.createFile(command[1]);
+                if(FileManager.createFile(command[1])==true)
+                {
+                    System.out.println("Pomyslnie utworzono plik.");
+                }
+                else System.out.println("Nie udalo sie utworzyc pliku.");
                 break;
         case "APPEND":
             if(command.length == 2) {
@@ -131,11 +135,11 @@ public void Match(String line)
             break;
         case "FCLOSE":
             if(command.length == 2) {
-                if (FileManager.closeFile(command[0]) == 0) {
+                if (FileManager.closeFile(command[1]) == 0) {
                     System.out.println("Plik zostal pomyslnie zamkniety.");
-                } else if (FileManager.closeFile(command[0]) == 1) {
+                } else if (FileManager.closeFile(command[1]) == 1) {
                     System.out.println("Plik nie zostal otwarty");
-                } else if (FileManager.closeFile(command[0]) == 2) {
+                } else if (FileManager.closeFile(command[1]) == 2) {
                     System.out.println("Plik nie istnieje.");
                 }
             }
