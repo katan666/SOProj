@@ -39,7 +39,7 @@ public class MemoryManager {
 
     public static short readInProcess (PCB pcb, short adr) {
         if (pcb.pageTable.empty()) {
-            System.out.println("\n <MemoryManager> [BŁĄD] Procesowi \"" + pcb.getName() + "\"(" + pcb.getPID() + ") nie przydzielono żadnej pamięci. Najpierw zaalokuj ją za pomocą odpowiedniego polecenia.");
+            System.out.println("\n Procesowi \"" + pcb.getName() + "\"(" + pcb.getPID() + ") nie przydzielono żadnej pamięci. Najpierw zaalokuj ją za pomocą odpowiedniego polecenia.");
             return -1;
         }
         else {
@@ -48,7 +48,7 @@ public class MemoryManager {
                 return byteToUShort(RAM[physAdr]);
             }
             else {
-                System.out.println("\n <MemoryManager> [BŁĄD] Proces \"" + pcb.getName() + "\"(" + pcb.getPID() + ") nie ma dostępu do ramki pamięci o indeksie " + (physAdr / FRAME_SIZE) + ".");
+                System.out.println("\n Proces \"" + pcb.getName() + "\"(" + pcb.getPID() + ") nie ma dostępu do ramki pamięci o indeksie " + (physAdr / FRAME_SIZE) + ".");
                 return -2;
             }
         }
@@ -64,7 +64,7 @@ public class MemoryManager {
 
     public static void writeInProcess (PCB pcb, short adr, short data) {
         if (pcb.pageTable.empty()) {
-            System.out.println("\n <MemoryManager> [BŁĄD] Procesowi \"" + pcb.getName() + "\"(" + pcb.getPID() + ") nie przydzielono żadnej pamięci. Najpierw zaalokuj ją za pomocą odpowiedniego polecenia.");
+            System.out.println("\n Procesowi \"" + pcb.getName() + "\"(" + pcb.getPID() + ") nie przydzielono żadnej pamięci. Najpierw zaalokuj ją za pomocą odpowiedniego polecenia.");
         }
         else {
             short physAdr = (short)(pcb.pageTable.get(adr / FRAME_SIZE) * FRAME_SIZE + (adr - ((adr / FRAME_SIZE) * FRAME_SIZE)));
@@ -72,27 +72,25 @@ public class MemoryManager {
                 RAM[physAdr] = (byte)(data - 128);
             }
             else {
-                System.out.println("\n <MemoryManager> [BŁĄD] Proces \"" + pcb.getName() + "\"(" + pcb.getPID() + ") nie ma dostępu do ramki pamięci o indeksie " + (physAdr / FRAME_SIZE) + ".");
+                System.out.println("\n Proces \"" + pcb.getName() + "\"(" + pcb.getPID() + ") nie ma dostępu do ramki pamięci o indeksie " + (physAdr / FRAME_SIZE) + ".");
             }
         }
     }
 
     public static void writeInRAM (short physAdr, short data) {
-        //Znowu nie rozumiem dlaczego tak
-
         RAM[physAdr] = (byte)(data - 128);
         //RAM[physAdr] = (byte)(data);
     }
 
     public static void allocateProcess (PCB pcb) {
         if (neededFrames(pcb) == 0) {
-            System.out.println("\n <MemoryManager> [BŁĄD] Proces \"" + pcb.getName() + "\"(" + pcb.getPID() + ") nie ma kodu, więc nie można go zaalokować.");
+            System.out.println("\n Proces \"" + pcb.getName() + "\"(" + pcb.getPID() + ") nie ma kodu, więc nie można go zaalokować.");
         }
         else if (neededFrames(pcb) > frameTable.length) {
-            System.out.println("\n <MemoryManager> [BŁĄD] Za duży rozmiar programu (ponad 256 bajtów).");
+            System.out.println("\n Za duży rozmiar programu (ponad 256 bajtów).");
         }
         else if (neededFrames(pcb) > freeFrames.size() ) {
-            System.out.println("\n <MemoryManager> [BŁĄD] Za mało wolnych ramek (" + freeFrames.size() + "), by załadować kod procesu \"" + pcb.getName() + "\"(" + pcb.getPID() + ") [potrzebne ramki: " + neededFrames(pcb) + "].");
+            System.out.println("\n Za mało wolnych ramek (" + freeFrames.size() + "), by załadować kod procesu \"" + pcb.getName() + "\"(" + pcb.getPID() + ") [potrzebne ramki: " + neededFrames(pcb) + "].");
         }
         else {
             for (byte w = 0; w < neededFrames(pcb); w++) {
@@ -116,13 +114,13 @@ public class MemoryManager {
             freeFrames.pop();
         }
         else {
-            System.out.println("\n <MemoryManager> [BŁĄD] Nie mozna zaalokowac dodatkowej strony dla procesu \"" + pcb.getName() + "\"(" + pcb.getPID() + "). Brak wolnych ramek pamieci operacyjnej.");
+            System.out.println("\n Nie mozna zaalokowac dodatkowej strony dla procesu \"" + pcb.getName() + "\"(" + pcb.getPID() + "). Brak wolnych ramek pamieci operacyjnej.");
         }
     }
 
     public static void removePage (PCB pcb) {
         if (pcb.pageTable.empty()) {
-            System.out.println("\n <MemoryManager> [BŁĄD] Nie można odjąć strony pamięci, bo proces \"" + pcb.getName() + "\"(" + pcb.getPID() + ") nie ma przypisanej żadnej pamięci.");
+            System.out.println("\n Nie można odjąć strony pamięci, bo proces \"" + pcb.getName() + "\"(" + pcb.getPID() + ") nie ma przypisanej żadnej pamięci.");
         }
         else {
             byte currentFrame = pcb.pageTable.peek();
@@ -135,7 +133,7 @@ public class MemoryManager {
 
     public static void deallocateProcess (PCB pcb) {
         if (pcb.pageTable.empty()) {
-            System.out.println("\n <MemoryManager> [BŁĄD] Nie ma czego dealokować, bo proces \"" + pcb.getName() + "\"(" + pcb.getPID() + ") nie ma przypisanej żadnej pamięci.");
+            System.out.println("\n Nie ma czego dealokować, bo proces \"" + pcb.getName() + "\"(" + pcb.getPID() + ") nie ma przypisanej żadnej pamięci.");
         }
         else {
             while (!pcb.pageTable.empty()) {
@@ -158,11 +156,11 @@ public class MemoryManager {
     }
 
     public static void printMemory() {
-        System.out.println("\n <MemoryManager> Zawartość pamięci fizycznej:");
+        System.out.println("\n Zawartość pamięci fizycznej:");
         for (byte i = 0; i < frameTable.length; i++) {
-            System.out.print("\t Ramka " + i + " (należy do procesu o ID: " + frameTable[i].getPID() + "):\n\t\t");
+            System.out.print("\t Ramka " + i + " należy do procesu o ID: " + frameTable[i].getPID() + ":\n\t\t");
             for (byte j = 0; j < FRAME_SIZE; j++) {
-                System.out.print( readInRAM((short)(i*FRAME_SIZE + j)) + "\t");
+                System.out.print(readInRAM((short)(i*FRAME_SIZE + j)) + "\t");
             }
             System.out.println();
         }
@@ -170,30 +168,30 @@ public class MemoryManager {
 
     public static void printFrame(byte frame) {
         if (frame >= 0 && frame < frameTable.length) {
-            System.out.print("\n <MemoryManager> Zawartość ramki nr " + frame + ":\n\t\t");
+            System.out.print("\n Zawartość ramki nr " + frame + ":\n\t\t");
             for (byte j = 0; j < FRAME_SIZE; j++) {
                 System.out.print( readInRAM( (short)(frame*FRAME_SIZE + j) ) + "\t");
             }
             System.out.println();
         }
         else {
-            System.out.println("\n <MemoryManager> [BŁĄD] Ramka o podanym numerze nie istnieje (jest spoza zasięgu).");
+            System.out.println("\n Ramka o podanym numerze nie istnieje.");
         }
     }
 
     public static void printCell(short physAddr) {
         if (physAddr >= 0 && physAddr < RAM.length) {
-            System.out.println("\n <MemoryManager> Zawartość pamięci fizycznej pod adresem " + physAddr + ":\t" + RAM[physAddr]);
+            System.out.println("\n  Zawartość pamięci fizycznej pod adresem " + physAddr + ":\t" + RAM[physAddr]);
         }
         else {
-            System.out.println("\n <MemoryManager> [BŁĄD] Adres spoza zasięgu pamięci.");
+            System.out.println("\n Adres spoza zasięgu pamięci.");
         }
     }
 
     public static void printMemoryASCII() {
-        System.out.println("\n <MemoryManager> Zawartość pamięci fizycznej zrzutowana na ASCII:");
+        System.out.println("\n Zawartość pamięci fizycznej zrzutowana na ASCII:");
         for (byte i = 0; i < frameTable.length; i++) {
-            System.out.print("\t Ramka " + i + " (należy do procesu o ID: " + frameTable[i].getPID() + "):\n\t\t");
+            System.out.print("\t Ramka " + i + " należy do procesu o ID: " + frameTable[i].getPID() + ":\n\t\t");
             for (byte j = 0; j < FRAME_SIZE; j++) {
                 System.out.print( (char)(readInRAM( (short)(i*FRAME_SIZE + j) )) + "\t");
             }
@@ -203,33 +201,33 @@ public class MemoryManager {
 
     public static void printFrameASCII(byte frame) {
         if (frame >= 0 && frame < frameTable.length) {
-            System.out.print("\n <MemoryManager> Zawartość ramki o indeksie " + frame + " zrzutowana na ASCII:\n\t\t");
+            System.out.print("\n Zawartość ramki o indeksie " + frame + " zrzutowana na ASCII:\n\t\t");
             for (byte j = 0; j < FRAME_SIZE; j++) {
                 System.out.print((char)RAM[frame*FRAME_SIZE + j] + "\t");
             }
             System.out.println();
         }
         else {
-            System.out.println("\n <MemoryManager> [BŁĄD] Ramka o podanym indeksie nie istnieje (jest spoza zasięgu).");
+            System.out.println("\n  Ramka o podanym indeksie nie istnieje.");
         }
     }
 
     public static void printCellASCII(short physAddr) {
         if (physAddr >= 0 && physAddr < RAM.length) {
-            System.out.println("\n <MemoryManager> Zawartość pamięci fizycznej pod adresem " + physAddr + ",zrzutowana na ASCII:\t" + (char)RAM[physAddr]);
+            System.out.println("\n  Zawartość pamięci fizycznej pod adresem " + physAddr + ",zrzutowana na ASCII:\t" + (char)RAM[physAddr]);
         } else {
-            System.out.println("\n <MemoryManager> [BŁĄD] Adres spoza zasięgu pamięci.");
+            System.out.println("\n  Adres spoza zasięgu pamięci.");
         }
     }
 
     public static void printFreeFrames() {
-        System.out.print("\n <MemoryManager> Wolne ramki pamięci fizycznej (indeksy):\n\t\t");
+        System.out.print("\n  Wolne ramki pamięci fizycznej (indeksy):\n\t\t");
         for (byte i = 0; i < frameTable.length; i++) {
             if(!frameTable[i].isTaken()) {
                 System.out.print(i + "\t");
             }
         }
-        System.out.print("\n Stos wolnych ramek (indeksy) (od dołu do góry):\n\t\t");
+        System.out.print("\n Stos wolnych ramek (indeksy) od dołu do góry:\n\t\t");
         for (byte i = 0; i < freeFrames.size(); i++) {
             System.out.print(freeFrames.get(i) + "\t");
         }
