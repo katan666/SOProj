@@ -6,8 +6,8 @@ import FileSystem.FileManager;
 import Programs.FileLoader;
 import RAM.MMU.MemoryManager;
 import Process.ProcessMenager;
-import RAM.MMU.PCB;
 import Scheduler.Scheduler;
+import Process.PCB;
 
 import java.util.Scanner;
 import java.util.Stack;
@@ -54,17 +54,7 @@ public class Interpreter {
         } else if (string.equals("showBitMap")){
             DiskManager.showBitMap();
             return readCommand();
-        } else if (string.equals("test0")){
-            Stack<Byte> v1 = new Stack<>();
-            Stack<Byte> v2 = new Stack<>();
-            RAM.MMU.PCB pcb0 = new RAM.MMU.PCB((short)6,"nazwa", v1, FileLoader.readAllBytesFromFileToShortVec("Source/Programs/dummy.txt"));
-            RAM.MMU.PCB pcb1 = new RAM.MMU.PCB((short)23,"nazwa", v2, FileLoader.readAllBytesFromFileToShortVec("Source/Programs/ciagLiczbKwadratowych.txt"));
-            MemoryManager.allocateProcess(pcb0);
-            MemoryManager.allocateProcess(pcb1);
-            for (Byte e : pcb0.pageTable){
-                System.out.println(e);
-            }
-            return readCommand();
+
         } else if (string.equals("showProcessList")){
             System.out.println(ProcessMenager.listOfProcess());
 
@@ -520,16 +510,18 @@ public class Interpreter {
         String[] args = argsStr.split(" ");
         System.out.println(FileManager.writeFile(args[0], "kurwa to kazdy oprocz mnie ale nie wiem do konca kto"));
     }
-    //TODO
+
     private static void formProcess(String argsStr) throws InvalidArgumentsInterpreterException{
         String[] args = argsStr.split(" ");
         if(args.length != 2) throw new InvalidArgumentsInterpreterException("Interpreter: Zla liczba argumentow.");
         String path = "Source/Programs/" + args[1];
         ProcessMenager.newProcess(args[0], path);
     }
-    //TODO
-    private static void deleteProcess(String argsStr) throws InvalidArgumentsInterpreterException{
+
+    private static void deleteProcess(String argsStr) throws InvalidArgumentsInterpreterException {
         String[] args = argsStr.split(" ");
+        if (args.length != 1) throw new InvalidArgumentsInterpreterException("Interpreter: Zla liczba argumentow.");
+        ProcessMenager.terminateProcess(args[0]);
     }
     //TODO
     private static void runProcess(String args) {

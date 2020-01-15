@@ -47,6 +47,9 @@ public class PCB {
     public int getPid() {
         return pid;
     }
+    public int getPID() {
+        return pid;
+    }
 
     public String getState() {
         return state;

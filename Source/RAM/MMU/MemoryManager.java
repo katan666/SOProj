@@ -1,7 +1,7 @@
 package RAM.MMU;
 
 import java.util.Stack;
-
+import Process.PCB;
 public class MemoryManager {
     final static private int FRAMES = 64;
     final static private int FRAME_SIZE = 16;
@@ -99,7 +99,7 @@ public class MemoryManager {
                 byte currentFrame = freeFrames.peek();
                 if (!frameTable[currentFrame].isTaken()) {
                     frameTable[currentFrame].setTaken(true);
-                    frameTable[currentFrame].setPID( pcb.getPID() );
+                    frameTable[currentFrame].setPID((short) pcb.getPID() );
                     pcb.pageTable.push(currentFrame);
                     freeFrames.pop();
                 }

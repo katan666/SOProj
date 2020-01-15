@@ -19,7 +19,7 @@ public enum CommandType {
     READ_FILE(3),
     WRITE_FILE(3),
     FORM_PROCESS(2),
-    DELETE_PROCESS(3),
+    DELETE_PROCESS(1),
     RUN_PROCESS(3),
     DECREMENT(1),
     INCREMENT(1),

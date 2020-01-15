@@ -41,6 +41,7 @@ public class Scheduler
         {
             if(readyQueue.get(i).getPid()==(pid))
             {
+                readyQueue.elementAt(i).state = TERMINATED;//Mateusz tu byl
                 readyQueue.remove(i);
                 code=1;
             }

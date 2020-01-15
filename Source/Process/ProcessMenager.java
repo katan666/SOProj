@@ -1,6 +1,7 @@
 package Process;
 
 
+import RAM.MMU.MemoryManager;
 import Scheduler.Scheduler;
 
 import java.util.Random;
@@ -43,7 +44,7 @@ public class ProcessMenager {
         PCB pcb = new PCB(name, pidGen(), NEW, 0,filePath);
         System.out.println(pcb.toStringReg());
         list.add(pcb);
-
+        MemoryManager.allocateProcess(pcb);
         Scheduler.add_process(pcb);
     }
 
@@ -54,6 +55,25 @@ public class ProcessMenager {
 
         }
         return tem;
+    }
+
+    private static int nameToPid(String name){
+        for (PCB pcb : list){
+            if(name.equals(pcb.getName())) return pcb.getPid();
+        }
+        return -1;
+    }
+
+    public static void terminateProcess(String name){
+        Scheduler.remove_process(nameToPid(name));
+        MemoryManager.deallocateProcess(pidToPbc(nameToPid(name)));
+    }
+
+    private static PCB pidToPbc(int pid){
+        for(PCB pcb : list){
+            if (pid == pcb.getPid()) return pcb;
+        }
+        return null;
     }
 
 }
