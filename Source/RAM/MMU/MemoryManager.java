@@ -172,18 +172,18 @@ public class MemoryManager {
             }
             System.out.println();
         }
-        else {
+        /*else {
             System.out.println("\n Ramka o podanym numerze nie istnieje.");
-        }
+        }*/
     }
 //zwracanie zawartosci pamieci fizycznej pod podanym adresem
     public static void printCell(short physAddr) {
         if (physAddr >= 0 && physAddr < RAM.length) {
             System.out.println("\n  Zawartość pamięci fizycznej pod adresem " + physAddr + ":\t" + RAM[physAddr]);
         }
-        else {
+        /*else {
             System.out.println("\n Adres spoza zasięgu pamięci.");
-        }
+        }*/
     }
 //wyswietlanie zawartosci pamieci fizycznej, zrzutowane na ascii + wlasnosci ramek
     public static void printMemoryASCII() {
