@@ -37,16 +37,21 @@ public class Lock {
             m_locked = true;
             m_ownerPID = Scheduler.get_running().getPID();
             // Scheduler.get_running().openFiles.add()
+            return 0;
 
         } else if (m_locked && m_ownerPID != 0) {
 
             m_waitingProcesses.add(Scheduler.get_running());
             Scheduler.process_waiting();
+            return 1;
 
         } else if ((!m_locked && m_ownerPID != 0) || (m_locked && m_ownerPID == 0)) {
 
             ProcessMenager.terminateProcess(Scheduler.get_running().getName());
+            return 2;
         }
+
+        return 2;
     }
         /*
         Zamykanie zamka. Jeśli jest otwarty i nie ma właściciela, pole „locked” jest
