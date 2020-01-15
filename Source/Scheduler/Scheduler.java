@@ -70,18 +70,23 @@ public class Scheduler
 
         int min=999999; //zmienna pomocnicza przy wybieraniu najmnijszej wartosci czasu
         int index=0;
-        for(int i=0; i<readyQueue.size();i++)
-        {
-            if(readyQueue.get(i).expected_time<min)
-            {
-                min= (int) readyQueue.get(i).expected_time;
-                index=i;
-            }
-        }
-        running.state=TERMINATED;
-        running=readyQueue.get(index);
-        remove_process(readyQueue.get(index).getPid());
 
+        if(readyQueue.size()==0)
+        {
+            running.state=TERMINATED;
+            running=ProcessMenager.getDummy();
+        }
+        else {
+            for (int i = 0; i < readyQueue.size(); i++) {
+                if (readyQueue.get(i).expected_time < min) {
+                    min = (int) readyQueue.get(i).expected_time;
+                    index = i;
+                }
+            }
+            running.state = TERMINATED;
+            running = readyQueue.get(index);
+            remove_process(readyQueue.get(index).getPid());
+        }
         return code;
 
 
