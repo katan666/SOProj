@@ -71,17 +71,22 @@ public class Lock {
 
             m_locked = false;
             m_ownerPID = 0;
-            // Scheduler.get_running().openFiles.add()
+            return 0;
 
-        } else if (m_locked && m_ownerPID != 0) {
+        } else if (m_locked && m_ownerPID != Scheduler.get_running().getPID()) {
 
-            m_waitingProcesses.add(Scheduler.get_running());
-            Scheduler.process_waiting();
-
-        } else if ((!m_locked && m_ownerPID != 0) || (m_locked && m_ownerPID == 0)) {
-
+            System.out.println("\n\n<Locks> Blad: Proba zwolnienia zamka przez proces, ktory nie jest wlascicielem.");
             ProcessMenager.terminateProcess(Scheduler.get_running().getName());
+            return 1;
+
+        } else if (!m_locked) {
+
+            System.out.println("\n\n<Locks> Blad: Proba zwolnienia otwartego zamka.");
+            ProcessMenager.terminateProcess(Scheduler.get_running().getName());
+            return 2;
         }
+
+        return 3;
     }
         /*
         Otwieranie zamka. Jeśli jest już otwarty, metoda wyświetli stosowny
