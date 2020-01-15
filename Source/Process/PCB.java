@@ -17,7 +17,6 @@ public class PCB {
         public OpenFile(){
             this.readPointer = 0;
             this.writePointer = 0;
-            openFiles = new Vector();
         }
     }
 
@@ -42,6 +41,7 @@ public class PCB {
         code = FileLoader.readAllBytesFromFileToShortVec(filePath);
         pageTable = new Stack<>();
         System.out.println(filePath);
+        openFiles = new Vector<>();
     }
 
 
