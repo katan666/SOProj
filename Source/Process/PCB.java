@@ -7,103 +7,57 @@ import java.util.Stack;
 
 public class PCB {
 
+    private Integer m_IP, m_AX, m_BX, m_CX, m_DX;
+    // Licznik rozkazów (Instruction Pointer) i zawartości rejestrów
+    private String m_name;
+    private Byte m_PID;
+    public String m_state;
+    public Double m_expectedTime;
+    // Tau
+    public Stack <Byte> m_pageTable;
 
+    public PCB(String name, Byte PID, String state, Double expectedTime, String filePath) {
 
-
-    private int counter, rA, rB, rC, rD;
-    private String name;
-    private int pid;
-    public String state;
-    public double expected_time;//tau
-    public Stack <Byte> pageTable;
-    public Vector <Short> code;
-    public PCB parent;
-    public Vector<PCB> children;
-
-    public PCB(String name, int pid, String state, double expected_time,  String filePath) {
-        this.name = name;
-        this.pid = pid;
-        this.state = state;
-        this.expected_time = expected_time;
-        counter = rA = rB = rC = rD = 0;
-        code = FileLoader.readAllBytesFromFileToShortVec(filePath);
-        pageTable = new Stack<>();
+        m_name = name;
+        m_PID = PID;
+        m_state = state;
+        m_expectedTime = expectedTime;
+        m_IP = m_AX = m_BX = m_CX = m_DX = 0;
+        m_pageTable = new Stack<>();
     }
 
+    // Metoda zwracająca stan rejestrów i licznika rozkazów jako String:
 
-    public String toStringReg(){
-        return "AX: "+String.valueOf(rA) + "\t" + "BX: "+String.valueOf(rB) + "\t" +
-                "CX: "+String.valueOf(rC) + "\t" + "DX: "+String.valueOf(rD) + "\t" +
-                "DX: "+String.valueOf(rD);
+    public String RegToString() {
+        return "AX: " + m_AX.toString() + "\t" + "BX: " + m_BX.toString() + "\t" +
+                "CX: " + m_CX.toString() + "\t" + "DX: " + m_DX.toString() + "\t" +
+                "IP: " + m_IP.toString();
     }
 
+    // Gettery i settery:
 
+    public String getName() {return m_name;}
 
-    //Gettery i settery jo
-    public String getName() {
-        return name;
-    }
+    public Byte getPID() {return m_PID;}
 
-    public int getPid() {
-        return pid;
-    }
-    public int getPID() {
-        return pid;
-    }
+    public String getState() {return m_state;}
+    public void setState(String state) {m_state = state;}
 
-    public String getState() {
-        return state;
-    }
+    public Double getExpectedTime() {return m_expectedTime;}
+    public void setExpectedTime(Double expectedTime) {m_expectedTime = expectedTime;}
 
-    public void setState(String state) {
-        this.state = state;
-    }
+    public Integer getIP() {return m_IP;}
+    public void setIP(Integer IP) {m_IP = IP;}
 
-    public double getExpected_time() {
-        return expected_time;
-    }
+    public Integer getAX() {return m_AX;}
+    public void setAX(Integer AX) {m_AX = AX;}
 
-    public void setExpected_time(double expected_time) {
-        this.expected_time = expected_time;
-    }
+    public Integer getBX() {return m_BX;}
+    public void setBX(Integer BX) {m_BX = BX;}
 
-    public int getCounter() {
-        return counter;
-    }
+    public Integer getCX() {return m_CX;}
+    public void setCX(Integer CX) {m_CX = CX;}
 
-    public void setCounter(int counter) {
-        this.counter = counter;
-    }
-
-    public int getrA() {
-        return rA;
-    }
-
-    public void setrA(int rA) {
-        this.rA = rA;
-    }
-
-    public int getrB() {
-        return rB;
-    }
-
-    public void setrB(int rB) {
-        this.rB = rB;
-    }
-
-    public int getrC() {
-        return rC;
-    }
-
-    public void setrC(int rC) {
-        this.rC = rC;
-    }
-
-    public int getrD() {
-        return rD;
-    }
-
-    public void setrD(int rD) {
-        this.rD = rD;
-    }
+    public Integer getDX() {return m_DX;}
+    public void setDX(Integer DX) {m_DX = DX;}
 }
