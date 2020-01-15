@@ -180,7 +180,7 @@ public class FileManager extends Files{
         return fileLength - 1;
     }
 
-
+/*
     public static int getWritePointer(String name){
         int writePointer = 0;
         for (int i = 0; i < mainCatalog.size(); i++) {
@@ -225,7 +225,7 @@ public class FileManager extends Files{
             }
         }
     }
-
+*/
 
     private static char getIndexBlock(String name){
         char index = '-';
@@ -346,7 +346,6 @@ public class FileManager extends Files{
         int blocksAmount = 0;
         int counter = 0;
 
-        setWritePointer(name, 0);
         clearFile(name);
         code = isOpened(name);
         index = getIndexBlock(name);
@@ -380,7 +379,6 @@ public class FileManager extends Files{
                             }
                         }
                         if(counter >= data.length()) {
-                            setWritePointer(name, counter);
                             break;
                         }
                     }
@@ -439,7 +437,6 @@ public class FileManager extends Files{
                             }
                         }
                         if(counter >= data.length()) {
-                            setWritePointer(name, getWritePointer(name) + counter);
                             break;
                         }
                     }
@@ -456,7 +453,6 @@ public class FileManager extends Files{
         char toRead = '-';
         int code;
 
-        getReadPointer(name);
         code = isOpened(name);
         index = getIndexBlock(name);
 
@@ -472,7 +468,6 @@ public class FileManager extends Files{
                         }
                     }
                 }
-                setReadPointer(name, stream.length());
             }
         return stream;
     }
