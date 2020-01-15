@@ -103,7 +103,7 @@ public class FileManager extends Files{
     private final static char BEGIN = '0';
     private final static int LENGTH = 64;
 
-    private static int fileLength(String name){
+    public static int fileLength(String name){
         int fileLength = 0;
         char index;
         int code;
@@ -417,14 +417,6 @@ public class FileManager extends Files{
             }
         }
         return code;
-    }
-
-    //TODO cale
-    public static char changeChar(String name, char toChange){
-        char Char = 'a';
-        int code;
-        code = isOpened(name);
-        return Char;
     }
 
     //TODO cale
