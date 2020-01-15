@@ -64,6 +64,7 @@ public class Scheduler
         {
             running.state=TERMINATED;
             running=ProcessMenager.getDummy();
+            running.state=RUNNING;
         }
         else {
             for (int i = 0; i < readyQueue.size(); i++) {
