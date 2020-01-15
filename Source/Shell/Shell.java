@@ -49,6 +49,59 @@ public void Match(String line)
             }
             else System.out.println("Nieprawidlowa liczba parametrow");
             break;
+        case "PRINT_CELL":
+            if(command.length == 2)
+            {
+                int temp = Integer.parseInt(command[1]);
+                if(temp>=0 && temp<=1023)
+                {
+                    short temp1 = (short)temp;
+                    MemoryManager.printCell(temp1);
+                }
+                else System.out.println("Nie ma komorki o tym adresie fizycznym.");
+            }
+            else System.out.println("Nieprawidlowa liczba paramterow");
+            break;
+        case "PRINT_MEMORY_ASCII":
+            if(command.length==1)
+            {
+                MemoryManager.printMemoryASCII();
+            }
+            else System.out.println("Nieprawidlowa liczba paramterow.");
+            break;
+        case "PRINT_FRAME_ASCII":
+            if(command.length == 2)
+            {
+                int temp = Integer.parseInt(command[1]);
+                if(temp>=0 && temp <= 63)
+                {
+                    byte temp1 = (byte)temp;
+                    MemoryManager.printFrameASCII(temp1);
+                }
+                else System.out.println("Nie ma komorki o tym adresie fizycznym.");
+            }
+            else System.out.println("Nieprawidlowa liczba arugmentow");
+            break;
+        case "PRINT_CELL_ASCII":
+            if(command.length == 2)
+            {
+                int temp = Integer.parseInt(command[1]);
+                if(temp>=0 && temp<=1023)
+                {
+                    short temp1 = (short)temp;
+                    MemoryManager.printCellASCII(temp1);
+                }
+                else System.out.println("Nie ma komorki o tym adresie fizycznym.");
+            }
+            else System.out.println("Nieprawidlowa liczba paramterow");
+            break;
+        case "PRINT_FREE_FRAMES":
+            if(command.length == 1)
+            {
+                MemoryManager.printFreeFrames();
+            }
+            else System.out.println("Nieprawidlowa liczba paramterow");
+            break;
         case "RENAME":
             if(command.length == 3)
             {
