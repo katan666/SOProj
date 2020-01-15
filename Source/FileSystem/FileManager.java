@@ -23,6 +23,7 @@ public class FileManager extends Files{
         showOpenedFiles();
         deleteFile(l);
         showMainCatalog();
+        showDisk();
     }
 
     public static Vector<Files> mainCatalog = new Vector<Files>();
@@ -333,7 +334,7 @@ public class FileManager extends Files{
         int blocksAmount = 0;
         int counter = 0;
 
-        setWritePointer(name, 0);
+
         clearFile(name);
         code = isOpened(name);
         index = getIndexBlock(name);
@@ -367,7 +368,6 @@ public class FileManager extends Files{
                             }
                         }
                         if(counter >= data.length()) {
-                            setWritePointer(name, counter);
                             break;
                         }
                     }
