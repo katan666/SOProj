@@ -5,35 +5,39 @@ import java.util.Stack;
 
 public class PCB {
 
+// ================================================= v Licznik rozkazów (Instruction Pointer) i zawartości rejestrów
     private Integer m_IP, m_AX, m_BX, m_CX, m_DX;
-        // Licznik rozkazów (Instruction Pointer) i zawartości rejestrów
     private String m_name;
     private Byte m_PID;
-    public String m_state;
-    public Double m_expectedTime;
-        // Tau
-    public Stack <Byte> m_pageTable;
+    private String m_state;
+// ================================================= v Tau
+    private Double m_expectedTime;
+    private Stack<Byte> m_pageTable;
+    private String m_filePath;
+    private Vector</*Plik*/> openFiles;
 
+// ================================================= v Metoda zwracająca stan rejestrów i licznika rozkazów jako String
+    public String regToString() {
+        return "AX: " + m_AX.toString() + "\t" + "BX: " + m_BX.toString() + "\t" +
+                "CX: " + m_CX.toString() + "\t" + "DX: " + m_DX.toString() + "\t" +
+                "IP: " + m_IP.toString();
+    }
+
+// ================================================= v Konstruktor
     public PCB(String name, Byte PID, String state, Double expectedTime, String filePath) {
 
         m_name = name;
         m_PID = PID;
         m_state = state;
         m_expectedTime = expectedTime;
+        m_filePath = filePath;
+
         m_IP = m_AX = m_BX = m_CX = m_DX = 0;
         m_pageTable = new Stack<>();
+        m_openFiles = new Vector<>();
     }
 
-        // Metoda zwracająca stan rejestrów i licznika rozkazów jako String:
-
-    public String RegToString() {
-        return "AX: " + m_AX.toString() + "\t" + "BX: " + m_BX.toString() + "\t" +
-                "CX: " + m_CX.toString() + "\t" + "DX: " + m_DX.toString() + "\t" +
-                "IP: " + m_IP.toString();
-    }
-
-        // Gettery i settery:
-
+// ================================================= v Gettery i settery
     public String getName() {return m_name;}
 
     public Byte getPID() {return m_PID;}

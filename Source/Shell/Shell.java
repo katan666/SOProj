@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.Scanner;
 import java.util.Vector;
 import Process.PCB;
-import Process.ProcessMenager;
+import ProcessManager;
 
 
 public class Shell
@@ -68,7 +68,7 @@ public void Match(String line)
         case "PL":
             if(command.length==1)
             {
-                System.out.println(ProcessMenager.listOfProcess());
+                System.out.println(ProcessManager.listOfProcess());
             }
             else System.out.println("Niepoprawna liczba argumentow.");
             break;
@@ -197,7 +197,7 @@ public void Match(String line)
         case "CREATE_PROCESS":
             if(command.length==3)
             {
-                ProcessMenager.newProcess(command[1],command[2]);
+                ProcessManager.newProcess(command[1],command[2]);
             }
             else System.out.println("Niepoprawna liczba argumentow.");
             break;

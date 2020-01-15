@@ -2,15 +2,7 @@ package Scheduler;
 
 import java.util.Vector;
 
-import Interpreter.Interpreter;
-import Process.PCB;
-
-import Process.ProcessMenager;
-import static Process.ProcessState.NEW;
-import static Process.ProcessState.READY;
-import static Process.ProcessState.RUNNING;
-import static Process.ProcessState.WAITING;
-import static Process.ProcessState.TERMINATED;
+import Process.*;
 
 public class Scheduler
 {
@@ -21,7 +13,7 @@ public class Scheduler
     private int x;
     public static void set_init()//metoda ustawiająca init jako uruchomiony
     {
-        running= ProcessMenager.getDummy();
+        running= ProcessManager.getDummy();
     }
 
     private static void calculate_srt()//metoda obliczajaca srednia wykladnicza ostatnich procesow
@@ -64,7 +56,7 @@ public class Scheduler
     public static int remove_running()
     {
         int code=1;
-        if (running==ProcessMenager.getDummy())
+        if (running== ProcessManager.getDummy())
         {
             code=0;
         }
@@ -75,7 +67,7 @@ public class Scheduler
         if(readyQueue.size()==0)
         {
             running.state=TERMINATED;
-            running=ProcessMenager.getDummy();
+            running= ProcessManager.getDummy();
         }
         else {
             for (int i = 0; i < readyQueue.size(); i++) {
@@ -122,7 +114,7 @@ public class Scheduler
         {
             process.expected_time=expected_time;
         }
-        if(readyQueue.size()==0 && running== ProcessMenager.getDummy())//jezeli kolejka gotowych procesow jest pusta
+        if(readyQueue.size()==0 && running== ProcessManager.getDummy())//jezeli kolejka gotowych procesow jest pusta
         {
             running.state="NULL";
             running=process; //jako proces uruchomiony ustawiam process poniewaz innych nie ma
@@ -163,7 +155,7 @@ public class Scheduler
     {
         calculate_srt();
         int code=1;
-        if (running==ProcessMenager.getDummy())
+        if (running== ProcessManager.getDummy())
         {
             code=0;
         }
@@ -179,7 +171,7 @@ public class Scheduler
             }
         }
         running.state=WAITING;
-        ProcessMenager.getWaitingList().add(running);
+        ProcessManager.getWaitingList().add(running);
         running=readyQueue.get(index);
         remove_process(readyQueue.get(index).getPid());
 

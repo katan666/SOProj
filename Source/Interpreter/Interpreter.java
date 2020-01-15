@@ -1,17 +1,12 @@
 package Interpreter;
 
-import FileSystem.Disk;
 import FileSystem.DiskManager;
 import FileSystem.FileManager;
-import Programs.FileLoader;
 import RAM.MMU.MemoryManager;
-import Process.ProcessMenager;
+import ProcessManager;
 import Scheduler.Scheduler;
-import Process.PCB;
 
 import java.util.Scanner;
-import java.util.Stack;
-import java.util.Vector;
 
 import static Interpreter.Tester.isTest;
 
@@ -74,13 +69,13 @@ public class Interpreter {
                 return readCommand();
 
             } else if (string.equals("showProcessList")) {
-                System.out.println(ProcessMenager.listOfProcess());
+                System.out.println(ProcessManager.listOfProcess());
 
                 return readCommand();
             } else if (string.equals("showRun")) {
                 System.out.println(Scheduler.get_running().getPid());
             } else if (string.equals("showFr")) {
-                System.out.println(ProcessMenager.list.elementAt(3).pageTable.toString());
+                System.out.println(ProcessManager.list.elementAt(3).pageTable.toString());
             }else if (string.equals("testOFF")) {
                 isTest = false;
                 return readCommand();
@@ -582,13 +577,13 @@ public class Interpreter {
         String[] args = argsStr.split(" ");
         if(args.length != 2) throw new InvalidArgumentsInterpreterException("Interpreter: Zla liczba argumentow.");
         String path = "Source/Programs/" + args[1];
-        ProcessMenager.newProcess(args[0], path);
+        ProcessManager.newProcess(args[0], path);
     }
 
     private static void deleteProcess(String argsStr) throws InvalidArgumentsInterpreterException {
         String[] args = argsStr.split(" ");
         if (args.length != 1) throw new InvalidArgumentsInterpreterException("Interpreter: Zla liczba argumentow.");
-        ProcessMenager.terminateProcess(args[0]);
+        ProcessManager.terminateProcess(args[0]);
     }
     //TODO
     private static void runProcess(String args) {
