@@ -76,7 +76,6 @@ public void Match(String line)
             System.out.println("Wyswietla zamki");
             break;
         case "PRINT_READY":
-            //Scheduler.print_ready_queue();
             if(command.length==1)
             {
                 Vector<PCB> temp = Scheduler.print_ready_queue();
@@ -93,7 +92,12 @@ public void Match(String line)
             else System.out.println("Niepoprawna ilosc argumentow.");
             break;
         case "PRINT_RUNNING":
-            //Scheduler.print_running_process();
+            if(command.length==1)
+            {
+                PCB temp = Scheduler.print_running_process();
+                System.out.println("ID:" + temp.getPid() + " Name: " + temp.getName() + " Tau: " + temp.expected_time + " Tn: " + temp.getCounter() + " State: " + temp.state);
+            }
+            else System.out.println("Niepoprawna ilosc argumentow.");
             break;
         case "FOPEN":
             if(command.length==2) {
