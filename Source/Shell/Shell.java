@@ -306,6 +306,24 @@ public void Match(String line)
             }
             else System.out.println("Niepoprawna liczba argumentow.");
             break;
+        case "TERMINATE_PROCESS":
+            if(command.length == 2)
+            {
+                if(ProcessMenager.terminateProcess(command[1])==0)
+                {
+                    System.out.println("Proces zabity.");
+                }
+                else if(ProcessMenager.terminateProcess(command[1])==1)
+                {
+                    System.out.println("Nie ma procesu o takiej nazwie");
+                }
+                else if(ProcessMenager.terminateProcess(command[1])==2)
+                {
+                    System.out.println("Nie mozna usunac dummy");
+                }
+            }
+            else System.out.println("Nieprawidlowa liczba argumentow");
+            break;
         default:
             System.out.println("Niepoprawna komenda");
             break;
