@@ -178,15 +178,19 @@ public void Match(String line)
             {
                     if(FileManager.isOpened(command[1]) == 0)
                     {
-                        System.out.println("Ten plik zawiera: ");
+                        System.out.println("Ten plik zawiera: " + FileManager.fileLength(command[1]) + " znakow.");
+                        System.out.println("Ile znakow chcesz odczytac?");
+                        Scanner temp = new Scanner(System.in);
+                        int data = temp.nextInt();
+                        FileManager.readFile(command[1],data);
                     }
                     else if(FileManager.isOpened(command[1]) == 1)
                     {
-
+                        System.out.println("Plik nie zostal otwarty.");
                     }
                     else if(FileManager.isOpened(command[1]) == 2)
                     {
-
+                        System.out.println("Plik nie istnieje.");
                     }
             }
             else System.out.println("Niepoprawna ilosc argumentow,");
