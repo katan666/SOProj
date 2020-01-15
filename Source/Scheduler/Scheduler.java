@@ -1,10 +1,7 @@
 package Scheduler;
 
 import java.util.Vector;
-
-import Interpreter.Interpreter;
 import Process.PCB;
-
 import Process.ProcessMenager;
 import static Process.ProcessState.READY;
 import static Process.ProcessState.RUNNING;
@@ -17,8 +14,8 @@ public class Scheduler
     private static double expected_time = 5; //przewidywany czas pracy
     static Vector<PCB> readyQueue = new Vector<PCB>();//wektor procesow gotowych do przydzielenia procesora
     private static PCB running; // uruchomiony proces
-    private int x;
-    public static void set_init()//metoda ustawiająca init jako uruchomiony
+
+    public static void set_init()//metoda ustawiająca dummy jako uruchomiony
     {
         running= ProcessMenager.getDummy();
     }
@@ -26,7 +23,6 @@ public class Scheduler
     private static void calculate_srt()//metoda obliczajaca srednia wykladnicza ostatnich procesow
     {
         running.expected_time = alfa * running.getCounter() + ((1 - alfa) * running.expected_time);
-        //oblicza kazdemu procesowi w kolejce gotowych przewidywany czas
     }
 
     public static void add_running(PCB x)
@@ -34,7 +30,7 @@ public class Scheduler
         readyQueue.add(x);
     }
 
-    public static int remove_process(int pid)//metoda usuwajaca proces z kolejki gotowych procesow
+    public static int remove_process(int pid)//funkcja usuwajaca proces z kolejki gotowych procesow
     {
         int code=0;
         for(int i=0;i<readyQueue.size();i++)
@@ -49,7 +45,7 @@ public class Scheduler
         return code;
     }
 
-    public static int remove_running()
+    public static int remove_running()//funkcja usuwajaca proces running
     {
         int code=1;
         if (running==ProcessMenager.getDummy())
@@ -62,9 +58,9 @@ public class Scheduler
 
         if(readyQueue.size()==0)
         {
-            running.state=TERMINATED;
-            running=ProcessMenager.getDummy();
-            running.state=RUNNING;
+            running.state=TERMINATED;//zmienia stan na terminated
+            running=ProcessMenager.getDummy();//ustawia dummy jako running
+            running.state=RUNNING;//zmienia stan dummy na running
         }
         else {
             for (int i = 0; i < readyQueue.size(); i++) {
@@ -86,10 +82,9 @@ public class Scheduler
         return readyQueue;
     }
 
-    public static PCB print_running_process()
+    public static PCB print_running_process()//drukuje proces uruchomiony
     {
         return running;
-     //   System.out.println("SCHEDULER -> " + "|ID:" + running.getPid() + "| |Name:" + running.getName() + "| |Tau:" + running.expected_time + "| |Tn:" + running.getCounter() + "| |State:" + running.state + "|"); //wypisuje uruchomiony proces
     }
 
     public static void add_process(PCB process)//<--------------------SZYMON zmiana dodanie do kolejki procesow gotowych
@@ -127,8 +122,8 @@ public class Scheduler
         }
         if(running.expected_time>readyQueue.get(index).expected_time)
         {
-            add_running(running);
             running.state=READY;
+            readyQueue.add(running);
             running = readyQueue.get(index);
             running.state=RUNNING;
             remove_process(readyQueue.get(index).getPid());
