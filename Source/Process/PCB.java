@@ -8,12 +8,12 @@ import java.util.Stack;
 public class PCB {
 
     private Integer m_IP, m_AX, m_BX, m_CX, m_DX;
-    // Licznik rozkazów (Instruction Pointer) i zawartości rejestrów
+        // Licznik rozkazów (Instruction Pointer) i zawartości rejestrów
     private String m_name;
     private Byte m_PID;
     public String m_state;
     public Double m_expectedTime;
-    // Tau
+        // Tau
     public Stack <Byte> m_pageTable;
 
     public PCB(String name, Byte PID, String state, Double expectedTime, String filePath) {
@@ -26,7 +26,7 @@ public class PCB {
         m_pageTable = new Stack<>();
     }
 
-    // Metoda zwracająca stan rejestrów i licznika rozkazów jako String:
+        // Metoda zwracająca stan rejestrów i licznika rozkazów jako String:
 
     public String RegToString() {
         return "AX: " + m_AX.toString() + "\t" + "BX: " + m_BX.toString() + "\t" +
@@ -34,7 +34,7 @@ public class PCB {
                 "IP: " + m_IP.toString();
     }
 
-    // Gettery i settery:
+        // Gettery i settery:
 
     public String getName() {return m_name;}
 
