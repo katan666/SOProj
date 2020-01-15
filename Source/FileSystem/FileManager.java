@@ -5,7 +5,7 @@ import java.util.Vector;
 public class FileManager extends Files{
 
 
-    /*
+
     public static void main(String[] args) {
         String l = "l";
         String r;
@@ -27,9 +27,9 @@ public class FileManager extends Files{
         showMainCatalog();
         showDisk();
     }
-    */
 
-    
+
+
     public static Vector<Files> mainCatalog = new Vector<Files>();
     public static Vector<Character> openedFiles = new Vector<Character>();
 
@@ -510,9 +510,14 @@ public class FileManager extends Files{
          */
         char index;
         char toErase = '-';
-        int code;
+        int code = -1;
 
-        code = isOpened(name);
+        if(isOpened(name) == 1){
+            code = 0;
+        }
+        else if(isOpened(name) == 0){
+            code = 1;
+        }
 
         if(code == 0){
             for(int i = 0; i < mainCatalog.size(); i++){
