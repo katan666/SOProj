@@ -13,6 +13,8 @@ import java.util.Scanner;
 import java.util.Stack;
 import java.util.Vector;
 
+import static Interpreter.Tester.isTest;
+
 public class Interpreter {
     private final static String REG_A = "AX";
     private final static String REG_B = "BX";
@@ -25,44 +27,87 @@ public class Interpreter {
     private static int rC;
     private static int rD;
     private static int counter;
-    //TODO private static PCB pcb;
 
-    //TODO
-    private static void getRegisters() {}
-    //TODO
-    private static void setRegisters() {}
-    //TODO
+
+    private static void getRegisters() {
+        rA = Scheduler.get_running().getrA();
+        rB = Scheduler.get_running().getrB();
+        rC = Scheduler.get_running().getrC();
+        rD = Scheduler.get_running().getrD();
+        counter = Scheduler.get_running().getCounter();
+    }
+
+    private static void setRegisters() {
+        Scheduler.get_running().setrA(rA);
+        Scheduler.get_running().setrB(rB);
+        Scheduler.get_running().setrC(rC);
+        Scheduler.get_running().setrD(rD);
+        Scheduler.get_running().setCounter(counter);
+    }
+
     private static String readCommand(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Write command in: ");
-        String string = scanner.nextLine();
-        if(string.equals("show")){
-            System.out.printf("AX:%d\nBX:%d\nCX:%d\nDX:%d\n", rA,rB,rC,rD);
-            return readCommand();
-        } else if (string.equals("showDisk")){
-            DiskManager.showDisk();
-            return readCommand();
-        } else if (string.equals("showRAM")){
-            MemoryManager.printMemory();
-            return readCommand();
-        } else if (string.equals("showRAM ascii")){
-            MemoryManager.printMemoryASCII();
-            return readCommand();
-        } else if (string.equals("writeRAM")){
-            MemoryManager.writeInRAM((short)16, (short)60);
-            return readCommand();
-        } else if (string.equals("showBitMap")){
-            DiskManager.showBitMap();
-            return readCommand();
+        String buff = "";
+        int adr = 0;
+        char mark;
 
-        } else if (string.equals("showProcessList")){
-            System.out.println(ProcessMenager.listOfProcess());
+        if(isTest) { //-----------
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Write command in: ");
+            String string = scanner.nextLine();
+            if (string.equals("show")) {
+                System.out.printf("AX:%d\nBX:%d\nCX:%d\nDX:%d\n", rA, rB, rC, rD);
+                return readCommand();
+            } else if (string.equals("showDisk")) {
+                DiskManager.showDisk();
+                return readCommand();
+            } else if (string.equals("showRAM")) {
+                MemoryManager.printMemory();
+                return readCommand();
+            } else if (string.equals("showRAM ascii")) {
+                MemoryManager.printMemoryASCII();
+                return readCommand();
+            } else if (string.equals("writeRAM")) {
+                MemoryManager.writeInRAM((short) 16, (short) 60);
+                return readCommand();
+            } else if (string.equals("showBitMap")) {
+                DiskManager.showBitMap();
+                return readCommand();
 
-            return readCommand();
-        } else if (string.equals("showRun")){
-            System.out.println(Scheduler.get_running().getPid());
+            } else if (string.equals("showProcessList")) {
+                System.out.println(ProcessMenager.listOfProcess());
+
+                return readCommand();
+            } else if (string.equals("showRun")) {
+                System.out.println(Scheduler.get_running().getPid());
+            } else if (string.equals("showFr")) {
+                System.out.println(ProcessMenager.list.elementAt(3).pageTable.toString());
+            }else if (string.equals("testOFF")) {
+                isTest = false;
+                return readCommand();
+            }
+            return string;
         }
-        return string;
+        else {
+            for(int s = 0; s < Scheduler.get_running().pageTable.size(); s++){
+                if(counter/MemoryManager.FRAME_SIZE != s) continue;
+
+                for(int i = 0 ; i < MemoryManager.FRAME_SIZE; i++){
+                    if(counter != s*MemoryManager.FRAME_SIZE+i) continue;
+
+                    adr = Scheduler.get_running().pageTable.elementAt(s)*MemoryManager.FRAME_SIZE +i;
+                    mark = (char) MemoryManager.readInRAM((short)adr);
+                    if(mark == ';'){
+                        counter = counter + 2;
+                        isTest = true;//--------
+                        System.out.println(buff);
+                        return buff;
+                    }
+                    else buff = buff + mark;
+                    counter++;
+                }
+            }
+        }
+        return null;
     }
     //Na podstawie pierwszych 2 znakow w argumencie str okresla typ komendy
     private static CommandType typeOf(String str){
@@ -245,7 +290,6 @@ public class Interpreter {
             default:
                 throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawny argument");
         }
-        counter += argsStr.length() + 3;
     }
 
     private static void subtract(String argsStr) throws InvalidArgumentsInterpreterException {
@@ -286,7 +330,6 @@ public class Interpreter {
             default:
                 throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawny argument");
         }
-        counter += argsStr.length() + 3;
     }
 
     private static void subtractInt(String argsStr) throws InvalidArgumentsInterpreterException {
@@ -316,7 +359,6 @@ public class Interpreter {
             default:
                 throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawny argument");
         }
-        counter += argsStr.length() + 3;
     }
 
     private static void multiply(String argsStr) throws InvalidArgumentsInterpreterException {
@@ -357,7 +399,6 @@ public class Interpreter {
             default:
                 throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawny argument");
         }
-        counter += argsStr.length() + 3;
     }
 
     private static void multiplyInt(String argsStr) throws InvalidArgumentsInterpreterException {
@@ -387,7 +428,6 @@ public class Interpreter {
             default:
                 throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawny argument");
         }
-        counter += argsStr.length() + 3;
     }
 
     private static void move(String argsStr) throws InvalidArgumentsInterpreterException {
@@ -428,7 +468,6 @@ public class Interpreter {
                 default:
                     throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawny argument");
             }
-            counter += argsStr.length() + 3;
     }
 
     private static void moveIntToReg(String argsStr) throws InvalidArgumentsInterpreterException {
@@ -458,7 +497,6 @@ public class Interpreter {
             default:
                 throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawny argument");
         }
-        counter += argsStr.length() + 3;
     }
     //TODO
     private static void jumpTo(String args) {
@@ -468,9 +506,9 @@ public class Interpreter {
     private static void jumpZero(String args) {
         System.out.printf("jumpZero args: %s\n", args);
     }
-    //TODO
+
     private static void halt() {
-        System.out.printf("halt args: %s\n", "");
+        Scheduler.remove_running();
     }
 
     private static void openFile (String argsStr) throws InvalidArgumentsInterpreterException{
@@ -549,7 +587,6 @@ public class Interpreter {
             default:
                 throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawny argument");
         }
-        counter += argsStr.length() + 3;
     }
 
     private static void increment(String argsStr) throws InvalidArgumentsInterpreterException {
@@ -573,7 +610,6 @@ public class Interpreter {
             default:
                 throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawny argument");
         }
-        counter += argsStr.length() + 3;
     }
 
     private static void doNothing() {

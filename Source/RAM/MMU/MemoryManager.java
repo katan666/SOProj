@@ -3,8 +3,8 @@ package RAM.MMU;
 import java.util.Stack;
 import Process.PCB;
 public class MemoryManager {
-    final static private int FRAMES = 64;
-    final static private int FRAME_SIZE = 16;
+    final static public int FRAMES = 64;
+    final static public int FRAME_SIZE = 16;
 
     private static FrameTableEntry[] frameTable = new FrameTableEntry[FRAMES];
     private static Stack<Byte> freeFrames = new Stack<Byte>();
