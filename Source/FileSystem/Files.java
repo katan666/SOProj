@@ -1,20 +1,20 @@
 package FileSystem;
 
+import Locks.*;
+
 public class Files extends DiskManager {
     public String fileName;
     public char indexBlock;
-    public int Size = 0;
-    public int readPointer;
-    public int writePointer;
+    public int Size;
+    
+    public Lock zamek;
 
-    public Files(){
-        this.readPointer = 0;
-        this.writePointer = 0;
+    public Files() {
+        zamek = new Lock();
     }
 
-    public Files(String name){
+    public Files(String name) {
         this.fileName = name;
-        this.readPointer = 0;
-        this.writePointer = 0;
+        zamek = new Lock();
     }
 }
