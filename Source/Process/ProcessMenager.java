@@ -16,6 +16,7 @@ public class ProcessMenager {
     public static final int DUMMY_PID = 0;
     public static Vector<PCB> list;
     public static int pidG = 1;
+    private static Vector<PCB> waitingList;
     public ProcessMenager() {
         list = new Vector<PCB>();
         addDummy();
@@ -41,11 +42,13 @@ public class ProcessMenager {
     }
 
     public static void newProcess(String name, String filePath){
+
         PCB pcb = new PCB(name, pidGen(), NEW, 0,filePath);
         System.out.println(pcb.toStringReg());
         list.add(pcb);
         MemoryManager.allocateProcess(pcb);
         Scheduler.add_process(pcb);
+
     }
 
     public static String listOfProcess(){
@@ -76,4 +79,7 @@ public class ProcessMenager {
         return null;
     }
 
+    public static Vector<PCB> getWaitingList() {
+        return waitingList;
+    }
 }

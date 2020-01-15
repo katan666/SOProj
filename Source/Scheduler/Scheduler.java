@@ -19,14 +19,15 @@ public class Scheduler
     static Vector<PCB> readyQueue = new Vector<PCB>();//wektor procesow gotowych do przydzielenia procesora
     private static PCB running; // uruchomiony proces
     private int x;
-    public static void set_init()//metoda ustawiająca init jako uruchomiony                                                                                                <---------- DOMINIK
+    public static void set_init()//metoda ustawiająca init jako uruchomiony
     {
         running= ProcessMenager.getDummy();
     }
 
     private static void calculate_srt()//metoda obliczajaca srednia wykladnicza ostatnich procesow
     {
-        running.expected_time = alfa * running.getCounter() + ((1 - alfa) * running.expected_time); //oblicza kazdemu procesowi w kolejce gotowych przewidywany czas
+        running.expected_time = alfa * running.getCounter() + ((1 - alfa) * running.expected_time);
+        //oblicza kazdemu procesowi w kolejce gotowych przewidywany czas
     }
 
     public static void add_running(PCB x)
@@ -41,7 +42,7 @@ public class Scheduler
         {
             if(readyQueue.get(i).getPid()==(pid))
             {
-                readyQueue.elementAt(i).state = TERMINATED;//Mateusz tu byl
+                readyQueue.elementAt(i).state = TERMINATED;
                 readyQueue.remove(i);
                 code=1;
             }
@@ -106,32 +107,16 @@ public class Scheduler
 
     public static Vector<PCB> print_ready_queue() //wypisywanie calej tablicy procesow gotowych
     {
-
-        /*
-
-        if(readyQueue.size()==0)//jezeli kolejka procesow gotowych jest pusta wypisuje info
-        {
-            System.out.println("SCHEDULER ->" + " kolejka gotowych procesow jest pusta");
-        }
-        else
-        {
-            for (int i = 0; i < readyQueue.size(); i++)
-            {
-                System.out.println("SCHEDULER -> " + "|ID:" + readyQueue.get(i).getPid() + "| |Name:" + readyQueue.get(i).getName() + "| |Tau:" + readyQueue.get(i).expected_time + "| |Tn:" + readyQueue.get(i).getCounter() + "| |State:" + readyQueue.get(i).state + "|"); //wypisuje numer procesu, nazwe oraz Tau
-            }
-        }
-
-         */
         return readyQueue;
     }
 
     public static PCB print_running_process()
     {
         return running;
-     //   System.out.println("SCHEDULER -> " + "|ID:" + running.getPid() + "| |Name:" + running.getName() + "| |Tau:" + running.expected_time + "| |Tn:" + running.getCounter() + "| |State:" + running.state + "|"); //wypisuje uruchomiony proces
+        //   System.out.println("SCHEDULER -> " + "|ID:" + running.getPid() + "| |Name:" + running.getName() + "| |Tau:" + running.expected_time + "| |Tn:" + running.getCounter() + "| |State:" + running.state + "|"); //wypisuje uruchomiony proces
     }
 
-    public static void add_process(PCB process)//metoda dodajaca proces do kolejki procesow gotowych
+    public static void add_process(PCB process)//<--------------------SZYMON zmiana dodanie do kolejki procesow gotowych
     {
         if(process.expected_time==0)
         {
@@ -174,8 +159,8 @@ public class Scheduler
         }
     }
 
-    public static int process_waiting()
-        {
+    public static int process_waiting() //<-----------------------------------------SZYMON zmiana running na waiting
+    {
         calculate_srt();
         int code=1;
         if (running==ProcessMenager.getDummy())
@@ -194,7 +179,7 @@ public class Scheduler
             }
         }
         running.state=WAITING;
-       // waitingQueue.add(running); <----------------------------------- ProcessMenager (kolejka procesow czekajacych)
+        ProcessMenager.getWaitingList().add(running);
         running=readyQueue.get(index);
         remove_process(readyQueue.get(index).getPid());
 
@@ -216,6 +201,6 @@ public class Scheduler
 
     public static PCB get_running()
     {
-        return running;//zwraca uruchomiony proces                                                                              <---------- Do wykorzystania
+        return running;//zwraca uruchomiony proces
     }
 }
