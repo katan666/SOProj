@@ -1,7 +1,1 @@
-CF nowyPlik;
-OF nowyPlik;
-WF nowyPlik [77] 17;
-XF nowyPlik;
-DF nowyPlik;
-HT;
-Operation Systems
+CF nowyPlik; OF nowyPlik; WF nowyPlik [77] 17; XF nowyPlik; DF nowyPlik; HT; Operation Systems
