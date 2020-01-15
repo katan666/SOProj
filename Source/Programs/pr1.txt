@@ -1,0 +1,5 @@
+MX DX 20;
+MX BX 3;
+MV AX BX;
+MI MX 9;
+HT;

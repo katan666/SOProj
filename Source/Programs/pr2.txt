@@ -1,0 +1,6 @@
+CF nowyPlik;
+OF nowyPlik;
+WF nowyPlik [61] 17;
+CF nowyPlik;
+HT;
+Operation Systems
