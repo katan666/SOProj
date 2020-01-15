@@ -8,19 +8,6 @@ import java.util.Stack;
 
 public class PCB {
 
-    public class OpenFile {
-
-        public Files file;
-        public int readPointer;
-        public int writePointer;
-
-        public OpenFile(Files file2) {
-            this.file = file2;
-            this.readPointer = 0;
-            this.writePointer = 0;
-        }
-    }
-
     public Vector<OpenFile> openFiles;
 
     private int counter, rA, rB, rC, rD;

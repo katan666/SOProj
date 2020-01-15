@@ -69,8 +69,8 @@ public class Lock {
 
         if (m_locked && m_ownerPID == Scheduler.get_running().getPID()) {
 
-            m_locked = true;
-            m_ownerPID = Scheduler.get_running().getPID();
+            m_locked = false;
+            m_ownerPID = 0;
             // Scheduler.get_running().openFiles.add()
 
         } else if (m_locked && m_ownerPID != 0) {

@@ -1,6 +1,8 @@
 package FileSystem;
 
 import java.util.Vector;
+import Scheduler.*;
+import Process.*;
 
 public class FileManager extends Files{
 
@@ -315,14 +317,13 @@ public class FileManager extends Files{
                 
                 if (temp == 0) {
                     
-                    Scheduler.get_running().openFiles.add(OpenFile(mainCatalog.get(i)));
+                    Scheduler.get_running().openFiles.add(new OpenFile(mainCatalog.get(i)));
                     openedFiles.add(mainCatalog.get(i).indexBlock);
                     opened = true;
                     break;
                     
                 } else if (temp == 1 || temp == 2) {
-                    
-                    opened = false;
+
                     break;
                 }
             }
