@@ -506,7 +506,7 @@ public class Interpreter {
     private static void jumpZero(String args) {
         System.out.printf("jumpZero args: %s\n", args);
     }
-
+    //TODO
     private static void halt() {
         Scheduler.remove_running();
     }
@@ -543,10 +543,39 @@ public class Interpreter {
     private static void readFile(String args) {
         System.out.printf("readFile args: %s\n", args);
     }
-    //TODO
-    private static void writeFile(String argsStr) {
+
+    private static void writeFile(String argsStr) throws InvalidArgumentsInterpreterException{
         String[] args = argsStr.split(" ");
-        System.out.println(FileManager.writeFile(args[0], "kurwa to kazdy oprocz mnie ale nie wiem do konca kto"));
+        if(args.length != 3) throw new InvalidArgumentsInterpreterException("Interpreter: Zla liczba argumentow.");
+        String buff = "";
+        int adr = 0;
+        char mark;
+        String dataCounterS = args[1].replace("[", "").replace("]", "");
+        int dataCounter = Integer.parseInt(dataCounterS);
+        int len = Integer.parseInt(args[2]);
+
+
+            for(int s = 0; s < Scheduler.get_running().pageTable.size(); s++){
+                if(dataCounter/MemoryManager.FRAME_SIZE != s) continue;
+
+                for(int i = 0 ; i < MemoryManager.FRAME_SIZE; i++){
+                    if(dataCounter != s*MemoryManager.FRAME_SIZE+i) continue;
+
+                    adr = Scheduler.get_running().pageTable.elementAt(s)*MemoryManager.FRAME_SIZE +i;
+                    mark = (char) MemoryManager.readInRAM((short)adr);
+                    if(len == 0){
+                        dataCounter = dataCounter + 2;
+
+                        //System.out.println(buff);
+                        FileManager.writeFile(args[0], buff);
+                        return;
+                    }
+                    else buff = buff + mark;
+                    dataCounter++;
+                    len--;
+                }
+            }
+
     }
 
     private static void formProcess(String argsStr) throws InvalidArgumentsInterpreterException{

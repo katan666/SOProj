@@ -2,7 +2,7 @@ package FileSystem;
 
 import java.util.Vector;
 
-public class FileManager extends  Files{
+public class FileManager extends Files{
 
     public static Vector<Files> mainCatalog = new Vector<Files>();
     public static Vector<Character> openedFiles = new Vector<Character>();
@@ -364,10 +364,11 @@ public class FileManager extends  Files{
     }
 
     //TODO cale
-    public static int changeChar(String name, char toChange){
+    public static char changeChar(String name, char toChange){
+        char Char = 'a';
         int code;
         code = isOpened(name);
-        return code;
+        return Char;
     }
 
     //TODO cale
