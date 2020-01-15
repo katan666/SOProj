@@ -75,9 +75,14 @@ public void Match(String line)
             if(command.length==1)
             {
                 Vector<PCB> temp = Scheduler.print_ready_queue();
-                for(int i=0;i>temp.size();i++)
+                if(temp.size()==0)
                 {
-                    System.out.println("ID: " + temp.get(i).getPID() +" Name: " + temp.get(i).getName() +" Tau: " + temp.get(i).expected_time + " Tn: "+ temp.get(i).getCounter() + " State: "+temp.get(i).state);
+                        System.out.println("Kolejka gotowych procesow jest pusta.");
+                }
+                else {
+                    for (int i = 0; i > temp.size(); i++) {
+                        System.out.println("ID: " + temp.get(i).getPID() + " Name: " + temp.get(i).getName() + " Tau: " + temp.get(i).expected_time + " Tn: " + temp.get(i).getCounter() + " State: " + temp.get(i).state);
+                    }
                 }
             }
             else System.out.println("Niepoprawna ilosc argumentow.");
