@@ -532,7 +532,7 @@ public class FileManager extends Files{
 
                 Scheduler.get_running().openFiles.remove(y);
 
-                //openedFiles.remove(whereIsOpened(name));
+                openedFiles.remove(whereIsOpened(name));
             }
         }
 
@@ -546,14 +546,17 @@ public class FileManager extends Files{
         * code == 1 plik jest otwarty nie mozna usunac otwartego pliku
         * code == 2 nie ma takiego pliku
          */
+        int closed;
         char index;
         char toErase = '-';
         int code = -1;
 
-        if(isOpened(name) == 0){
+        closed = isOpened(name);
+
+        if(closed == 0){
             code = 1;
         }
-        else if(isOpened(name) == 1){
+        else if(closed == 1){
             code = 0;
         }
         else{
