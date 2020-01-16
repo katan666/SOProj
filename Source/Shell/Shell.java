@@ -29,7 +29,11 @@ public void Match(String line)
     switch(command[0])
     {
         case "EXIT":
-            finish = 1;
+            if(command.length==1)
+            {
+                finish = 1;
+            }
+            else System.out.println("Niepoprawna ilosc argumentow.");
             break;
         case "PRINT_MEMORY":
             if(command.length == 1)
@@ -273,9 +277,13 @@ public void Match(String line)
             else System.out.println("Niepoprawna ilosc argumentow,");
             break;
         case "DATE":
-            DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
-            Date dateobj = new Date();
-            System.out.println(df.format(dateobj));
+            if(command.length == 1)
+            {
+                DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+                Date dateobj = new Date();
+                System.out.println(df.format(dateobj));
+            }
+            else System.out.println("Nieprawidlowa liczba argumentow");
             break;
         case "DIR":
             if(command.length == 1)
@@ -300,11 +308,11 @@ public void Match(String line)
         case "CREATE_PROCESS":
             if(command.length==3)
             {
-                if(ProcessMenager.newProcess(command[1],("Source/Programs" + command[2])) == 0)
+                if(ProcessMenager.newProcess(command[1],("Source/Programs/" + command[2])) == 0)
                {
                    System.out.println("Proces utworzony pomyslnie.");
                }
-               else if(ProcessMenager.newProcess(command[1],("Source/Programs" + command[2])) == 1)
+               else if(ProcessMenager.newProcess(command[1],("Source/Programs/" + command[2])) == 1)
                 {
                     System.out.println("Nie udalo sie utworzyc procesu. Ta nazwa jest juz zajeta.");
                 }
