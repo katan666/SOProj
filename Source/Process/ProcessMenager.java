@@ -114,7 +114,7 @@ public class ProcessMenager {
         return 1;
     }
 
-    private static PCB pidToPbc(int pid){
+    public static PCB pidToPbc(int pid){
         for(PCB pcb : list){
             if (pid == pcb.getPid()) return pcb;
         }

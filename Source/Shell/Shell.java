@@ -379,7 +379,31 @@ public void Match(String line)
                 int temp = Integer.parseInt(command[1]);
                 Scheduler.print_process(temp);
             }
-            else System.out.println("Nieprawidlowa liczba argumentow");
+            else System.out.println("Nieprawidlowa liczba argumentow.");
+            break;
+        case "PRINT_LOGIC":
+            if(command.length==2)
+            {
+                int temp = Integer.parseInt(command[1]);
+                RAM.MMU.MemoryManager.printLogicMemory(ProcessMenager.pidToPbc(temp));
+            }
+            else System.out.println("Nieprawidlowa liczba argumentow.");
+            break;
+        case "PRINT_LOGIC_ASCII":
+            if(command.length==2)
+            {
+                int temp = Integer.parseInt(command[1]);
+                RAM.MMU.MemoryManager.printLogicMemoryASCII(ProcessMenager.pidToPbc(temp));
+            }
+            else System.out.println("Nieprawidlowa liczba argumentow.");
+            break;
+        case "PT":
+            if(command.length==2)
+            {
+                int temp = Integer.parseInt(command[1]);
+                RAM.MMU.MemoryManager.printPageTable(ProcessMenager.pidToPbc(temp));
+            }
+            else System.out.println("Nieprawidlowa liczba argumentow.");
             break;
         default:
             System.out.println("Niepoprawna komenda");
@@ -445,6 +469,7 @@ public void Help()
     System.out.println("MAP                                                         -Wyswielta macierz zajetosci bloku");
     System.out.println("STEP                                                        -Wykonuje nastepna komende");
     System.out.println("REG                                                         -Wyswietla rejestry");
+    System.out.println("PRINT_PROCESS                                               -Wyswietla proces o podanym PID");
 
 
 }
