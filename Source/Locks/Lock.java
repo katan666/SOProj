@@ -71,6 +71,9 @@ public class Lock {
 
             m_locked = false;
             m_ownerPID = 0;
+
+            Scheduler.add_process(m_waitingProcesses.remove());
+
             return 0;
 
         } else if (m_locked && m_ownerPID != Scheduler.get_running().getPID()) {
