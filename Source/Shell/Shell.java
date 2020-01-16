@@ -198,7 +198,7 @@ public void Match(String line)
                     String data;
                     System.out.println("Prosze podac dane do zapisania w pliku");
                     Scanner read = new Scanner(System.in);
-                    data = read.next();
+                    data = read.nextLine();
                     if (FileManager.appendFile(command[1], data) == 0) {
                         System.out.println("Dane wpisane pomyslnie");
                     } else if (FileManager.appendFile(command[1], data) == 3) {
