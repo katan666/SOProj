@@ -282,7 +282,7 @@ public void Match(String line)
             }
             else System.out.println("Nieprawidlowa ilosc argumentow");
             break;
-        case "DIROPEN":
+        case "DIR_OPEN":
             if(command.length == 1)
             {
                 for(String e : FileManager.showOpenedFiles())
@@ -324,6 +324,13 @@ public void Match(String line)
             }
             else System.out.println("Nieprawidlowa liczba argumentow");
             break;
+        case "HELP":
+            if(command.length==1)
+            {
+                Help();
+            }
+            else System.out.println("Nieprawidlowa liczba argumentow");
+            break;
         default:
             System.out.println("Niepoprawna komenda");
             break;
@@ -347,6 +354,37 @@ public void loopStart()
         Match(line);
 
     }
+}
+
+public void Help()
+{
+    System.out.println("DATE                                                        -Wyswietla aktualna date i godzine.");
+    System.out.println("DIR                                                         -Wyswietla zawartosc glownego katalogu");
+    System.out.println("DIR_OPEN                                                    -Wyswietla liste otwartych plikow");
+    System.out.println("FCREATE nazwa pliku                                         -Tworzy plik o podanej nazwie");
+    System.out.println("FOPEN nazwa pliku                                           -Otwiera plik o podanej nazwie");
+    System.out.println("APPEND nazwa pliku                                          -Dopisuje dane na koniec pliku");
+    System.out.println("WRITE nazwa pliku                                           -Nadpisuje dane pliku o podanej nazwie");
+    System.out.println("FCLOSE nazwa pliku                                          -Zamyka plik o podanej nazwie");
+    System.out.println("READ nazwa pliku                                            -Wyswietla plik o podanej nazwie");
+    System.out.println("CREATE_PROCESS nazwa procesu nazwa pliku                    -Tworzy nowy proces");
+    System.out.println("TERMINATE_PROCESS nazwa procesu                             -Zabija proces o danej nazwie");
+    System.out.println("PRINT_RUNNING                                               -Wyswietla uruchomiony proces");
+    System.out.println("PRINT_READY                                                 -Wyswietla kolejke gotowych procesow");
+    System.out.println("LOCKS                                                       -Wyswietla zamki");
+    System.out.println("PL                                                          -Wyswietla liste wszystkich procesow");
+    System.out.println("DELETE nazwa pliku                                          -Usuwa plik o podanej nazwie");
+    System.out.println("RENAME aktualna nazwa nowa nazwa                            -Zmienia nazwe pliku");
+    System.out.println("PRINT_MEMORY                                                -Wyswietla cala pamiec RAM");
+    System.out.println("PRINT_FRAME numer stronicy                                  -Wyswietla dana stronice pamieci RAM");
+    System.out.println("PRINT_CELL adres fizyczny                                   -Wyswietla zawartosc komorki pamieci pod podanym adresem");
+    System.out.println("PRINT_MEMORY_ASCII                                          -Wyswietla cala pamiec RAM rzutowana na ASCII");
+    System.out.println("PRINT_FRAME_ASCII numer stronicy                            -Wyswietla dana stronice pamieci RAM rzutowana na ASCII");
+    System.out.println("PRINT_CELL_ASCII  adres fizyczny                            -Wyswielta zawartosci komorki pamieci pod podanym adresem rzutowana na ASCII");
+    System.out.println("PRINT_FREE_FRAME                                            -Wyswielta numery wszystkich wolnych ramek");
+    System.out.println("EXIT                                                        -Konczy dzialanie systemu");
+    System.out.println("HELP                                                        -Wyswietla pomoc dla uzytkownika ");
+
 }
 
 
