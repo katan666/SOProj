@@ -67,7 +67,7 @@ public class ProcessMenager {
     }
 
     private static int nameToPid(String name){
-        for (PCB pcb : list){
+        for (PCB pcb : list) {
             if(name.equals(pcb.getName())) return pcb.getPid();
         }
         return -1;
@@ -80,10 +80,29 @@ public class ProcessMenager {
         if(name.equals(getDummy().getName())) return 2;
         for(PCB pcb : list){
             if(pcb.getName().equals(name)) {
-                if(pcb.getPid() == Scheduler.get_running().getPid()){
+                if(pcb.getPid() == Scheduler.get_running().getPid()) {
+
+                    for (byte i = 0; i < pcb.openFiles.size(); ++i) {
+                        int temp = pcb.openFiles.get(i).file.zamek.unlock();
+                        if (!pcb.openFiles.get(i).file.zamek.m_waitingProcesses.isEmpty()) {
+
+                            Scheduler.add_process(pcb.openFiles.get(i).file.zamek.m_waitingProcesses.remove());
+                        }
+                        if (temp != 0) break;
+                    }
+
                     Scheduler.remove_running();
                     MemoryManager.deallocateProcess(pidToPbc(nameToPid(name)));
                     return 0;
+                }
+
+                for (byte i = 0; i < pcb.openFiles.size(); ++i) {
+                    pcb.openFiles.get(i).file.zamek.setLocked(false);
+                    pcb.openFiles.get(i).file.zamek.setOwnerPID(0);
+                    if (!pcb.openFiles.get(i).file.zamek.m_waitingProcesses.isEmpty()) {
+
+                        Scheduler.add_process(pcb.openFiles.get(i).file.zamek.m_waitingProcesses.remove());
+                    }
                 }
 
                 Scheduler.remove_process(nameToPid(name));

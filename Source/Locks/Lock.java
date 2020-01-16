@@ -9,7 +9,7 @@ import Scheduler.*;
 public class Lock {
 
         // Kolejka oczekujących procesów:
-    private Queue<PCB> m_waitingProcesses;
+    public Queue<PCB> m_waitingProcesses;
 
         // Stan zamka.
     private Boolean m_locked;
@@ -17,8 +17,14 @@ public class Lock {
         // PID właściciela.
     private int m_ownerPID;
 
+        // Setter stanu zamka:
+    public void setLocked(Boolean locked) {m_locked = locked;}
+
         // Getter stanu zamka:
     public Boolean isLocked() {return m_locked;}
+
+        // Setter PID właściciela:
+    public void setOwnerPID(int ownerPID) {m_ownerPID = ownerPID;}
 
         // Getter PID właściciela:
     public int getOwner() {return m_ownerPID;}
