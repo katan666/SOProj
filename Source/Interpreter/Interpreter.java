@@ -50,64 +50,24 @@ public class Interpreter {
         int adr = 0;
         char mark;
 
-        if(isTest) { //-----------
-            Scanner scanner = new Scanner(System.in);
-            System.out.print("Write command in: ");
-            String string = scanner.nextLine();
-            if (string.equals("show")) {
-                System.out.printf("AX:%d\nBX:%d\nCX:%d\nDX:%d\n", rA, rB, rC, rD);
-                System.out.println(counter);
-                return readCommand();
-            } else if (string.equals("showDisk")) {
-                DiskManager.showDisk();
-                return readCommand();
-            } else if (string.equals("showRAM")) {
-                MemoryManager.printMemory();
-                return readCommand();
-            } else if (string.equals("showRAM ascii")) {
-                MemoryManager.printMemoryASCII();
-                return readCommand();
-            } else if (string.equals("writeRAM")) {
-                MemoryManager.writeInRAM((short) 16, (short) 60);
-                return readCommand();
-            } else if (string.equals("showBitMap")) {
-                DiskManager.showBitMap();
-                return readCommand();
+        for(int s = 0; s < Scheduler.get_running().pageTable.size(); s++){
+            if(counter/MemoryManager.FRAME_SIZE != s) continue;
 
-            } else if (string.equals("showProcessList")) {
-                System.out.println(ProcessMenager.listOfProcess());
+            for(int i = 0 ; i < MemoryManager.FRAME_SIZE; i++){
+                if(counter != s*MemoryManager.FRAME_SIZE+i) continue;
 
-                return readCommand();
-            } else if (string.equals("showRun")) {
-                System.out.println(Scheduler.get_running().getPid());
-            } else if (string.equals("showFr")) {
-                System.out.println(ProcessMenager.list.elementAt(3).pageTable.toString());
-            }else if (string.equals("step")) {
-                isTest = false;
-                return readCommand();
-            }
-            return string;
-        }
-        else {
-            for(int s = 0; s < Scheduler.get_running().pageTable.size(); s++){
-                if(counter/MemoryManager.FRAME_SIZE != s) continue;
-
-                for(int i = 0 ; i < MemoryManager.FRAME_SIZE; i++){
-                    if(counter != s*MemoryManager.FRAME_SIZE+i) continue;
-
-                    adr = Scheduler.get_running().pageTable.elementAt(s)*MemoryManager.FRAME_SIZE +i;
-                    mark = (char) MemoryManager.readInRAM((short)adr);
-                    if(mark == ';'){
-                        counter = counter + 2;
-                        isTest = true;//--------
-                        System.out.println(buff);
-                        return buff;
-                    }
-                    else buff = buff + mark;
-                    counter++;
+                adr = Scheduler.get_running().pageTable.elementAt(s)*MemoryManager.FRAME_SIZE +i;
+                mark = (char) MemoryManager.readInRAM((short)adr);
+                if(mark == ';'){
+                    counter = counter + 2;
+                    System.out.println(buff);
+                    return buff;
                 }
+                else buff = buff + mark;
+                counter++;
             }
         }
+
         return null;
     }
     //Na podstawie pierwszych 2 znakow w argumencie str okresla typ komendy
@@ -431,43 +391,43 @@ public class Interpreter {
     }
 
     private static void move(String argsStr) throws InvalidArgumentsInterpreterException {
-            String[] args = argsStr.split(" ");
-            if (args.length != 2) {
-                throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawna liczba argumentow");
-            }
-            int buff;
-            switch (args[1]){
-                case REG_A:
-                    buff = rA;
-                    break;
-                case REG_B:
-                    buff = rB;
-                    break;
-                case REG_C:
-                    buff = rC;
-                    break;
-                case REG_D:
-                    buff = rD;
-                    break;
-                default:
-                    throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawny argument");
-            }
-            switch (args[0]){
-                case REG_A:
-                    rA=buff;
-                    break;
-                case REG_B:
-                    rB=buff;
-                    break;
-                case REG_C:
-                    rC=buff;
-                    break;
-                case REG_D:
-                    rD=buff;
-                    break;
-                default:
-                    throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawny argument");
-            }
+        String[] args = argsStr.split(" ");
+        if (args.length != 2) {
+            throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawna liczba argumentow");
+        }
+        int buff;
+        switch (args[1]){
+            case REG_A:
+                buff = rA;
+                break;
+            case REG_B:
+                buff = rB;
+                break;
+            case REG_C:
+                buff = rC;
+                break;
+            case REG_D:
+                buff = rD;
+                break;
+            default:
+                throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawny argument");
+        }
+        switch (args[0]){
+            case REG_A:
+                rA=buff;
+                break;
+            case REG_B:
+                rB=buff;
+                break;
+            case REG_C:
+                rC=buff;
+                break;
+            case REG_D:
+                rD=buff;
+                break;
+            default:
+                throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawny argument");
+        }
     }
 
     private static void moveIntToReg(String argsStr) throws InvalidArgumentsInterpreterException {
@@ -542,7 +502,6 @@ public class Interpreter {
         String[] args = argsStr.split(" ");
         if(args.length != 1) throw new InvalidArgumentsInterpreterException("Interpreter: Zla liczba argumentow.");
         int isOkey = FileManager.deleteFile(args[0]);
-        System.out.println();
         if (isOkey != 0) throw new InvalidArgumentsInterpreterException("Interpreter: Problem z FileManager.deleteFile");
     }
 
@@ -568,26 +527,26 @@ public class Interpreter {
         int len = Integer.parseInt(args[2]);
 
 
-            for(int s = 0; s < Scheduler.get_running().pageTable.size(); s++){
-                if(dataCounter/MemoryManager.FRAME_SIZE != s) continue;
+        for(int s = 0; s < Scheduler.get_running().pageTable.size(); s++){
+            if(dataCounter/MemoryManager.FRAME_SIZE != s) continue;
 
-                for(int i = 0 ; i < MemoryManager.FRAME_SIZE; i++){
-                    if(dataCounter != s*MemoryManager.FRAME_SIZE+i) continue;
+            for(int i = 0 ; i < MemoryManager.FRAME_SIZE; i++){
+                if(dataCounter != s*MemoryManager.FRAME_SIZE+i) continue;
 
-                    adr = Scheduler.get_running().pageTable.elementAt(s)*MemoryManager.FRAME_SIZE +i;
-                    mark = (char) MemoryManager.readInRAM((short)adr);
-                    if(len == 0){
-                        dataCounter = dataCounter + 2;
+                adr = Scheduler.get_running().pageTable.elementAt(s)*MemoryManager.FRAME_SIZE +i;
+                mark = (char) MemoryManager.readInRAM((short)adr);
+                if(len == 0){
+                    dataCounter = dataCounter + 2;
 
-                        //System.out.println(buff);
-                        FileManager.writeFile(args[0], buff);
-                        return;
-                    }
-                    else buff = buff + mark;
-                    dataCounter++;
-                    len--;
+                    //System.out.println(buff);
+                    FileManager.writeFile(args[0], buff);
+                    return;
                 }
+                else buff = buff + mark;
+                dataCounter++;
+                len--;
             }
+        }
 
     }
 
@@ -657,9 +616,14 @@ public class Interpreter {
     private static void doNothing() {
         //totalna utopia
     }
-    //TODO
-    private static void swapByte(String args) {
-        System.out.printf("swapByte args: %s\n", args);
+
+    private static void swapByte(String argsStr) throws InvalidArgumentsInterpreterException {
+        String[] args = argsStr.split(" ");
+        if (args.length != 3) {
+            throw new InvalidArgumentsInterpreterException("Interpreter: Niepoprawna liczba argumentow");
+        }
+        String string = FileManager.readFile(args[0], FileManager.fileLength(args[0])).replace(args[1], args[2]);
+        FileManager.writeFile(args[0], string);
     }
 
 
@@ -673,4 +637,3 @@ public class Interpreter {
 
 
 }
-
