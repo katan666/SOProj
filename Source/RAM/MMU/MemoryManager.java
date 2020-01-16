@@ -205,17 +205,18 @@ public class MemoryManager {
             }
             System.out.println();
         }
-        else {
+        /*else {
             System.out.println("\n  Ramka o podanym indeksie nie istnieje.");
-        }
+        }*/
     }
 //wyswietlanie zawartosci pamieci fizycznej pod podanym adresem zrzutowane na ascii
     public static void printCellASCII(short physAddr) {
         if (physAddr >= 0 && physAddr < RAM.length) {
             System.out.println("\n  Zawartość pamięci fizycznej pod adresem " + physAddr + ",zrzutowana na ASCII:\t" + (char)RAM[physAddr]);
-        } else {
-            System.out.println("\n  Adres spoza zasięgu pamięci.");
         }
+        /*else {
+            System.out.println("\n  Adres spoza zasięgu pamięci.");
+        }*/
     }
 //wyswietlanie indeksow wolnych ramek
     public static void printFreeFrames() {
