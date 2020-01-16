@@ -158,7 +158,7 @@ public void Match(String line)
                {
                    System.out.println(command[1] + " Zamek jest zamkniety");
                }
-               else System.out.println(command[1] + "Zamek jest owarty");
+               else System.out.println(command[1] + " Zamek jest owarty");
             }
             else System.out.println("Nieprawidlowa liczba argumentow.");
             break;
