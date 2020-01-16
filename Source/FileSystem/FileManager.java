@@ -533,6 +533,7 @@ public class FileManager extends Files{
             }
         }
 
+        System.out.println("\n<FileManager> Nie istnieje plik o podanej nazwie.");
         return null;
     }
 }
