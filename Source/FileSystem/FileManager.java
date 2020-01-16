@@ -524,4 +524,15 @@ public class FileManager extends Files{
         }
         return code;
     }
+
+    public static Files getFileByName(String name) {
+
+        for (byte i = 0; i < mainCatalog.size(); ++i) {
+            if (name.equals(mainCatalog.get(i).fileName)) {
+                return mainCatalog.get(i);
+            }
+        }
+
+        return null;
+    }
 }
