@@ -470,6 +470,9 @@ public void Help()
     System.out.println("STEP                                                        -Wykonuje nastepna komende");
     System.out.println("REG                                                         -Wyswietla rejestry");
     System.out.println("PRINT_PROCESS                                               -Wyswietla proces o podanym PID");
+    System.out.println("PRINT_LOGIC                                                 -Wyswietla pamiec logiczna danego procesu");
+    System.out.println("PRINT_LOGIC_ASCII                                           -Wyswietla pamiec logiczna danego procesu rzutowana na ASCII");
+    System.out.println("PT                                                          -Wyswietla tablice stron danego procesu");
 
 
 }
