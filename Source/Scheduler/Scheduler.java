@@ -153,6 +153,7 @@ public class Scheduler
             }
             running.state = WAITING;
             ProcessMenager.getWaitingList().add(running);
+            readyQueue.get(index).state=RUNNING;
             running = readyQueue.get(index);
             remove_process(readyQueue.get(index).getPid());
         }
