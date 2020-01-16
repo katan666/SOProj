@@ -1,7 +1,10 @@
 package Scheduler;
 
 import java.util.Vector;
+
+import Interpreter.Interpreter;
 import Process.PCB;
+
 import Process.ProcessMenager;
 import static Process.ProcessState.READY;
 import static Process.ProcessState.RUNNING;
@@ -14,8 +17,7 @@ public class Scheduler
     private static double expected_time = 5; //przewidywany czas pracy
     static Vector<PCB> readyQueue = new Vector<PCB>();//wektor procesow gotowych do przydzielenia procesora
     private static PCB running; // uruchomiony proces
-
-    public static void set_init()//metoda ustawiająca dummy jako uruchomiony
+    public static void set_init()//metoda ustawiająca init jako uruchomiony
     {
         running= ProcessMenager.getDummy();
     }
@@ -23,6 +25,7 @@ public class Scheduler
     private static void calculate_srt()//metoda obliczajaca srednia wykladnicza ostatnich procesow
     {
         running.expected_time = alfa * running.getCounter() + ((1 - alfa) * running.expected_time);
+        //oblicza kazdemu procesowi w kolejce gotowych przewidywany czas
     }
 
     public static void add_running(PCB x)
@@ -82,9 +85,10 @@ public class Scheduler
         return readyQueue;
     }
 
-    public static PCB print_running_process()//drukuje proces uruchomiony
+    public static PCB print_running_process()
     {
         return running;
+     //   System.out.println("SCHEDULER -> " + "|ID:" + running.getPid() + "| |Name:" + running.getName() + "| |Tau:" + running.expected_time + "| |Tn:" + running.getCounter() + "| |State:" + running.state + "|"); //wypisuje uruchomiony proces
     }
 
     public static void add_process(PCB process)//<--------------------SZYMON zmiana dodanie do kolejki procesow gotowych
@@ -122,8 +126,8 @@ public class Scheduler
         }
         if(running.expected_time>readyQueue.get(index).expected_time)
         {
+            add_running(running);
             running.state=READY;
-            readyQueue.add(running);
             running = readyQueue.get(index);
             running.state=RUNNING;
             remove_process(readyQueue.get(index).getPid());
