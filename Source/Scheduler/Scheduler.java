@@ -172,27 +172,21 @@ public class Scheduler
 
     }
 
-    public static PCB print_process(int PID)
+    public static void print_process(int PID)
     {
-        if(running.getPID()==PID)
+        int x=0;
+        for(int i=0;i<ProcessMenager.list.size();i++)
         {
-            print_running_process();
-        }
-        for(int i=0;i<readyQueue.size();i++)
-        {
-            if(readyQueue.get(i).getPID()==PID)
+            if(ProcessMenager.list.elementAt(i).getPID()==PID)
             {
-                return readyQueue.get(i);
+                System.out.println("ID: " + ProcessMenager.list.elementAt(i).getPID() + " Name: " + ProcessMenager.list.elementAt(i).getName() + " Tau: " + ProcessMenager.list.elementAt(i).expected_time + " Tn: " + ProcessMenager.list.elementAt(i).getCounter() + " State: " + ProcessMenager.list.elementAt(i).state);
+            x=1;
             }
         }
-        for(int i=0;i<ProcessMenager.getWaitingList().size();i++)
+        if(x==0)
         {
-            if(ProcessMenager.getWaitingList().get(i).getPID()==PID)
-            {
-                return ProcessMenager.getWaitingList().get(i);
-            }
+            System.out.println("Proces o podanym id nie istnieje");
         }
-        return null;
     }
 
 
