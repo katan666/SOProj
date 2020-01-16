@@ -179,7 +179,7 @@ public class Scheduler
         {
             if(ProcessMenager.list.elementAt(i).getPID()==PID)
             {
-                System.out.println("ID: " + ProcessMenager.list.elementAt(i).getPID() + " Name: " + ProcessMenager.list.elementAt(i).getName() + " Tau: " + ProcessMenager.list.elementAt(i).expected_time + " Tn: " + ProcessMenager.list.elementAt(i).getCounter() + " State: " + ProcessMenager.list.elementAt(i).state);
+                System.out.println("ID: " + ProcessMenager.list.elementAt(i).getPID() + " Name: " + ProcessMenager.list.elementAt(i).getName() + " Tau: " + ProcessMenager.list.elementAt(i).expected_time + " Tn: " + ProcessMenager.list.elementAt(i).licznikRoz + " State: " + ProcessMenager.list.elementAt(i).state);
             x=1;
             }
         }
