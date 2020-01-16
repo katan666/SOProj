@@ -23,6 +23,7 @@ public class ProcessMenager {
     }
     public static void init(){
         list = new Vector<PCB>();
+        waitingList = new Vector<PCB>();
         addDummy();
     }
 

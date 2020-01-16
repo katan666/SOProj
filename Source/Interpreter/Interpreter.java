@@ -556,6 +556,11 @@ public class Interpreter {
         if(args.length != 2) throw new InvalidArgumentsInterpreterException("Interpreter: Zla liczba argumentow.");
         String path = "Source/Programs/" + args[1];
         ProcessMenager.newProcess(args[0], path);
+        for(PCB pcb : ProcessMenager.list){
+            if (Scheduler.get_running().getName().equals(args[0])){
+                getRegisters();
+            }
+        }
     }
 
     private static void deleteProcess(String argsStr) throws InvalidArgumentsInterpreterException {

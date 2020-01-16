@@ -1,0 +1,1 @@
+CF testowy; OF testowy; DN; DN; DN; DN; DN; DN; DN; DN; FP proc1 pr9.txt; HT;

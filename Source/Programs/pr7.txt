@@ -1,0 +1,1 @@
+CF nowyPlik; OF nowyPlik; WF nowyPlik [81] 17; SW nowyPlik e E; XF nowyPlik; HT; Operation Systems
