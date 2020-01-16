@@ -83,7 +83,7 @@ public class ProcessMenager {
                 Scheduler.remove_process(nameToPid(name));
                 if(pcb.getPid() == Scheduler.get_running().getPid()){
                     Scheduler.remove_running();
-                    Scheduler.remove_process(nameToPid(name));
+                    MemoryManager.deallocateProcess(pidToPbc(nameToPid(name)));
                     return 0;
                 }
 

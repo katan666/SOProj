@@ -40,7 +40,7 @@ public class Scheduler
         {
             if(readyQueue.get(i).getPid()==(pid))
             {
-                readyQueue.elementAt(i).state = TERMINATED;
+                if(readyQueue.elementAt(i).getPid()!=get_running().getPid())readyQueue.elementAt(i).state = TERMINATED;
                 readyQueue.remove(i);
                 code=1;
             }
@@ -88,7 +88,7 @@ public class Scheduler
     public static PCB print_running_process()
     {
         return running;
-     //   System.out.println("SCHEDULER -> " + "|ID:" + running.getPid() + "| |Name:" + running.getName() + "| |Tau:" + running.expected_time + "| |Tn:" + running.getCounter() + "| |State:" + running.state + "|"); //wypisuje uruchomiony proces
+        //   System.out.println("SCHEDULER -> " + "|ID:" + running.getPid() + "| |Name:" + running.getName() + "| |Tau:" + running.expected_time + "| |Tn:" + running.getCounter() + "| |State:" + running.state + "|"); //wypisuje uruchomiony proces
     }
 
     public static void add_process(PCB process)//<--------------------SZYMON zmiana dodanie do kolejki procesow gotowych
@@ -135,7 +135,7 @@ public class Scheduler
     }
 
     public static int process_waiting() //<-----------------------------------------SZYMON zmiana running na waiting
-        {
+    {
         calculate_srt();
         int code=1;
         if (running==ProcessMenager.getDummy())
