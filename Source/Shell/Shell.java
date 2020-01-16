@@ -220,7 +220,8 @@ public void Match(String line)
                     String data;
                     System.out.println("Prosze podac dane do zapisania w pliku");
                     Scanner read = new Scanner(System.in);
-                    data = read.next();
+                    data = read.nextLine();
+                  //  System.out.println(data);
                     if (FileManager.writeFile(command[1], data) == 0) {
                         System.out.println("Dane wpisane pomyslnie");
                     } else if (FileManager.writeFile(command[1], data) == 3) {
@@ -257,7 +258,8 @@ public void Match(String line)
                         System.out.println("Ile znakow chcesz odczytac?");
                         Scanner temp = new Scanner(System.in);
                         int data = temp.nextInt();
-                        FileManager.readFile(command[1],data);
+                        String a = FileManager.readFile(command[1],data);
+                        System.out.println(a);
                     }
                     else if(FileManager.isOpened(command[1]) == 1)
                     {
@@ -298,11 +300,11 @@ public void Match(String line)
         case "CREATE_PROCESS":
             if(command.length==3)
             {
-               if(ProcessMenager.newProcess(command[1],command[2]) == 0)
+                if(ProcessMenager.newProcess(command[1],("Source/Programs" + command[2])) == 0)
                {
                    System.out.println("Proces utworzony pomyslnie.");
                }
-               else if(ProcessMenager.newProcess(command[1],command[2]) ==1)
+               else if(ProcessMenager.newProcess(command[1],("Source/Programs" + command[2])) == 1)
                 {
                     System.out.println("Nie udalo sie utworzyc procesu. Ta nazwa jest juz zajeta.");
                 }
@@ -408,10 +410,10 @@ public void Help()
     System.out.println("DELETE nazwa pliku                                          -Usuwa plik o podanej nazwie");
     System.out.println("RENAME aktualna nazwa nowa nazwa                            -Zmienia nazwe pliku");
     System.out.println("PRINT_MEMORY                                                -Wyswietla cala pamiec RAM");
-    System.out.println("PRINT_FRAME numer stronicy                                  -Wyswietla dana stronice pamieci RAM");
+    System.out.println("PRINT_FRAME numer stronicy                                  -Wyswietla dana ramki pamieci RAM");
     System.out.println("PRINT_CELL adres fizyczny                                   -Wyswietla zawartosc komorki pamieci pod podanym adresem");
     System.out.println("PRINT_MEMORY_ASCII                                          -Wyswietla cala pamiec RAM rzutowana na ASCII");
-    System.out.println("PRINT_FRAME_ASCII numer stronicy                            -Wyswietla dana stronice pamieci RAM rzutowana na ASCII");
+    System.out.println("PRINT_FRAME_ASCII numer stronicy                            -Wyswietla dana ramki pamieci RAM rzutowana na ASCII");
     System.out.println("PRINT_CELL_ASCII  adres fizyczny                            -Wyswielta zawartosci komorki pamieci pod podanym adresem rzutowana na ASCII");
     System.out.println("PRINT_FREE_FRAME                                            -Wyswielta numery wszystkich wolnych ramek");
     System.out.println("EXIT                                                        -Konczy dzialanie systemu");
