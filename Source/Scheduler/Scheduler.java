@@ -2,7 +2,6 @@ package Scheduler;
 
 import java.util.Vector;
 
-import Interpreter.Interpreter;
 import Process.PCB;
 
 import Process.ProcessMenager;
@@ -24,7 +23,7 @@ public class Scheduler
 
     private static void calculate_srt()//metoda obliczajaca srednia wykladnicza ostatnich procesow
     {
-        running.expected_time = alfa * running.getCounter() + ((1 - alfa) * running.expected_time);
+        running.expected_time = alfa * running.licznikRoz + ((1 - alfa) * running.expected_time);
         //oblicza kazdemu procesowi w kolejce gotowych przewidywany czas
     }
 
