@@ -118,7 +118,7 @@ public void Match(String line)
                 }
                 else if(FileManager.renameFile(command[1],command[2])==1)
                 {
-                    System.out.println("Plik nie zostal otwarty");
+                    System.out.println("Nie mozna zmienic nazwy gdy plik jest otwarty");
                 }
                 else if(FileManager.renameFile(command[1],command[2])==2)
                 {

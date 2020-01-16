@@ -362,7 +362,7 @@ public class FileManager extends Files{
                 for(int j = 0; j < blockSize && howMuch > 0; j++) {
                     if (disk[readAddress(index)][j] != '-') {
                         toRead = disk[readAddress(index)][j];
-                        for (int g = 0; g < blockSize; g++) {
+                        for (int g = 0; g < blockSize && howMuch > 0; g++) {
                             if(disk[readAddress(toRead)][g] != '%'){
                                 stream += disk[readAddress(toRead)][g];
                                 howMuch--;
@@ -385,6 +385,12 @@ public class FileManager extends Files{
         int code;
 
         code = isOpened(oldName);
+        if(code == 0){
+            code = 1;
+        }
+        else if(code == 1){
+            code = 0;
+        }
         if(code == 0) {
             for (int i = 0; i < mainCatalog.size(); i++) {
                 if (oldName.equals(mainCatalog.get(i).fileName)) {
@@ -481,6 +487,7 @@ public class FileManager extends Files{
                         }
                         disk[readAddress(index)][j] = '%';
                     }
+                    mainCatalog.remove(i);
                     code = 0;
                     break;
                 }
