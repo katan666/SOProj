@@ -11,6 +11,7 @@ import java.util.Vector;
 import Process.PCB;
 import Process.ProcessMenager;
 import RAM.MMU.MemoryManager;
+import FileSystem.DiskManager;
 
 
 public class Shell
@@ -331,6 +332,20 @@ public void Match(String line)
             }
             else System.out.println("Nieprawidlowa liczba argumentow");
             break;
+        case "DISK":
+            if(command.length == 1)
+            {
+                DiskManager.showDisk();
+            }
+            else System.out.println("Nieprawidlowa liczba argumentow");
+            break;
+        case "MAP":
+            if(command.length==1)
+            {
+                DiskManager.showBitMap();
+            }
+            else System.out.println("Nieprawidlowa liczba argumentow");
+            break;
         default:
             System.out.println("Niepoprawna komenda");
             break;
@@ -351,6 +366,7 @@ public void loopStart()
         }
         System.out.printf("C:\\>");
         String line = rd.nextLine();
+        line = line.toUpperCase();
         Match(line);
 
     }
@@ -384,6 +400,9 @@ public void Help()
     System.out.println("PRINT_FREE_FRAME                                            -Wyswielta numery wszystkich wolnych ramek");
     System.out.println("EXIT                                                        -Konczy dzialanie systemu");
     System.out.println("HELP                                                        -Wyswietla pomoc dla uzytkownika ");
+    System.out.println("DISK                                                        -Wyswielta zawartosc dysku");
+    System.out.println("MAP                                                         -Wyswielta macierz zajetosci bloku");
+
 
 }
 
