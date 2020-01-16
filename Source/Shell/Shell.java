@@ -24,6 +24,7 @@ Scanner rd = new Scanner(System.in);
 public void Match(String line)
 {
     String[] command = line.split("\\s+");
+    command[0] = command[0].toUpperCase();
 
     switch(command[0])
     {
@@ -382,7 +383,6 @@ public void loopStart()
         }
         System.out.printf("C:\\>");
         String line = rd.nextLine();
-        line = line.toUpperCase();
         Match(line);
 
     }
