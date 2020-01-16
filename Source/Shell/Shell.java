@@ -151,8 +151,16 @@ public void Match(String line)
             }
             else System.out.println("Nieprawidlowa liczba argumentow.");
             break;
-        case "LOCKS":
-            System.out.println("Wyswietla zamki");
+        case "LOCK":
+            if(command.length == 2)
+            {
+               if(FileSystem.FileManager.getFileByName(command[1]).zamek.isLocked())
+               {
+                   System.out.println(command[1] + " Zamek jest zamkniety");
+               }
+               else System.out.println(command[1] + "Zamek jest owarty");
+            }
+            else System.out.println("Nieprawidlowa liczba argumentow.");
             break;
         case "PRINT_READY":
             if(command.length==1)
@@ -452,7 +460,7 @@ public void Help()
     System.out.println("TERMINATE_PROCESS nazwa procesu                             -Zabija proces o danej nazwie");
     System.out.println("PRINT_RUNNING                                               -Wyswietla uruchomiony proces");
     System.out.println("PRINT_READY                                                 -Wyswietla kolejke gotowych procesow");
-    System.out.println("LOCKS                                                       -Wyswietla zamki");
+    System.out.println("LOCK nazwa pliku                                            -Wyswietla stan zamka danego pliku");
     System.out.println("PL                                                          -Wyswietla liste wszystkich procesow");
     System.out.println("DELETE nazwa pliku                                          -Usuwa plik o podanej nazwie");
     System.out.println("RENAME aktualna nazwa nowa nazwa                            -Zmienia nazwe pliku");
