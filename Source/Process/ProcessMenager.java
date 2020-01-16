@@ -80,7 +80,6 @@ public class ProcessMenager {
         if(name.equals(getDummy().getName())) return 2;
         for(PCB pcb : list){
             if(pcb.getName().equals(name)) {
-                Scheduler.remove_process(nameToPid(name));
                 if(pcb.getPid() == Scheduler.get_running().getPid()){
                     Scheduler.remove_running();
                     MemoryManager.deallocateProcess(pidToPbc(nameToPid(name)));
