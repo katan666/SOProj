@@ -2,6 +2,11 @@ package FileSystem;
 
 public class DiskManager extends Disk {
 
+    public static void init(){
+        fillDisk();
+        setBitMap();
+    }
+
     public static void fillDisk(){
         for(int i = 0; i < diskSize/blockSize; i++){
             for(int j = 0; j < blockSize; j++){
