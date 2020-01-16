@@ -156,9 +156,9 @@ public void Match(String line)
             {
                if(FileSystem.FileManager.getFileByName(command[1]).zamek.isLocked())
                {
-                   System.out.println(command[1] + " Zamek jest zamkniety");
+                   System.out.println(command[1] + " -Zamek jest zamkniety");
                }
-               else System.out.println(command[1] + " Zamek jest owarty");
+               else System.out.println(command[1] + " -Zamek jest owarty");
             }
             else System.out.println("Nieprawidlowa liczba argumentow.");
             break;
