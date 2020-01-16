@@ -502,9 +502,40 @@ public class FileManager extends Files{
          * code == 2 - Plik nie istnieje
          * */
         int code = isOpened(name);
-        if(code == 0){
-            openedFiles.remove(whereIsOpened(name));
+
+        if (code == 0) {
+
+            int x = 0;
+
+            for (int i = 0; i < mainCatalog.size(); i++) {
+                if (name.equals(mainCatalog.get(i).fileName)) {
+
+                    x = i;
+                    break;
+                }
+            }
+
+            int temp = mainCatalog.get(x).zamek.unlock();
+
+            if (temp == 0) {
+
+                int y = 0;
+
+                for (int i = 0; i < Scheduler.get_running().openFiles.size(); ++i) {
+
+                    if (name.equals(Scheduler.get_running().openFiles.get(i).file.fileName)) {
+
+                        y = i;
+                        break;
+                    }
+                }
+
+                Scheduler.get_running().openFiles.remove(y);
+
+                //openedFiles.remove(whereIsOpened(name));
+            }
         }
+
         return code;
     }
 
