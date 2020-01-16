@@ -486,9 +486,16 @@ public class Interpreter {
 
     private static void openFile (String argsStr) throws InvalidArgumentsInterpreterException{
         String[] args = argsStr.split(" ");
+
         if(args.length != 1) throw new InvalidArgumentsInterpreterException("Interpreter: Zla liczba argumentow.");
+        int pidBuff = Scheduler.get_running().getPid();
+        int counterBuff = counter;
         boolean isOkey = FileManager.openFile(args[0]);
-        if (!isOkey) throw new InvalidArgumentsInterpreterException("Interpreter: Problem z FileManager.openFile");
+        if(pidBuff != Scheduler.get_running().getPid()){
+            getRegisters();
+            //ProcessMenager.pidToPbc(pidBuff).setCounter(counterBuff);
+        }
+        //if (!isOkey) throw new InvalidArgumentsInterpreterException("Interpreter: Problem z FileManager.openFile");
     }
 
     private static void closeFile(String argsStr) throws InvalidArgumentsInterpreterException{
@@ -555,6 +562,7 @@ public class Interpreter {
         String[] args = argsStr.split(" ");
         if(args.length != 2) throw new InvalidArgumentsInterpreterException("Interpreter: Zla liczba argumentow.");
         String path = "Source/Programs/" + args[1];
+        setRegisters();
         ProcessMenager.newProcess(args[0], path);
         for(PCB pcb : ProcessMenager.list){
             if (Scheduler.get_running().getName().equals(args[0])){

@@ -88,10 +88,12 @@ public class ProcessMenager {
                         if (!pcb.openFiles.get(i).file.zamek.m_waitingProcesses.isEmpty()) {
 
                             Scheduler.add_process(pcb.openFiles.get(i).file.zamek.m_waitingProcesses.remove());
-                        }
-                        if (temp != 0) break;
-                    }
 
+                        }
+                        //if (temp != 0) break;
+
+                    }
+                    pcb.openFiles.clear();
                     Scheduler.remove_running();
                     MemoryManager.deallocateProcess(pidToPbc(nameToPid(name)));
                     return 0;
