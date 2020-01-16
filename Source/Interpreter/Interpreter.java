@@ -168,6 +168,7 @@ public class Interpreter {
     public static void executeInstruction(){
         try {
             getRegisters();
+            Scheduler.get_running().licznikRoz++;
             execute(readCommand());
             setRegisters();
         }catch (StringIndexOutOfBoundsException e0){

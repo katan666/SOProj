@@ -19,6 +19,7 @@ public class PCB {
     public Vector <Short> code;
     public PCB parent;
     public Vector<PCB> children;
+    public int licznikRoz = 0;
 
     public PCB(String name, int pid, String state, double expected_time,  String filePath) {
         this.name = name;
