@@ -33,14 +33,14 @@ public void Match(String line)
             {
                 finish = 1;
             }
-            else System.out.println("Niepoprawna ilosc argumentow.");
+            else System.out.println("Nieprawidlowa liczba argumentow.");
             break;
         case "PRINT_MEMORY":
             if(command.length == 1)
             {
                 MemoryManager.printMemory();
             }
-            else System.out.println("Niepoprawna ilosc argumentow.");
+            else System.out.println("Nieprawidlowa liczba argumentow.");
             break;
         case "PRINT_FRAME":
             if(command.length == 2)
@@ -54,7 +54,7 @@ public void Match(String line)
                }
                else System.out.println("Nie ma ramki o tym numerze.");
             }
-            else System.out.println("Nieprawidlowa liczba parametrow");
+            else System.out.println("Nieprawidlowa liczba argumentow.");
             break;
         case "PRINT_CELL":
             if(command.length == 2)
@@ -67,14 +67,14 @@ public void Match(String line)
                 }
                 else System.out.println("Nie ma komorki o tym adresie fizycznym.");
             }
-            else System.out.println("Nieprawidlowa liczba paramterow");
+            else System.out.println("Nieprawidlowa liczba argumentow.");
             break;
         case "PRINT_MEMORY_ASCII":
             if(command.length==1)
             {
                 MemoryManager.printMemoryASCII();
             }
-            else System.out.println("Nieprawidlowa liczba paramterow.");
+            else System.out.println("Nieprawidlowa liczba argumentow.");
             break;
         case "PRINT_FRAME_ASCII":
             if(command.length == 2)
@@ -87,7 +87,7 @@ public void Match(String line)
                 }
                 else System.out.println("Nie ma komorki o tym adresie fizycznym.");
             }
-            else System.out.println("Nieprawidlowa liczba arugmentow");
+            else System.out.println("Nieprawidlowa liczba argumentow.");
             break;
         case "PRINT_CELL_ASCII":
             if(command.length == 2)
@@ -100,14 +100,14 @@ public void Match(String line)
                 }
                 else System.out.println("Nie ma komorki o tym adresie fizycznym.");
             }
-            else System.out.println("Nieprawidlowa liczba paramterow");
+            else System.out.println("Nieprawidlowa liczba argumentow.");
             break;
         case "PRINT_FREE_FRAMES":
             if(command.length == 1)
             {
                 MemoryManager.printFreeFrames();
             }
-            else System.out.println("Nieprawidlowa liczba paramterow");
+            else System.out.println("Nieprawidlowa liczba argumentow.");
             break;
         case "RENAME":
             if(command.length == 3)
@@ -125,7 +125,7 @@ public void Match(String line)
                     System.out.println("Plik nie istnieje");
                 }
             }
-            else System.out.println("Zbyt wiele parametrow.");
+            else System.out.println("Nieprawidlowa liczba argumentow.");
             break;
         case "DELETE":
             if(command.length == 2)
@@ -149,7 +149,7 @@ public void Match(String line)
             {
                 System.out.println(ProcessMenager.listOfProcess());
             }
-            else System.out.println("Niepoprawna liczba argumentow.");
+            else System.out.println("Nieprawidlowa liczba argumentow.");
             break;
         case "LOCKS":
             System.out.println("Wyswietla zamki");
@@ -168,7 +168,7 @@ public void Match(String line)
                     }
                 }
             }
-            else System.out.println("Niepoprawna ilosc argumentow.");
+            else System.out.println("Nieprawidlowa liczba argumentow.");
             break;
         case "PRINT_RUNNING":
             if(command.length==1)
@@ -176,7 +176,7 @@ public void Match(String line)
                 PCB temp = Scheduler.print_running_process();
                 System.out.println("ID:" + temp.getPid() + " Name: " + temp.getName() + " Tau: " + temp.expected_time + " Tn: " + temp.getCounter() + " State: " + temp.state);
             }
-            else System.out.println("Niepoprawna ilosc argumentow.");
+            else System.out.println("Nieprawidlowa liczba argumentow.");
             break;
         case "FOPEN":
             if(command.length==2) {
@@ -186,7 +186,7 @@ public void Match(String line)
                     System.out.println("Nie udalo sie otworzyc pliku.");
                 }
             }
-            else System.out.println("Nieprawidlowa ilosc argumentow");
+            else System.out.println("Nieprawidlowa liczba argumentow.");
            break;
         case "FCREATE":
             if(command.length==2) {
@@ -194,7 +194,7 @@ public void Match(String line)
                     System.out.println("Pomyslnie utworzono plik.");
                 } else System.out.println("Nie udalo sie utworzyc pliku.");
             }
-            else System.out.println("Nieprawidlowa ilosc argumentow");
+            else System.out.println("Nieprawidlowa liczba argumentow.");
             break;
         case "APPEND":
             if(command.length == 2) {
@@ -216,7 +216,7 @@ public void Match(String line)
                     System.out.println("Plik nie zostal otwarty.");
                 }
             }
-            else System.out.println("Zbyt wiele parametrow.");
+            else System.out.println("Nieprawidlowa liczba argumentow.");
             break;
         case "WRITE":
             if(command.length == 2) {
@@ -239,7 +239,7 @@ public void Match(String line)
                     System.out.println("Plik nie zostal otwarty.");
                 }
             }
-            else System.out.println("Zbyt wiele parametrow.");
+            else System.out.println("Nieprawidlowa liczba argumentow.");
             break;
         case "FCLOSE":
             if(command.length == 2) {
@@ -251,7 +251,7 @@ public void Match(String line)
                     System.out.println("Plik nie istnieje.");
                 }
             }
-            else System.out.println("Zbyt wiele parametrow");
+            else System.out.println("Nieprawidlowa liczba argumentow.");
             break;
         case "READ":
             if(command.length == 2)
@@ -274,7 +274,7 @@ public void Match(String line)
                         System.out.println("Plik nie istnieje.");
                     }
             }
-            else System.out.println("Niepoprawna ilosc argumentow,");
+            else System.out.println("Nieprawidlowa liczba argumentow.");
             break;
         case "DATE":
             if(command.length == 1)
@@ -283,7 +283,7 @@ public void Match(String line)
                 Date dateobj = new Date();
                 System.out.println(df.format(dateobj));
             }
-            else System.out.println("Nieprawidlowa liczba argumentow");
+            else System.out.println("Nieprawidlowa liczba argumentow.");
             break;
         case "DIR":
             if(command.length == 1)
@@ -293,7 +293,7 @@ public void Match(String line)
                     System.out.println(e);
                 }
             }
-            else System.out.println("Nieprawidlowa ilosc argumentow");
+            else System.out.println("Nieprawidlowa liczba argumentow.");
             break;
         case "DIR_OPEN":
             if(command.length == 1)
@@ -303,7 +303,7 @@ public void Match(String line)
                     System.out.println(e);
                 }
             }
-            else System.out.println("Nieprawidlowa ilosc argumentow");
+            else System.out.println("Nieprawidlowa liczba argumentow.");
             break;
         case "CREATE_PROCESS":
             if(command.length==3)
@@ -317,7 +317,7 @@ public void Match(String line)
                     System.out.println("Nie udalo sie utworzyc procesu. Ta nazwa jest juz zajeta.");
                 }
             }
-            else System.out.println("Niepoprawna liczba argumentow.");
+            else System.out.println("Nieprawidlowa liczba argumentow.");
             break;
         case "TERMINATE_PROCESS":
             if(command.length == 2)
@@ -335,28 +335,28 @@ public void Match(String line)
                     System.out.println("Nie mozna usunac dummy");
                 }
             }
-            else System.out.println("Nieprawidlowa liczba argumentow");
+            else System.out.println("Nieprawidlowa liczba argumentow.");
             break;
         case "HELP":
             if(command.length==1)
             {
                 Help();
             }
-            else System.out.println("Nieprawidlowa liczba argumentow");
+            else System.out.println("Nieprawidlowa liczba argumentow.");
             break;
         case "DISK":
             if(command.length == 1)
             {
                 DiskManager.showDisk();
             }
-            else System.out.println("Nieprawidlowa liczba argumentow");
+            else System.out.println("Nieprawidlowa liczba argumentow.");
             break;
         case "MAP":
             if(command.length==1)
             {
                 DiskManager.showBitMap();
             }
-            else System.out.println("Nieprawidlowa liczba argumentow");
+            else System.out.println("Nieprawidlowa liczba argumentow.");
             break;
         case "STEP":
             if(command.length == 1)
@@ -364,14 +364,14 @@ public void Match(String line)
                 Interpreter.executeInstruction();
                 System.out.println(Scheduler.get_running().toStringReg());
             }
-            else System.out.println("Nieprawidlowa liczba argumentow");
+            else System.out.println("Nieprawidlowa liczba argumentow.");
             break;
         case "REG":
             if(command.length == 1)
             {
                 System.out.println(Scheduler.get_running().toStringReg());
             }
-            else System.out.println("Nieprawidlowa liczba argumentow");
+            else System.out.println("Nieprawidlowa liczba argumentow.");
             break;
         default:
             System.out.println("Niepoprawna komenda");
