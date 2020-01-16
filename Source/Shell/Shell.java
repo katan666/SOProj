@@ -1,6 +1,7 @@
 package Shell;
 
 import FileSystem.FileManager;
+import Interpreter.Interpreter;
 import Scheduler.Scheduler;
 
 import java.text.DateFormat;
@@ -346,6 +347,21 @@ public void Match(String line)
             }
             else System.out.println("Nieprawidlowa liczba argumentow");
             break;
+        case "STEP":
+            if(command.length == 1)
+            {
+                Interpreter.executeInstruction();
+                System.out.println(Scheduler.get_running().toStringReg());
+            }
+            else System.out.println("Nieprawidlowa liczba argumentow");
+            break;
+        case "REG":
+            if(command.length == 1)
+            {
+                System.out.println(Scheduler.get_running().toStringReg());
+            }
+            else System.out.println("Nieprawidlowa liczba argumentow");
+            break;
         default:
             System.out.println("Niepoprawna komenda");
             break;
@@ -402,6 +418,8 @@ public void Help()
     System.out.println("HELP                                                        -Wyswietla pomoc dla uzytkownika ");
     System.out.println("DISK                                                        -Wyswielta zawartosc dysku");
     System.out.println("MAP                                                         -Wyswielta macierz zajetosci bloku");
+    System.out.println("STEP                                                        -Wykonuje nastepna komende");
+    System.out.println("REG                                                         -Wyswietla rejestry");
 
 
 }
