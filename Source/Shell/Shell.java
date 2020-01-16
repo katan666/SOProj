@@ -164,7 +164,7 @@ public void Match(String line)
                 }
                 else {
                     for (int i = 0; i < temp.size(); i++) {
-                        System.out.println("ID: " + temp.get(i).getPID() + " Name: " + temp.get(i).getName() + " Tau: " + temp.get(i).expected_time + " Tn: " + temp.get(i).getCounter() + " State: " + temp.get(i).state);
+                        System.out.println("ID: " + temp.get(i).getPID() + " Name: " + temp.get(i).getName() + " Tau: " + temp.get(i).expected_time + " Tn: " + temp.get(i).licznikRoz + " State: " + temp.get(i).state);
                     }
                 }
             }
@@ -174,7 +174,7 @@ public void Match(String line)
             if(command.length==1)
             {
                 PCB temp = Scheduler.print_running_process();
-                System.out.println("ID:" + temp.getPid() + " Name: " + temp.getName() + " Tau: " + temp.expected_time + " Tn: " + temp.getCounter() + " State: " + temp.state);
+                System.out.println("ID:" + temp.getPid() + " Name: " + temp.getName() + " Tau: " + temp.expected_time + " Tn: " + temp.licznikRoz + " State: " + temp.state);
             }
             else System.out.println("Nieprawidlowa liczba argumentow.");
             break;
@@ -462,7 +462,7 @@ public void Help()
     System.out.println("PRINT_MEMORY_ASCII                                          -Wyswietla cala pamiec RAM rzutowana na ASCII");
     System.out.println("PRINT_FRAME_ASCII numer ramki                               -Wyswietla dana ramki pamieci RAM rzutowana na ASCII");
     System.out.println("PRINT_CELL_ASCII  adres fizyczny                            -Wyswielta zawartosci komorki pamieci pod podanym adresem rzutowana na ASCII");
-    System.out.println("PRINT_FREE_FRAME                                            -Wyswielta numery wszystkich wolnych ramek");
+    System.out.println("PRINT_FREE_FRAMES                                            -Wyswielta numery wszystkich wolnych ramek");
     System.out.println("EXIT                                                        -Konczy dzialanie systemu");
     System.out.println("HELP                                                        -Wyswietla pomoc dla uzytkownika ");
     System.out.println("DISK                                                        -Wyswielta zawartosc dysku");
