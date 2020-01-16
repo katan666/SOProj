@@ -172,6 +172,30 @@ public class Scheduler
 
     }
 
+    public static PCB print_process(int PID)
+    {
+        if(running.getPID()==PID)
+        {
+            print_running_process();
+        }
+        for(int i=0;i<readyQueue.size();i++)
+        {
+            if(readyQueue.get(i).getPID()==PID)
+            {
+                return readyQueue.get(i);
+            }
+        }
+        for(int i=0;i<ProcessMenager.getWaitingList().size();i++)
+        {
+            if(ProcessMenager.getWaitingList().get(i).getPID()==PID)
+            {
+                return ProcessMenager.getWaitingList().get(i);
+            }
+        }
+        return null;
+    }
+
+
     public static PCB get_running()
     {
         return running;//zwraca uruchomiony proces
