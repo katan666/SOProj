@@ -517,9 +517,17 @@ public class FileManager extends Files{
          */
         char index;
         char toErase = '-';
-        int code;
+        int code = -1;
 
-        code = isOpened(name);
+        if(isOpened(name) == 0){
+            code = 1;
+        }
+        else if(isOpened(name) == 1){
+            code = 0;
+        }
+        else{
+            code = 2;
+        }
 
         if(code == 0){
             for(int i = 0; i < mainCatalog.size(); i++){
