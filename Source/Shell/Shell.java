@@ -410,10 +410,10 @@ public void Help()
     System.out.println("DELETE nazwa pliku                                          -Usuwa plik o podanej nazwie");
     System.out.println("RENAME aktualna nazwa nowa nazwa                            -Zmienia nazwe pliku");
     System.out.println("PRINT_MEMORY                                                -Wyswietla cala pamiec RAM");
-    System.out.println("PRINT_FRAME numer stronicy                                  -Wyswietla dana ramki pamieci RAM");
+    System.out.println("PRINT_FRAME numer ramki                                     -Wyswietla dana ramki pamieci RAM");
     System.out.println("PRINT_CELL adres fizyczny                                   -Wyswietla zawartosc komorki pamieci pod podanym adresem");
     System.out.println("PRINT_MEMORY_ASCII                                          -Wyswietla cala pamiec RAM rzutowana na ASCII");
-    System.out.println("PRINT_FRAME_ASCII numer stronicy                            -Wyswietla dana ramki pamieci RAM rzutowana na ASCII");
+    System.out.println("PRINT_FRAME_ASCII numer ramki                               -Wyswietla dana ramki pamieci RAM rzutowana na ASCII");
     System.out.println("PRINT_CELL_ASCII  adres fizyczny                            -Wyswielta zawartosci komorki pamieci pod podanym adresem rzutowana na ASCII");
     System.out.println("PRINT_FREE_FRAME                                            -Wyswielta numery wszystkich wolnych ramek");
     System.out.println("EXIT                                                        -Konczy dzialanie systemu");
