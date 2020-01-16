@@ -73,6 +73,7 @@ public class Scheduler
             }
             running.state = TERMINATED;
             running = readyQueue.get(index);
+            running.state=RUNNING;
             remove_process(readyQueue.get(index).getPid());
         }
         return code;
