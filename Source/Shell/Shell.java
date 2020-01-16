@@ -373,6 +373,23 @@ public void Match(String line)
             }
             else System.out.println("Nieprawidlowa liczba argumentow.");
             break;
+       /* case "PRINT_PROCESS":
+            if(command.length==2)
+            {
+                int temp = Integer.parseInt(command[1]);
+                System.out.println(temp);
+                if(Scheduler.print_process(temp)== null)
+                {
+                    System.out.println("Proces o podanym ID nie istnieje.");
+                }
+                else
+                {
+                    PCB temp1 = Scheduler.print_process(temp);
+                    System.out.println("ID:" + temp1.getPid() + " Name: " + temp1.getName() + " Tau: " + temp1.expected_time + " Tn: " + temp1.getCounter() + " State: " + temp1.state);
+                }
+            }
+            else System.out.println("Nieprawidlowa liczba argumentow");
+            break;*/
         default:
             System.out.println("Niepoprawna komenda");
             break;
@@ -385,6 +402,13 @@ public void Match(String line)
 
 public void loopStart()
 {
+    System.out.println("\n" +
+            "██████╗░██╗░██████╗░░█████╗░░██████╗\n" +
+            "██╔══██╗██║██╔════╝░██╔══██╗██╔════╝\n" +
+            "██████╦╝██║██║░░██╗░██║░░██║╚█████╗░\n" +
+            "██╔══██╗██║██║░░╚██╗██║░░██║░╚═══██╗\n" +
+            "██████╦╝██║╚██████╔╝╚█████╔╝██████╔╝\n" +
+            "╚═════╝░╚═╝░╚═════╝░░╚════╝░╚═════╝░");
     while(true)
     {
         if(finish != 0)
