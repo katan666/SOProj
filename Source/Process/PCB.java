@@ -37,7 +37,7 @@ public class PCB {
     public String toStringReg(){
         return "AX: "+ rA + "\t" + "BX: "+ rB + "\t" +
                 "CX: "+ rC + "\t" + "DX: "+ rD + "\t" +
-                "counter: "+ counter;
+                "DX: "+ rD;
     }
 
 
